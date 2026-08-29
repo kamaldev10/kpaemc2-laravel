@@ -39,6 +39,7 @@ class HandleInertiaRequests extends Middleware
                 ...(new Ziggy)->toArray(),
                 'location' => $request->url(),
             ],
+            'use_mock_data' => filter_var(env('USE_MOCK_DATA', false), FILTER_VALIDATE_BOOLEAN),
         ];
     }
 }
