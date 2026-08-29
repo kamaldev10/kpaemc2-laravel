@@ -1,0 +1,12 @@
+node_modules/
+public/
+vendor/
+storage/
+bootstrap/cache/
+composer.lock
+package-lock.json
+*.sqlite
+.env
+.env.*
+dist/
+build/
