@@ -4,9 +4,9 @@
 
 ```
 main              ← Production-ready code only. Protected.
-develop           ← Integration branch. Default working branch.
-feature/{slug}    ← New features (branched from develop)
-fix/{slug}        ← Bug fixes (branched from develop or main)
+master           	← Integration branch. Default working branch.
+feature/{slug}    ← New features (branched from master)
+fix/{slug}        ← Bug fixes (branched from master or main)
 chore/{slug}      ← Maintenance, dependency updates, docs
 ```
 
@@ -106,8 +106,8 @@ If any fail → fix before committing. Do not commit with `--no-verify`.
 
 ## Pull Request / Merge Rules
 
-- Feature branches merge into `develop` via PR.
-- `develop` merges into `main` only after sprint review and QA sign-off.
+- Feature branches merge into `master` via PR.
+- `master` merges into `main` only after sprint review and QA sign-off.
 - PR title follows Conventional Commits format.
 - PR must include:
   - What changed and why
