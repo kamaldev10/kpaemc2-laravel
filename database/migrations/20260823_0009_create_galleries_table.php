@@ -12,10 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('galleries', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedSmallInteger('division_id')->nullable();
-            $table->foreign('division_id')->references('id')->on('divisions')->nullOnDelete();
-            $table->foreignId('category_id')->nullable()->constrained('categories')->nullOnDelete();
+            $table->uuid('id')->primary();
+            $table->foreignUuid('division_id')->nullable()->constrained('divisions')->nullOnDelete();
+            $table->foreignUuid('category_id')->nullable()->constrained('categories')->nullOnDelete();
             $table->string('title', 255);
             $table->text('description')->nullable();
             $table->string('cover_url', 500)->nullable();
@@ -25,8 +24,8 @@ return new class extends Migration
             $table->boolean('is_published')->default(false);
             $table->integer('sort_order')->default(0);
             $table->boolean('is_active')->default(true);
-            $table->foreignId('created_by')->nullable()->index()->constrained('users')->nullOnDelete();
-            $table->foreignId('updated_by')->nullable()->index()->constrained('users')->nullOnDelete();
+            $table->foreignUuid('created_by')->nullable()->index()->constrained('users')->nullOnDelete();
+            $table->foreignUuid('updated_by')->nullable()->index()->constrained('users')->nullOnDelete();
             $table->timestampsTz();
             $table->softDeletesTz();
 

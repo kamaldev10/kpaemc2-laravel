@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('about_infos', function (Blueprint $table) {
-            $table->smallInteger('id')->primary()->default(1);
+            $table->uuid('id')->primary();
             $table->string('org_name');
             $table->string('founded_date', 100)->default('10 Oktober 1984');
             $table->string('motto', 500)->default('Bergerak Satu Asa, Berbekal Alam Lestari!');
@@ -26,8 +26,8 @@ return new class extends Migration
             $table->string('cover_url', 500)->nullable();
             $table->string('cover_public_id', 300)->nullable();
             $table->boolean('is_active')->default(true);
-            $table->foreignId('created_by')->nullable()->index()->constrained('users')->nullOnDelete();
-            $table->foreignId('updated_by')->nullable()->index()->constrained('users')->nullOnDelete();
+            $table->foreignUuid('created_by')->nullable()->index()->constrained('users')->nullOnDelete();
+            $table->foreignUuid('updated_by')->nullable()->index()->constrained('users')->nullOnDelete();
             $table->timestampsTz();
         });
     }

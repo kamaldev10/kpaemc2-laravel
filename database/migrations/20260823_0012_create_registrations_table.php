@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('registrations', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('event_id')->constrained('events')->cascadeOnDelete();
+            $table->uuid('id')->primary();
+            $table->foreignUuid('event_id')->constrained('events')->cascadeOnDelete();
             $table->string('registration_code', 30)->unique();
             $table->string('full_name', 255);
             $table->string('email', 255);
@@ -36,8 +36,8 @@ return new class extends Migration
             $table->string('status', 50)->default('pending');
             $table->text('reviewer_notes')->nullable();
             $table->boolean('is_active')->default(true);
-            $table->foreignId('created_by')->nullable()->index()->constrained('users')->nullOnDelete();
-            $table->foreignId('updated_by')->nullable()->index()->constrained('users')->nullOnDelete();
+            $table->foreignUuid('created_by')->nullable()->index()->constrained('users')->nullOnDelete();
+            $table->foreignUuid('updated_by')->nullable()->index()->constrained('users')->nullOnDelete();
             $table->timestampsTz();
 
             $table->index(['event_id', 'status']);

@@ -13,11 +13,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('posts', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('user_id')->nullable()->constrained('users')->nullOnDelete();
-            $table->foreignId('category_id')->nullable()->constrained('categories')->nullOnDelete();
-            $table->unsignedSmallInteger('division_id')->nullable();
-            $table->foreign('division_id')->references('id')->on('divisions')->nullOnDelete();
+            $table->uuid('id')->primary();
+            $table->foreignUuid('user_id')->nullable()->constrained('users')->nullOnDelete();
+            $table->foreignUuid('category_id')->nullable()->constrained('categories')->nullOnDelete();
+            $table->foreignUuid('division_id')->nullable()->constrained('divisions')->nullOnDelete();
             $table->string('title', 500);
             $table->string('slug', 600)->unique();
             $table->text('excerpt');
@@ -33,8 +32,8 @@ return new class extends Migration
             $table->timestampTz('published_at')->nullable();
             $table->timestampTz('post_date')->useCurrent();
             $table->boolean('is_active')->default(true);
-            $table->foreignId('created_by')->nullable()->index()->constrained('users')->nullOnDelete();
-            $table->foreignId('updated_by')->nullable()->index()->constrained('users')->nullOnDelete();
+            $table->foreignUuid('created_by')->nullable()->index()->constrained('users')->nullOnDelete();
+            $table->foreignUuid('updated_by')->nullable()->index()->constrained('users')->nullOnDelete();
             $table->timestampsTz();
             $table->softDeletesTz();
 

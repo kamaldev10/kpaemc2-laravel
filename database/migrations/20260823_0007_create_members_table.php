@@ -12,11 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('members', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->string('member_number', 50)->unique();
             $table->string('name', 255);
-            $table->unsignedSmallInteger('division_id')->nullable();
-            $table->foreign('division_id')->references('id')->on('divisions')->nullOnDelete();
+            $table->foreignUuid('division_id')->nullable()->constrained('divisions')->nullOnDelete();
             $table->string('position', 150)->nullable();
             $table->smallInteger('batch_year')->nullable();
             $table->string('major', 255)->nullable();
@@ -29,8 +28,8 @@ return new class extends Migration
             $table->boolean('is_visible')->default(true);
             $table->integer('sort_order')->default(0);
             $table->boolean('is_active')->default(true);
-            $table->foreignId('created_by')->nullable()->index()->constrained('users')->nullOnDelete();
-            $table->foreignId('updated_by')->nullable()->index()->constrained('users')->nullOnDelete();
+            $table->foreignUuid('created_by')->nullable()->index()->constrained('users')->nullOnDelete();
+            $table->foreignUuid('updated_by')->nullable()->index()->constrained('users')->nullOnDelete();
             $table->timestampsTz();
             $table->softDeletesTz();
 

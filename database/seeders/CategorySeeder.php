@@ -15,6 +15,7 @@ class CategorySeeder extends Seeder
             ['slug' => 'konservasi-alam', 'name' => 'Konservasi & Edukasi', 'type' => 'post', 'color' => '#2E7D32', 'sort_order' => 2],
             ['slug' => 'tips-outdoor', 'name' => 'Tips & Wawasan Alam Bebas', 'type' => 'post', 'color' => '#E65100', 'sort_order' => 3],
             ['slug' => 'kabar-organisasi', 'name' => 'Kabar Organisasi & Alumni', 'type' => 'post', 'color' => '#0277BD', 'sort_order' => 4],
+            ['slug' => 'kolaborasi', 'name' => 'Kolaborasi', 'type' => 'post', 'color' => '#6B21A8', 'sort_order' => 5],
 
             // Kategori Kegiatan / Event
             ['slug' => 'sekolah-lingkungan', 'name' => 'Sekolah Lingkungan', 'type' => 'event', 'color' => '#2E7D32', 'sort_order' => 1],

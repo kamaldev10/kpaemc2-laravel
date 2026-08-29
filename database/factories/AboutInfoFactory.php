@@ -13,7 +13,6 @@ class AboutInfoFactory extends Factory
     public function definition(): array
     {
         return [
-            'id' => 1,
             'org_name' => 'Kelompok Pecinta Alam EMC²',
             'founded_date' => '10 Oktober 1984',
             'motto' => 'Bergerak Satu Asa, Berbekal Alam Lestari!',

@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\AboutInfo;
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 
 class AboutInfoSeeder extends Seeder
@@ -10,81 +11,39 @@ class AboutInfoSeeder extends Seeder
     public function run(): void
     {
         AboutInfo::updateOrCreate(
-            ['id' => 1],
+            ['org_name' => 'KPA EMC²'],
             [
-                'org_name' => 'Kelompok Pecinta Alam EMC²',
                 'founded_date' => '10 Oktober 1984',
-                'motto' => 'Bergerak Satu Asa, Berbekal Alam Lestari!',
-                'description' => 'Kelompok Pecinta Alam EMC² (KPA EMC²) adalah organisasi kepecintaalaman tingkat perguruan tinggi yang didirikan pada tanggal 10 Oktober 1984. Berlandaskan semangat persaudaraan, petualangan alam bebas beretika, riset ilmiah, kepedulian sosial kemasyarakatan, dan komitmen pelestarian lingkungan hidup berkelanjutan.',
-                'vision' => 'Menjadi organisasi pecinta alam terkemuka yang melahirkan insan akademis berkarakter tangguh, berwawasan ilmiah, berjiwa sosial tinggi, serta menjadi pelopor gerakan pelestarian lingkungan hidup.',
+                'motto' => 'Bergerak Satu Asa, Berbekal Alam Lestari',
+                'description' => 'KPA EMC² adalah organisasi kemahasiswaan milik FMIPA UNRI yang bertujuan menghimpun, membina, mengedukasi, dan menyalurkan potensi mahasiswa FMIPA UNRI, serta berkontribusi menjaga kelestarian dan keseimbangan lingkungan hidup.',
+                'vision' => 'Terwujudnya organisasi pecinta alam yang bertakwa kepada Tuhan Yang Maha Esa, berkarakter, berkualitas, serta berpartisipasi dalam pengembangan ilmu pengetahuan dan teknologi untuk mendukung pelestarian lingkungan hidup.',
                 'mission' => [
-                    'Menyelenggarakan sistem kaderisasi dan pendidikan kepecintaalaman yang sistematis, aman, dan berkarakter.',
-                    'Melaksanakan program pengabdian masyarakat, Sekolah Lingkungan, dan aksi nyata konservasi lingkungan hidup.',
-                    'Mengembangkan riset ilmiah, eksplorasi alam bebas, dan kajian penelitian pengembangan (Litbang).',
-                    'Mengelola tata kelola organisasi, kerumahtanggaan (Karata), dan inventarisasi logistik yang profesional.',
+                    'Mengembangkan eksistensi organisasi di dalam maupun di luar universitas.',
+                    'Membentuk generasi yang bermoral, berkarakter dan intelektual.',
+                    'Berkontribusi dalam kegiatan sosial dan menjaga pelestarian lingkungan hidup.',
+                    'Menjalin silaturahmi baik kepada sesama pecinta alam maupun lembaga lain.',
                 ],
-                'active_term' => '2025/2026',
+                'active_term' => '2025',
                 'org_structure' => [
                     [
-                        'level' => 'Inti Pimpinan',
-                        'position' => 'Ketua',
-                        'name' => 'Fajar Pratama',
-                        'nrp' => 'EMC.2022.045',
-                        'batch' => '2022',
+                        'image' => '/images/struktur-2025.png',
+                        'period' => '2025',
+                        'chairmanName' => 'Desti Seri Fatimah',
                     ],
                     [
-                        'level' => 'Inti Pimpinan',
-                        'position' => 'Sekretaris',
-                        'name' => 'Annisa Rahmawati',
-                        'nrp' => 'EMC.2023.051',
-                        'batch' => '2023',
+                        'image' => '/images/struktur-2024.png',
+                        'period' => '2023-2024',
+                        'chairmanName' => 'Muhammad Farhan',
                     ],
                     [
-                        'level' => 'Staff Khusus Sekretariat',
-                        'position' => 'Staff Ahli Arsip Data & Rumah Tangga',
-                        'name' => 'Dewi Lestari',
-                        'nrp' => 'EMC.2023.053',
-                        'batch' => '2023',
-                        'reports_to' => 'Sekretaris',
+                        'image' => '/images/struktur-2023.png',
+                        'period' => '2022-2023',
+                        'chairmanName' => 'Rina Noviana',
                     ],
                     [
-                        'level' => 'Inti Pimpinan',
-                        'position' => 'Bendahara',
-                        'name' => 'Rian Hidayat',
-                        'nrp' => 'EMC.2022.048',
-                        'batch' => '2022',
-                    ],
-                    [
-                        'level' => 'Divisi Operasional',
-                        'position' => 'Kepala Divisi Kaderisasi',
-                        'name' => 'Bagus Setiawan',
-                        'nrp' => 'EMC.2023.055',
-                        'batch' => '2023',
-                        'division' => 'Kaderisasi',
-                    ],
-                    [
-                        'level' => 'Divisi Operasional',
-                        'position' => 'Kepala Divisi SKLH',
-                        'name' => 'Siti Aisyah',
-                        'nrp' => 'EMC.2023.058',
-                        'batch' => '2023',
-                        'division' => 'SKLH',
-                    ],
-                    [
-                        'level' => 'Divisi Operasional',
-                        'position' => 'Kepala Divisi Litbang',
-                        'name' => 'Bayu Wicaksono',
-                        'nrp' => 'EMC.2023.057',
-                        'batch' => '2023',
-                        'division' => 'Litbang',
-                    ],
-                    [
-                        'level' => 'Divisi Operasional',
-                        'position' => 'Kepala Divisi Karata',
-                        'name' => 'Dimas Nugraha',
-                        'nrp' => 'EMC.2023.061',
-                        'batch' => '2023',
-                        'division' => 'Karata',
+                        'image' => '/images/struktur-2023.png',
+                        'period' => '2021',
+                        'chairmanName' => 'Muhammad Ahlunnazah',
                     ],
                 ],
                 'logo_url' => 'https://res.cloudinary.com/demo/image/upload/v1/samples/logo.png',
@@ -92,6 +51,7 @@ class AboutInfoSeeder extends Seeder
                 'cover_url' => 'https://res.cloudinary.com/demo/image/upload/v1/samples/landscapes/nature-mountains.jpg',
                 'cover_public_id' => 'samples/landscapes/nature-mountains',
                 'is_active' => true,
+                'updated_at' => Carbon::parse('2025-07-16 07:20:09.79'),
             ]
         );
     }

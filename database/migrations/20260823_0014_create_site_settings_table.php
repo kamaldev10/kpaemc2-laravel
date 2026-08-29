@@ -12,14 +12,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('site_settings', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->string('key', 150)->unique();
             $table->text('value')->nullable();
             $table->string('group', 100)->default('general');
             $table->string('description', 500)->nullable();
             $table->boolean('is_active')->default(true);
-            $table->foreignId('created_by')->nullable()->index()->constrained('users')->nullOnDelete();
-            $table->foreignId('updated_by')->nullable()->index()->constrained('users')->nullOnDelete();
+            $table->foreignUuid('created_by')->nullable()->index()->constrained('users')->nullOnDelete();
+            $table->foreignUuid('updated_by')->nullable()->index()->constrained('users')->nullOnDelete();
             $table->timestampsTz();
 
             $table->index('group');

@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('divisions', function (Blueprint $table) {
-            $table->smallIncrements('id');
+            $table->uuid('id')->primary();
             $table->string('slug', 100)->unique();
             $table->string('name', 150);
             $table->string('icon_name', 100)->nullable();
@@ -24,8 +24,8 @@ return new class extends Migration
             $table->jsonb('equipment')->nullable();
             $table->smallInteger('sort_order')->default(0);
             $table->boolean('is_active')->default(true);
-            $table->foreignId('created_by')->nullable()->index()->constrained('users')->nullOnDelete();
-            $table->foreignId('updated_by')->nullable()->index()->constrained('users')->nullOnDelete();
+            $table->foreignUuid('created_by')->nullable()->index()->constrained('users')->nullOnDelete();
+            $table->foreignUuid('updated_by')->nullable()->index()->constrained('users')->nullOnDelete();
             $table->timestampsTz();
 
             $table->index('sort_order');

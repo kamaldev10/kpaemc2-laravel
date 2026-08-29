@@ -13,11 +13,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('events', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->string('slug', 200)->unique();
-            $table->foreignId('category_id')->nullable()->constrained('categories')->nullOnDelete();
-            $table->unsignedSmallInteger('division_id')->nullable();
-            $table->foreign('division_id')->references('id')->on('divisions')->nullOnDelete();
+            $table->foreignUuid('category_id')->nullable()->constrained('categories')->nullOnDelete();
+            $table->foreignUuid('division_id')->nullable()->constrained('divisions')->nullOnDelete();
             $table->string('title', 300);
             $table->string('type', 100);
             $table->text('description')->nullable();
@@ -35,8 +34,8 @@ return new class extends Migration
             $table->jsonb('tags')->default('[]');
             $table->boolean('is_published')->default(false);
             $table->boolean('is_active')->default(true);
-            $table->foreignId('created_by')->nullable()->index()->constrained('users')->nullOnDelete();
-            $table->foreignId('updated_by')->nullable()->index()->constrained('users')->nullOnDelete();
+            $table->foreignUuid('created_by')->nullable()->index()->constrained('users')->nullOnDelete();
+            $table->foreignUuid('updated_by')->nullable()->index()->constrained('users')->nullOnDelete();
             $table->timestampsTz();
 
             $table->index('category_id');
