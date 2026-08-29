@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Traits\HasAuditColumns;
+use App\Models\Traits\HasUuidKey;
 use Database\Factories\MemberFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -12,7 +13,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Member extends Model
 {
     /** @use HasFactory<MemberFactory> */
-    use HasFactory, HasAuditColumns, SoftDeletes;
+    use HasFactory, HasAuditColumns, SoftDeletes, HasUuidKey;
 
     protected $fillable = [
         'member_number',
@@ -27,7 +28,7 @@ class Member extends Model
         'bio',
         'avatar_url',
         'avatar_public_id',
-        'is_visible',
+        'is_pengurus',
         'sort_order',
         'is_active',
         'created_by',
@@ -38,7 +39,7 @@ class Member extends Model
     {
         return [
             'batch_year' => 'integer',
-            'is_visible' => 'boolean',
+            'is_pengurus' => 'boolean',
             'sort_order' => 'integer',
             'is_active' => 'boolean',
         ];
@@ -47,5 +48,15 @@ class Member extends Model
     public function division(): BelongsTo
     {
         return $this->belongsTo(Division::class);
+    }
+
+    public function scopeActive($query)
+    {
+        return $query->where('is_active', true);
+    }
+
+    public function scopePengurus($query)
+    {
+        return $query->where('is_pengurus', true)->where('is_active', true);
     }
 }

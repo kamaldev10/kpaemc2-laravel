@@ -15,17 +15,18 @@ class EventFactory extends Factory
 {
     public function definition(): array
     {
-        $title = fake()->unique()->randomElement([
-            'Sekolah Lingkungan Angkatan X',
+        $baseTitle = fake()->randomElement([
+            'Sekolah Lingkungan Angkatan',
             'Seminar Nasional Konservasi Hutan',
-            'Aksi Bersih Sungai Ciliwung',
-            'EMC Outdoor Expo 2026',
-            'Open Recruitment Anggota Muda 2026',
-            'Pelatihan Basic Caving & Rescue',
+            'Aksi Bersih Sungai & Mangrove',
+            'EMC Outdoor Expo',
+            'Penerimaan Anggota Muda',
+            'Pelatihan Basic Navigation & Rescue',
         ]);
+        $title = $baseTitle . ' ' . fake()->unique()->numerify('###');
 
         return [
-            'slug' => Str::slug($title . '-' . fake()->year()),
+            'slug' => Str::slug($title . '-' . fake()->unique()->numerify('#####')),
             'category_id' => Category::factory(),
             'division_id' => Division::factory(),
             'title' => $title,

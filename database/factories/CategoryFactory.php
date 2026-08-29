@@ -13,11 +13,12 @@ class CategoryFactory extends Factory
 {
     public function definition(): array
     {
-        $name = fake()->unique()->words(2, true);
+        $name = ucwords(fake()->words(2, true));
+        $slug = Str::slug($name) . '-' . Str::lower(Str::random(5));
 
         return [
-            'slug' => Str::slug($name),
-            'name' => ucwords($name),
+            'slug' => $slug,
+            'name' => $name,
             'type' => fake()->randomElement(['post', 'event', 'gallery', 'general']),
             'color' => fake()->hexColor(),
             'sort_order' => fake()->numberBetween(0, 20),

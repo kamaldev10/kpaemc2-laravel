@@ -13,40 +13,16 @@ class DivisionFactory extends Factory
 {
     public function definition(): array
     {
-        $divisionData = fake()->unique()->randomElement([
-            [
-                'name' => 'Divisi Kaderisasi',
-                'slug' => 'kaderisasi',
-                'icon_name' => 'users',
-                'short' => 'Regenerasi, rekrutmen, dan DIKLATSAR anggota muda.',
-            ],
-            [
-                'name' => 'Divisi SKLH',
-                'slug' => 'sklh',
-                'icon_name' => 'leaf',
-                'short' => 'Sosial kemasyarakatan, Sekolah Lingkungan, dan konservasi alam.',
-            ],
-            [
-                'name' => 'Divisi Litbang',
-                'slug' => 'litbang',
-                'icon_name' => 'book-open',
-                'short' => 'Penelitian, kajian ilmiah, eksplorasi, dan pengembangan organisasi.',
-            ],
-            [
-                'name' => 'Divisi Karata',
-                'slug' => 'karata',
-                'icon_name' => 'home',
-                'short' => 'Kepala Rumah Tangga, inventaris alat outdoor, dan operasional sekretariat.',
-            ],
-        ]);
+        $name = 'Divisi ' . ucwords(fake()->words(2, true));
+        $slug = Str::slug($name) . '-' . Str::lower(Str::random(5));
 
         return [
-            'slug' => $divisionData['slug'],
-            'name' => $divisionData['name'],
-            'icon_name' => $divisionData['icon_name'],
+            'slug' => $slug,
+            'name' => $name,
+            'icon_name' => fake()->randomElement(['Users', 'TreePine', 'Compass', 'Home']),
             'cover_url' => 'https://res.cloudinary.com/demo/image/upload/v1/samples/landscapes/nature-mountains.jpg',
             'cover_public_id' => 'samples/landscapes/nature-mountains',
-            'short_description' => $divisionData['short'],
+            'short_description' => fake()->sentence(10),
             'full_description' => fake()->paragraphs(3, true),
             'study_materials' => ['Materi Dasar 1', 'Materi Praktik 2', 'Kajian Lapangan 3'],
             'equipment' => ['Perlengkapan Standar 1', 'Alat Operasional 2'],

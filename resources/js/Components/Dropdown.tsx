@@ -86,7 +86,9 @@ const Content = ({
 					className={`absolute z-50 mt-2 rounded-md shadow-lg ${alignmentClasses} ${widthClasses}`}
 					onClick={() => setOpen(false)}
 				>
-					<div className={`rounded-md ring-1 ring-black ring-opacity-5 ` + contentClasses}>
+					<div
+						className={`rounded-md ring-1 ring-black ring-opacity-5 ` + contentClasses}
+					>
 						{children}
 					</div>
 				</div>

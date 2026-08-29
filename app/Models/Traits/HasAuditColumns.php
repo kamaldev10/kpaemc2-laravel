@@ -12,6 +12,9 @@ trait HasAuditColumns
     public static function bootHasAuditColumns(): void
     {
         static::creating(function ($model) {
+            if (! isset($model->attributes['is_active'])) {
+                $model->is_active = true;
+            }
             if (Auth::check()) {
                 if (empty($model->created_by)) {
                     $model->created_by = Auth::id();

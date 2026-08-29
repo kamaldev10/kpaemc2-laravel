@@ -3,35 +3,36 @@
 namespace App\Models;
 
 use App\Models\Traits\HasAuditColumns;
+use App\Models\Traits\HasUuidKey;
 use Database\Factories\SiteSettingFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class SiteSetting extends Model
 {
-    /** @use HasFactory<SiteSettingFactory> */
-    use HasFactory, HasAuditColumns;
+	/** @use HasFactory<SiteSettingFactory> */
+	use HasFactory, HasAuditColumns, HasUuidKey;
 
-    protected $fillable = [
-        'key',
-        'value',
-        'group',
-        'description',
-        'is_active',
-        'created_by',
-        'updated_by',
-    ];
+	protected $fillable = [
+		'key',
+		'value',
+		'group',
+		'description',
+		'is_active',
+		'created_by',
+		'updated_by',
+	];
 
-    protected function casts(): array
-    {
-        return [
-            'is_active' => 'boolean',
-        ];
-    }
+	protected function casts(): array
+	{
+		return [
+			'is_active' => 'boolean',
+		];
+	}
 
-    public static function get(string $key, ?string $default = null): ?string
-    {
-        $setting = static::where('key', $key)->where('is_active', true)->first();
-        return $setting ? $setting->value : $default;
-    }
+	public static function get(string $key, ?string $default = null): ?string
+	{
+		$setting = static::where('key', $key)->where('is_active', true)->first();
+		return $setting ? $setting->value : $default;
+	}
 }

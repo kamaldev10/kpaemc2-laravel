@@ -17,7 +17,7 @@ return new class extends Migration
 			DB::statement('CREATE EXTENSION IF NOT EXISTS "unaccent"');
 
 			// 2. Partial Indexes
-			DB::statement('CREATE INDEX IF NOT EXISTS idx_members_public_roster ON members (division_id, status, sort_order) WHERE is_visible = true AND is_active = true AND deleted_at IS NULL');
+			DB::statement('CREATE INDEX IF NOT EXISTS idx_members_public_roster ON members (division_id, status, sort_order) WHERE is_pengurus = true AND is_active = true AND deleted_at IS NULL');
 			DB::statement('CREATE INDEX IF NOT EXISTS idx_posts_published_feed ON posts (published_at DESC) WHERE is_published = true AND is_active = true AND deleted_at IS NULL');
 			DB::statement('CREATE INDEX IF NOT EXISTS idx_posts_featured ON posts (is_featured) WHERE is_published = true AND is_active = true AND deleted_at IS NULL');
 			DB::statement('CREATE INDEX IF NOT EXISTS idx_galleries_public ON galleries (event_date DESC) WHERE is_published = true AND is_active = true AND deleted_at IS NULL');

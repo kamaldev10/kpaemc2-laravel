@@ -17,7 +17,7 @@
 
 ## 📌 Tentang Proyek
 
-**Portal Resmi KPA EMC²** adalah platform web terpadu yang memadukan _Company Profile_, _Media Center & Jurnal Ekspedisi Alam_, serta _Sistem Pendaftaran Kegiatan Terpadu_ untuk organisasi mahasiswa pecinta alam **KPA EMC²**.
+**Portal Resmi KPA EMC²** adalah platform web terpadu yang memadukan _Company Profile_, _Media Center & Artikel Ekspedisi Alam_, serta _Sistem Pendaftaran Kegiatan Terpadu_ untuk organisasi mahasiswa pecinta alam **KPA EMC²**.
 
 Portal ini dirancang untuk menyelesaikan fragmentasi informasi profil organisasi, mengarsipkan catatan perjalanan ekspedisi ke dalam database yang _searchable_, mempermudah registrasi peserta kegiatan terbuka secara digital, serta mendistribusikan dokumentasi media berkualitas tinggi secara efisien tanpa membebani server lokal.
 
@@ -28,10 +28,9 @@ Portal ini dirancang untuk menyelesaikan fragmentasi informasi profil organisasi
 ### 1. Public Portal (React + Inertia.js)
 
 - **Beranda Interaktif (`/`)**: Hero banner alam, statistik pencapaian counter, sorotan 4 divisi, artikel terkini, dan kegiatan mendatang.
-- **Tentang Kami (`/tentang`)**: Narasi sejarah pendirian, visi & misi terstruktur, filosofi lambang organisasi, dan Kode Etik Pecinta Alam Indonesia.
-- **Divisi Operasional (`/divisi`, `/divisi/{slug}`)**: Informasi detail 4 Divisi Operasional (Kaderisasi, SKLH, Litbang, Karata) dan Inti Pimpinan.
-- **Struktur Kepengurusan (`/struktur`)**: Bagan organisasi hierarkis, profil pengurus (nama, NRP/NIA, foto, jabatan), dan filter interaktif.
-- **Artikel & Jurnal Alam (`/artikel`, `/artikel/{slug}`)**: Publikasi catatan ekspedisi dengan pencarian cepat berbasis PostgreSQL `pg_trgm`, filter kategori, tag JSONB, rich text render, dan tombol _Share to WhatsApp_.
+- **Tentang Kami (`/about`)**: Narasi sejarah pendirian, visi & misi terstruktur, 4 divisi operasional, filosofi lambang organisasi, dan Kode Etik Pecinta Alam Indonesia.
+- **Struktur Kepengurusan (`/structure`)**: Bagan organisasi hierarkis, profil pengurus (nama, NRP/NIA, foto, jabatan), dan filter interaktif.
+- **Artikel & Postingan (`/posts`, `/posts/{slug}`)**: Publikasi catatan ekspedisi dengan pencarian cepat berbasis PostgreSQL `pg_trgm`, filter kategori, tag JSONB, rich text render, dan tombol _Share to WhatsApp_.
 - **Galeri Dokumentasi (`/galeri`)**: Portofolio visual foto dan video ekspedisi dengan tampilan responsif, filter kategori, dan _lightbox preview_.
 - **Katalog & Registrasi Event (`/events`, `/events/{slug}/register`)**: Daftar kegiatan terbuka dengan formulir pendaftaran dinamis (`JSONB` custom fields), upload berkas/bukti transfer, kode registrasi unik, dan fitur cek status mandiri (`/events/check-status`).
 - **Kontak & Sekretariat (`/kontak`)**: Peta lokasi sekretariat, form pesan masuk dengan pencatatan IP (`INET`), dan tautan media sosial resmi.
@@ -248,7 +247,7 @@ Dokumentasi lengkap proyek tersimpan di folder `docs/`:
 - **Divisi Operasional**:
   1. **Kaderisasi** — Pendidikan, rekrutmen, dan pembinaan anggota
   2. **SKLH** — Sosial Kemasyarakatan & Lingkungan Hidup
-  3. **Litbang** — Penelitian, pengembangan ilmu kepecintaalaman & jurnal ekspedisi
+  3. **Litbang** — Penelitian, pengembangan ilmu kepecintaalaman & publikasi artikel/catatan ekspedisi
   4. **Karata** — Kepala Rumah Tangga, fasilitas & logistik basecamp
 
 ---

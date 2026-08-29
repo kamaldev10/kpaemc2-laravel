@@ -26,7 +26,10 @@ export default function Authenticated({
 							</div>
 
 							<div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-								<NavLink href={route('dashboard')} active={route().current('dashboard')}>
+								<NavLink
+									href={route('dashboard')}
+									active={route().current('dashboard')}
+								>
 									Dashboard
 								</NavLink>
 							</div>
@@ -60,8 +63,14 @@ export default function Authenticated({
 									</Dropdown.Trigger>
 
 									<Dropdown.Content>
-										<Dropdown.Link href={route('profile.edit')}>Profile</Dropdown.Link>
-										<Dropdown.Link href={route('logout')} method="post" as="button">
+										<Dropdown.Link href={route('profile.edit')}>
+											Profile
+										</Dropdown.Link>
+										<Dropdown.Link
+											href={route('logout')}
+											method="post"
+											as="button"
+										>
 											Log Out
 										</Dropdown.Link>
 									</Dropdown.Content>
@@ -71,19 +80,30 @@ export default function Authenticated({
 
 						<div className="-me-2 flex items-center sm:hidden">
 							<button
-								onClick={() => setShowingNavigationDropdown((previousState) => !previousState)}
+								onClick={() =>
+									setShowingNavigationDropdown((previousState) => !previousState)
+								}
 								className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 transition duration-150 ease-in-out hover:bg-gray-100 hover:text-gray-500 focus:bg-gray-100 focus:text-gray-500 focus:outline-none"
 							>
-								<svg className="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
+								<svg
+									className="h-6 w-6"
+									stroke="currentColor"
+									fill="none"
+									viewBox="0 0 24 24"
+								>
 									<path
-										className={!showingNavigationDropdown ? 'inline-flex' : 'hidden'}
+										className={
+											!showingNavigationDropdown ? 'inline-flex' : 'hidden'
+										}
 										strokeLinecap="round"
 										strokeLinejoin="round"
 										strokeWidth="2"
 										d="M4 6h16M4 12h16M4 18h16"
 									/>
 									<path
-										className={showingNavigationDropdown ? 'inline-flex' : 'hidden'}
+										className={
+											showingNavigationDropdown ? 'inline-flex' : 'hidden'
+										}
 										strokeLinecap="round"
 										strokeLinejoin="round"
 										strokeWidth="2"
@@ -97,7 +117,10 @@ export default function Authenticated({
 
 				<div className={(showingNavigationDropdown ? 'block' : 'hidden') + ' sm:hidden'}>
 					<div className="space-y-1 pb-3 pt-2">
-						<ResponsiveNavLink href={route('dashboard')} active={route().current('dashboard')}>
+						<ResponsiveNavLink
+							href={route('dashboard')}
+							active={route().current('dashboard')}
+						>
 							Dashboard
 						</ResponsiveNavLink>
 					</div>
@@ -109,7 +132,9 @@ export default function Authenticated({
 						</div>
 
 						<div className="mt-3 space-y-1">
-							<ResponsiveNavLink href={route('profile.edit')}>Profile</ResponsiveNavLink>
+							<ResponsiveNavLink href={route('profile.edit')}>
+								Profile
+							</ResponsiveNavLink>
 							<ResponsiveNavLink method="post" href={route('logout')} as="button">
 								Log Out
 							</ResponsiveNavLink>

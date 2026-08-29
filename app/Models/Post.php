@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Traits\HasAuditColumns;
+use App\Models\Traits\HasUuidKey;
 use Database\Factories\PostFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -12,7 +13,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Post extends Model
 {
     /** @use HasFactory<PostFactory> */
-    use HasFactory, HasAuditColumns, SoftDeletes;
+    use HasFactory, HasAuditColumns, SoftDeletes, HasUuidKey;
 
     protected $fillable = [
         'user_id',
@@ -72,5 +73,22 @@ class Post extends Model
     public function scopeFeatured($query)
     {
         return $query->where('is_featured', true)->published();
+    }
+
+    public function scopeSearch($query, ?string $term)
+    {
+        if (empty($term)) {
+            return $query;
+        }
+
+        $term = trim($term);
+
+        return $query->where(function ($q) use ($term) {
+            $q->where('title', 'ILIKE', "%{$term}%")
+              ->orWhere('excerpt', 'ILIKE', "%{$term}%")
+              ->orWhere('content', 'ILIKE', "%{$term}%")
+              ->orWhere('author_name', 'ILIKE', "%{$term}%")
+              ->orWhereRaw("tags::text ILIKE ?", ["%{$term}%"]);
+        });
     }
 }

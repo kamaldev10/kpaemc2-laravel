@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Division;
 use App\Models\Member;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
@@ -36,6 +37,13 @@ class MemberSeeder extends Seeder
 		preg_match_all($pattern, $valuesStr, $matches, PREG_SET_ORDER);
 
 		$this->command->info(sprintf('Parsed %d member records from Member_rows.sql', count($matches)));
+
+		// Retrieve division IDs for mapping
+		$divisions = Division::all()->keyBy('slug');
+		$kaderisasiId = $divisions->get('kaderisasi')?->id;
+		$sklhId = $divisions->get('sklh')?->id;
+		$litbangId = $divisions->get('litbang')?->id;
+		$karataId = $divisions->get('karata')?->id;
 
 		foreach ($matches as $row) {
 			$numericId = (int) $row[1];
@@ -75,12 +83,40 @@ class MemberSeeder extends Seeder
 				}
 			}
 
+			// Determine if member is active board / pengurus
+			$isPengurus = false;
+			$position = null;
+			$divisionId = null;
+
+			$lowerName = strtolower($name);
+			if (str_contains($lowerName, 'desti seri')) {
+				$isPengurus = true;
+				$position = 'Ketua Umum';
+			} elseif (str_contains($lowerName, 'syahren nabila')) {
+				$isPengurus = true;
+				$position = 'Sekretaris Umum';
+			} elseif (str_contains($lowerName, 'dewi lestari')) {
+				$isPengurus = true;
+				$position = 'Staff Ahli Arsip Data & RT';
+			} elseif (str_contains($lowerName, 'rina noviana')) {
+				$isPengurus = true;
+				$position = 'Bendahara Umum';
+			} elseif (str_contains($lowerName, 'ali musthafa')) {
+				$isPengurus = true;
+				$position = 'Kepala Divisi Litbang';
+				$divisionId = $litbangId;
+			} elseif (str_contains($lowerName, 'muhammad farhan')) {
+				$isPengurus = true;
+				$position = 'Kepala Divisi Karata';
+				$divisionId = $karataId;
+			}
+
 			Member::updateOrCreate(
 				['member_number' => $memberNumber],
 				[
 					'name' => $name,
-					'division_id' => null,
-					'position' => null,
+					'division_id' => $divisionId,
+					'position' => $position,
 					'batch_year' => $batchYear,
 					'major' => $major,
 					'phone' => $phone,
@@ -89,7 +125,7 @@ class MemberSeeder extends Seeder
 					'bio' => null,
 					'avatar_url' => $avatarUrl,
 					'avatar_public_id' => $avatarPublicId,
-					'is_visible' => true,
+					'is_pengurus' => $isPengurus,
 					'sort_order' => $numericId,
 					'is_active' => $status !== 'Non Aktif',
 					'created_at' => $createdAt,

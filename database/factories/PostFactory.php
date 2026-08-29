@@ -16,14 +16,14 @@ class PostFactory extends Factory
 {
     public function definition(): array
     {
-        $title = fake()->unique()->sentence(6);
+        $title = fake()->sentence(6);
 
         return [
             'user_id' => User::factory(),
             'category_id' => Category::factory(),
             'division_id' => Division::factory(),
             'title' => $title,
-            'slug' => Str::slug($title),
+            'slug' => Str::slug($title) . '-' . Str::lower(Str::random(6)),
             'excerpt' => fake()->paragraph(2),
             'content' => '<p>' . implode('</p><p>', fake()->paragraphs(4)) . '</p>',
             'content_source' => fake()->optional()->url(),
@@ -31,8 +31,8 @@ class PostFactory extends Factory
             'cover_image_public_id' => 'samples/landscapes/nature-mountains',
             'cover_image_source' => 'Dokumentasi KPA EMC²',
             'author_name' => fake()->name(),
-            'tags' => ['survival', 'gunung', 'ekspedisi', 'navigasi'],
-            'is_featured' => fake()->boolean(20),
+            'tags' => ['alam', 'konservasi'],
+            'is_featured' => false,
             'is_published' => true,
             'published_at' => now(),
             'post_date' => now(),

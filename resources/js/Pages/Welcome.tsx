@@ -91,7 +91,10 @@ export default function Welcome({
 									</div>
 
 									<div className="relative flex items-center gap-6 lg:items-end">
-										<div id="docs-card-content" className="flex items-start gap-6 lg:flex-col">
+										<div
+											id="docs-card-content"
+											className="flex items-start gap-6 lg:flex-col"
+										>
 											<div className="flex size-12 shrink-0 items-center justify-center rounded-full bg-[#FF2D20]/10 sm:size-16">
 												<svg
 													className="size-5 sm:size-6"
@@ -116,9 +119,11 @@ export default function Welcome({
 												</h2>
 
 												<p className="mt-4 text-sm/relaxed">
-													Laravel has wonderful documentation covering every aspect of the
-													framework. Whether you are a newcomer or have prior experience with
-													Laravel, we recommend reading our documentation from beginning to end.
+													Laravel has wonderful documentation covering
+													every aspect of the framework. Whether you are a
+													newcomer or have prior experience with Laravel,
+													we recommend reading our documentation from
+													beginning to end.
 												</p>
 											</div>
 										</div>
@@ -157,11 +162,14 @@ export default function Welcome({
 									</div>
 
 									<div className="pt-3 sm:pt-5">
-										<h2 className="text-xl font-semibold text-black dark:text-white">Laracasts</h2>
+										<h2 className="text-xl font-semibold text-black dark:text-white">
+											Laracasts
+										</h2>
 
 										<p className="mt-4 text-sm/relaxed">
-											Laracasts offers thousands of video tutorials on Laravel, PHP, and JavaScript
-											development. Check them out, see for yourself, and massively level up your
+											Laracasts offers thousands of video tutorials on
+											Laravel, PHP, and JavaScript development. Check them
+											out, see for yourself, and massively level up your
 											development skills in the process.
 										</p>
 									</div>
@@ -206,9 +214,10 @@ export default function Welcome({
 										</h2>
 
 										<p className="mt-4 text-sm/relaxed">
-											Laravel News is a community driven portal and newsletter aggregating all of
-											the latest and most important news in the Laravel ecosystem, including new
-											package releases and tutorials.
+											Laravel News is a community driven portal and newsletter
+											aggregating all of the latest and most important news in
+											the Laravel ecosystem, including new package releases
+											and tutorials.
 										</p>
 									</div>
 
@@ -247,7 +256,8 @@ export default function Welcome({
 										</h2>
 
 										<p className="mt-4 text-sm/relaxed">
-											Laravel's robust library of first-party tools and libraries, such as{' '}
+											Laravel's robust library of first-party tools and
+											libraries, such as{' '}
 											<a
 												href="https://forge.laravel.com"
 												className="rounded-sm underline hover:text-black focus:outline-none focus-visible:ring-1 focus-visible:ring-[#FF2D20] dark:hover:text-white dark:focus-visible:ring-[#FF2D20]"
@@ -282,8 +292,8 @@ export default function Welcome({
 											>
 												Herd
 											</a>{' '}
-											help you take your projects to the next level. Pair them with powerful open
-											source libraries like{' '}
+											help you take your projects to the next level. Pair them
+											with powerful open source libraries like{' '}
 											<a
 												href="https://laravel.com/docs/billing"
 												className="rounded-sm underline hover:text-black focus:outline-none focus-visible:ring-1 focus-visible:ring-[#FF2D20] dark:hover:text-white"

@@ -114,12 +114,15 @@ $table->jsonb('org_structure')->nullable();
 
 ---
 
-## Native PostgreSQL Types
+## Native PostgreSQL Types & Primary Keys
+
+All application tables strictly use **UUID v7 / v4** primary keys (`$table->uuid('id')->primary()`) and UUID foreign keys (`$table->foreignUuid(...)`). All Eloquent models use `Illuminate\Database\Eloquent\Concerns\HasUuids`.
 
 | Column                         | Table                   | Type       | Notes                                              |
 | ------------------------------ | ----------------------- | ---------- | -------------------------------------------------- |
+| `id`                           | ALL tables              | `UUID`     | Primary key (`$table->uuid('id')->primary()`)      |
+| `created_by`, `updated_by`     | ALL tables              | `UUID`     | Audit columns (`$table->foreignUuid(...)`)         |
 | `ip_address`                   | `contacts`              | `INET`     | Use `->ipAddress()` in migration (maps to INET)    |
-| `id`                           | `divisions`             | `SMALLINT` | Only 4 divisions — `$table->smallIncrements('id')` |
 | `tags`                         | `posts`, `events`       | `JSONB`    | With GIN index + CHECK constraint                  |
 | `form_fields`, `org_structure` | `events`, `about_infos` | `JSONB`    | No constraint                                      |
 

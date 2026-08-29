@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\AboutInfo;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 use Tighten\Ziggy\Ziggy;
@@ -40,6 +41,7 @@ class HandleInertiaRequests extends Middleware
                 'location' => $request->url(),
             ],
             'use_mock_data' => filter_var(env('USE_MOCK_DATA', false), FILTER_VALIDATE_BOOLEAN),
+            'app_logo_url' => fn () => AboutInfo::where('is_active', true)->first()?->logo_url,
         ];
     }
 }

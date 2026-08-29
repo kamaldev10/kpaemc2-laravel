@@ -1,83 +1,39 @@
-# Sprint 26.01 — Core Foundation & Public Shell
+# Sprint 26.01 — Consolidated Public Portal (Core Pages, Members, Posts, Events & Contact)
 
 | Field | Value |
 |---|---|
-| **Sprint** | 26.01 |
-| **Nama** | Core Foundation & Public Shell |
-| **Tanggal Mulai** | 2026-09-01 (Senin) |
-| **Tanggal Selesai** | 2026-09-14 (Minggu) |
-| **Status** | `active` |
+| **Sprint** | 26.01 (Consolidated) |
+| **Nama** | Public Portal: Beranda, Tentang Kami, Struktur, Artikel, Kegiatan & Kontak |
+| **Status** | `in_progress` |
 | **PIC** | Full-stack |
-| **PRD Ref** | User Story #1, #2 (P1) |
+| **PRD Ref** | User Stories #1, #2, #3, #4, #5, #6, #7 |
 
 ---
 
 ## Tujuan Sprint
 
-Membangun **fondasi teknis** yang dibutuhkan seluruh sprint selanjutnya dan mengimplementasikan **2 halaman publik pertama** — Beranda (Home) dan Tentang Kami — lengkap dengan layout, navigasi, dan data dari database.
-
-Setelah sprint ini selesai:
-- Pengunjung bisa membuka website dan melihat Beranda dengan Hero Section, Stats Bar, dan konten highlight.
-- Pengunjung bisa membuka halaman `/tentang` dan membaca profil organisasi.
-- Infrastruktur (Seeder, Cloudinary, PublicLayout, TypeScript types) siap digunakan sprint berikutnya.
-
----
-
-## Goals & Deliverables
-
-| # | Deliverable | Layer | Prioritas |
-|:---:|---|---|:---:|
-| 1 | Jalankan semua seeder — database terisi data awal | Database | P0 |
-| 2 | `PublicLayout` — Navbar (desktop + mobile drawer) + Footer | Frontend | P0 |
-| 3 | `CloudinaryService` — upload, delete, URL builder | Backend | P0 |
-| 4 | TypeScript type definitions (`types/`) | Frontend | P0 |
-| 5 | Halaman Beranda (`/`) — Hero, StatsBar, Highlights | Frontend | P1 |
-| 6 | Halaman Tentang Kami (`/tentang`) — Profil, Visi-Misi, Sejarah | Frontend | P1 |
-| 7 | `HomeController` + `AboutController` | Backend | P1 |
-| 8 | Route registrasi public (`routes/web.php`) | Backend | P1 |
-| 9 | Unit test: `CloudinaryService`, `SiteSettingModel` | Test | P1 |
-| 10 | Feature test: GET `/` dan GET `/tentang` | Test | P1 |
+Membangun portal publik terpadu **KPA EMC²** secara menyeluruh yang mencakup:
+1. **Beranda (`/`)** — Hero Banner, Stats Counter, 4 Divisi Highlight, Artikel & Postingan Highlight, Agenda Terbuka Highlight, CTA.
+2. **Tentang Kami (`/about`)** — Profil Organisasi, Visi Misi & Kode Etik, 4 Divisi Operasional (terintegrasi), Struktur Organisasi & Periode Kepengurusan, Filosofi Lambang EMC².
+3. **Struktur Kepengurusan (`/structure`)** — Filter interaktif, Inti Pimpinan (BPH), dan daftar pengurus per divisi.
+4. **Artikel & Postingan (`/posts`, `/posts/{slug}`)** — Pencarian `pg_trgm`, filter kategori, paginasi, pembaca artikel rich text, OpenGraph, share WhatsApp & salin tautan.
+5. **Katalog & Detail Kegiatan (`/events`, `/events/{slug}`)** — Filter kategori & tipe kegiatan, status pendaftaran (buka/tutup), formulir pendaftaran interaktif (`POST /events/{slug}/register`).
+6. **Hubungi Kami (`/contact`)** — Informasi kontak sekretariat, embed lokasi kampus, formulir pesan masuk interaktif (`POST /contact`).
+*(Catatan: Modul Galeri disembunyikan sementara dari navigasi publik).*
 
 ---
 
-## Dependency (Prasyarat)
+## Deliverables
 
-- [x] PostgreSQL 18+ berjalan di port 5433
-- [x] 15 migrasi sudah `Ran` (batch 1)
-- [x] 12 Eloquent Models tersedia
-- [x] 12 Factories + 11 Seeders sudah ditulis
-- [ ] Akun Cloudinary (API key, secret, cloud name) — masukkan ke `.env`
-- [ ] `npm install` sudah dijalankan
-
----
-
-## Scope Halaman
-
-### 1. Beranda (`/`)
-
-Sections yang harus ada:
-1. **HeroSection** — foto/video alam, tagline, CTA button ("Eksplorasi Kami" + "Daftar Kegiatan")
-2. **StatsBar** — 4 angka: Tahun Berdiri, Anggota Aktif, Ekspedisi Sukses, Puncak/Gua Terjelajahi
-3. **DivisiHighlight** — 4 kartu divisi (Kaderisasi, SKLH, Litbang, Karata) dengan link ke `/divisi/{slug}`
-4. **ArticleHighlight** — 3 artikel terbaru dengan thumbnail, judul, excerpt, tanggal
-5. **EventHighlight** — Kegiatan mendatang (maks 2) dengan tanggal dan CTA daftar
-6. **CTABanner** — Banner ajakan bergabung dengan tombol ke `/kontak`
-
-### 2. Tentang Kami (`/tentang`)
-
-Sections yang harus ada:
-1. **PageHero** — banner halaman dengan judul "Tentang Kami"
-2. **ProfilSection** — narasi sejarah pendirian, tahun berdiri, latar belakang
-3. **VisiMisiSection** — Visi + list Misi + Kode Etik Pecinta Alam
-4. **LogoSection** — makna/filosofi lambang EMC² (data dari `about_infos.org_name`, `logo_url`, `description`)
-5. **CTASection** — ajakan ke halaman divisi atau kegiatan
-
----
-
-## Tech Notes
-
-- Data `about_infos` diambil dengan `AboutInfo::find(1)` — singleton.
-- Stats Bar menggunakan kombinasi `SiteSetting::get('stats_*')` untuk nilai yang bisa diedit admin.
-- `CloudinaryService` perlu env vars: `CLOUDINARY_CLOUD_NAME`, `CLOUDINARY_API_KEY`, `CLOUDINARY_API_SECRET`.
-- Layout public menggunakan `resources/js/Pages/Public/` terpisah dari `Pages/Auth/`.
-- SSR aktif — hindari `window`/`localStorage` di top-level komponen.
+| # | Deliverable | Layer | Prioritas | Status |
+|---|---|---|---|---|
+| 1 | `HomeController`, `AboutController`, `MemberController`, `PostController` | Backend | P0 | ✅ |
+| 2 | `EventController` (`index`, `show`, `register`) | Backend | P0 | 🔄 |
+| 3 | `ContactController` (`index`, `store`) | Backend | P0 | 🔄 |
+| 4 | Route Registrasi Publik (`routes/web.php`) | Backend | P0 | 🔄 |
+| 5 | TypeScript Types (`types/event.ts`, `types/contact.ts`, dll.) | Frontend | P0 | 🔄 |
+| 6 | Mock Datasets (`eventMock.ts`, `contactMock.ts`, dll.) | Frontend | P0 | 🔄 |
+| 7 | Halaman Publik Beranda, Tentang Kami, Struktur, Artikel | Frontend | P0 | ✅ |
+| 8 | Halaman Publik Kegiatan (`/events`, `/events/{slug}`) & Formulir Pendaftaran | Frontend | P0 | 🔄 |
+| 9 | Halaman Publik Kontak (`/contact`) & Formulir Pesan Masuk | Frontend | P0 | 🔄 |
+| 10 | Feature & Unit Tests lengkap untuk seluruh endpoint publik | Testing | P0 | 🔄 |

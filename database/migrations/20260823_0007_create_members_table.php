@@ -25,7 +25,7 @@ return new class extends Migration
             $table->text('bio')->nullable();
             $table->string('avatar_url', 500)->nullable();
             $table->string('avatar_public_id', 300)->nullable();
-            $table->boolean('is_visible')->default(true);
+            $table->boolean('is_pengurus')->default(false);
             $table->integer('sort_order')->default(0);
             $table->boolean('is_active')->default(true);
             $table->foreignUuid('created_by')->nullable()->index()->constrained('users')->nullOnDelete();
@@ -35,6 +35,7 @@ return new class extends Migration
 
             $table->index('division_id');
             $table->index('batch_year');
+            $table->index('is_pengurus');
         });
     }
 
