@@ -37,11 +37,4 @@ class AboutTest extends TestCase
             ->has('siteSettings')
         );
     }
-
-    public function test_tentang_route_redirects_to_about(): void
-    {
-        $response = $this->get('/tentang');
-
-        $response->assertRedirect('/about');
-    }
 }

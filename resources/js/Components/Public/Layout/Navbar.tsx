@@ -26,19 +26,19 @@ export const Navbar: FC = () => {
 			return url === '/';
 		}
 		if (href.startsWith('/about')) {
-			return url === '/about' || url.startsWith('/about') || url === '/tentang';
+			return url === '/about' || url.startsWith('/about');
 		}
 		if (href.startsWith('/posts')) {
-			return url.startsWith('/posts') || url.startsWith('/artikel');
+			return url.startsWith('/posts');
 		}
 		if (href.startsWith('/events')) {
-			return url.startsWith('/events') || url.startsWith('/kegiatan');
+			return url.startsWith('/events');
 		}
 		if (href.startsWith('/galleries')) {
-			return url.startsWith('/galleries') || url.startsWith('/galeri');
+			return url.startsWith('/galleries');
 		}
 		if (href.startsWith('/contact')) {
-			return url.startsWith('/contact') || url.startsWith('/kontak');
+			return url.startsWith('/contact');
 		}
 		return url.startsWith(href);
 	};

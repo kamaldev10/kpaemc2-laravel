@@ -18,7 +18,7 @@ export const CTABanner: FC<CTABannerProps> = ({
 	primaryButtonText = 'Daftar Kegiatan Terbuka',
 	primaryButtonHref = '/events',
 	secondaryButtonText = 'Hubungi Sekretariat',
-	secondaryButtonHref = '/kontak',
+	secondaryButtonHref = '/contact',
 	className = '',
 }) => {
 	return (
