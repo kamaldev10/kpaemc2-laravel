@@ -68,7 +68,6 @@ export const EventsIndex: FC<EventsIndexProps> = ({ events = null, filters = {} 
 			<PageHero
 				title="Agenda & Kegiatan Terbuka"
 				subtitle="Tingkatkan wawasan konservasi, keterampilan teknis penjelajahan, dan jalin persaudaraan melalui kegiatan resmi KPA EMC²."
-				backgroundImageUrl="https://images.unsplash.com/photo-1526772662000-3f88f10405ff?auto=format&fit=crop&w=1920&q=80"
 			/>
 
 			{/* Search Bar Section */}

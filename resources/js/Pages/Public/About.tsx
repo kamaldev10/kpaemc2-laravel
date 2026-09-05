@@ -50,14 +50,17 @@ export const About: FC<AboutProps> = ({ aboutInfo, divisions, featuredMembers = 
 				<meta name="description" content={pageDescription} />
 				<meta property="og:title" content={pageTitle} />
 				<meta property="og:description" content={pageDescription} />
-				<meta
-					property="og:image"
-					content={
-						currentInfo?.hero_banner_url ||
-						currentInfo?.cover_url ||
-						'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=80'
-					}
-				/>
+				{currentInfo?.hero_banner_url || currentInfo?.cover_url || currentInfo?.logo_url ? (
+					<meta
+						property="og:image"
+						content={
+							currentInfo?.hero_banner_url ||
+							currentInfo?.cover_url ||
+							currentInfo?.logo_url ||
+							''
+						}
+					/>
+				) : null}
 				<meta property="og:type" content="website" />
 			</Head>
 

@@ -1,3 +1,4 @@
+import { ImagePlaceholder } from '@/Components/Public/UI/ImagePlaceholder';
 import { mockHomeEvents } from '@/mocks/homeMock';
 import { Event } from '@/types/event';
 import { Link } from '@inertiajs/react';
@@ -9,7 +10,7 @@ interface EventHighlightProps {
 }
 
 export const EventHighlight: FC<EventHighlightProps> = ({ events = mockHomeEvents }) => {
-	const currentEvents = (events && events.length > 0 ? events : mockHomeEvents);
+	const currentEvents = events && events.length > 0 ? events : mockHomeEvents;
 
 	if (!currentEvents || currentEvents.length === 0) {
 		return null;
@@ -48,9 +49,7 @@ export const EventHighlight: FC<EventHighlightProps> = ({ events = mockHomeEvent
 				{/* Event Cards Grid */}
 				<div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
 					{currentEvents.map((event) => {
-						const cover =
-							event.cover_url ||
-							'https://images.unsplash.com/photo-1526772662000-3f88f10405ff?auto=format&fit=crop&w=800&q=80';
+						const cover = event.cover_url;
 						const rawDate = event.start_date || event.event_date;
 						const dateFormatted = rawDate
 							? new Date(rawDate).toLocaleDateString('id-ID', {
@@ -66,16 +65,20 @@ export const EventHighlight: FC<EventHighlightProps> = ({ events = mockHomeEvent
 								key={event.id}
 								className="group relative flex flex-col overflow-hidden rounded-3xl border border-slate-800 bg-slate-950/70 shadow-xl transition-all duration-200 hover:border-purple-500/40 hover:shadow-2xl hover:shadow-purple-900/20 md:flex-row"
 							>
-								{/* Image */}
-								<div className="relative aspect-video w-full md:aspect-auto md:w-2/5 overflow-hidden">
-									<img
-										src={cover}
-										alt={event.title}
-										loading="lazy"
-										className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-									/>
-									<div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 md:bg-gradient-to-r md:from-transparent md:to-slate-950/80" />
-									<div className="absolute top-3 left-3">
+								{/* Image or Placeholder */}
+								<div className="relative aspect-video w-full md:aspect-auto md:w-2/5 overflow-hidden bg-slate-900">
+									{cover ? (
+										<img
+											src={cover}
+											alt={event.title}
+											loading="lazy"
+											className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+										/>
+									) : (
+										<ImagePlaceholder type="event" title={event.title} />
+									)}
+									<div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 md:bg-gradient-to-r md:from-transparent md:to-slate-950/80 pointer-events-none" />
+									<div className="absolute top-3 left-3 z-10">
 										<span className="inline-flex items-center rounded-full bg-emerald-600 px-3 py-0.5 text-xs font-bold text-white shadow">
 											Pendaftaran Dibuka
 										</span>
@@ -113,7 +116,7 @@ export const EventHighlight: FC<EventHighlightProps> = ({ events = mockHomeEvent
 									{/* Action Footer */}
 									<div className="mt-6 pt-4 border-t border-slate-800/80 flex items-center justify-between">
 										<div>
-											{(Number(event.payment_amount) > 0 || (event.fee && event.fee > 0)) ? (
+											{Number(event.payment_amount) > 0 || (event.fee && event.fee > 0) ? (
 												<span className="text-sm font-extrabold text-amber-400">
 													Rp {Number(event.payment_amount || event.fee).toLocaleString('id-ID')}
 												</span>

@@ -1,5 +1,6 @@
 import { EventCard } from '@/Components/Public/Cards/EventCard';
 import { PublicLayout } from '@/Components/Public/Layout/PublicLayout';
+import { ImagePlaceholder } from '@/Components/Public/UI/ImagePlaceholder';
 import { TagList } from '@/Components/Public/UI/TagList';
 import { mockEvents } from '@/mocks/eventMock';
 import { Event } from '@/types/event';
@@ -167,16 +168,17 @@ export const EventsShow: FC<EventsShowProps> = ({ event = null, relatedEvents = 
 					<div className="grid grid-cols-1 gap-10 lg:grid-cols-12">
 						{/* Left Column: Event Details */}
 						<div className="space-y-8 lg:col-span-7">
-							{/* Cover Image */}
+							{/* Cover Image or Placeholder */}
 							<div className="relative aspect-16/9 w-full overflow-hidden rounded-3xl border border-slate-200 bg-slate-900 shadow-sm">
-								<img
-									src={
-										currentEvent.cover_url ||
-										'https://images.unsplash.com/photo-1526772662000-3f88f10405ff?auto=format&fit=crop&w=1200&q=80'
-									}
-									alt={currentEvent.title}
-									className="h-full w-full object-cover"
-								/>
+								{currentEvent.cover_url ? (
+									<img
+										src={currentEvent.cover_url}
+										alt={currentEvent.title}
+										className="h-full w-full object-cover"
+									/>
+								) : (
+									<ImagePlaceholder type="event" title={currentEvent.title} />
+								)}
 							</div>
 
 							{/* Key Metrics Quick Cards */}

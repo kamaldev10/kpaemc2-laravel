@@ -85,7 +85,6 @@ export const PostsIndex: FC<PostsIndexProps> = ({ posts, categories, filters = {
 			<PageHero
 				title="Artikel & Postingan"
 				subtitle="Kumpulan artikel, kabar terbaru, dan catatan kegiatan alam bebas KPA EMC²."
-				backgroundImageUrl="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1920&q=80"
 			/>
 
 			{/* Filter & Search Bar Section */}

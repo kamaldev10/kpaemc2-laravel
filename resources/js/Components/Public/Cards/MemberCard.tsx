@@ -1,5 +1,6 @@
+import { AvatarPlaceholder } from '@/Components/Public/UI/AvatarPlaceholder';
 import { Member } from '@/types/member';
-import { Award, ShieldCheck, User } from 'lucide-react';
+import { Award, ShieldCheck } from 'lucide-react';
 import { FC } from 'react';
 
 interface MemberCardProps {
@@ -39,9 +40,7 @@ export const MemberCard: FC<MemberCardProps> = ({
 							loading="lazy"
 						/>
 					) : (
-						<div className="flex h-full w-full items-center justify-center text-purple-400">
-							<User className={isLeadership ? 'h-12 w-12' : 'h-8 w-8'} />
-						</div>
+						<AvatarPlaceholder name={member.name} className="h-full w-full" />
 					)}
 				</div>
 

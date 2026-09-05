@@ -122,11 +122,11 @@ export const PostShow: FC<PostShowProps> = ({ post, relatedPosts }) => {
 				</header>
 
 				{/* Featured Cover Image */}
-				{currentPost.cover_url && (
+				{(currentPost.cover_image_url || currentPost.cover_url) && (
 					<div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 -mt-6">
 						<div className="overflow-hidden rounded-3xl shadow-xl shadow-purple-950/5 border border-slate-100 bg-slate-900 max-h-[520px]">
 							<img
-								src={currentPost.cover_url}
+								src={currentPost.cover_image_url || currentPost.cover_url || ''}
 								alt={currentPost.title}
 								className="w-full h-full object-cover max-h-[520px]"
 							/>

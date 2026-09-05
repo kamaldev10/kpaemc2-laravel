@@ -1,3 +1,4 @@
+import { ImagePlaceholder } from '@/Components/Public/UI/ImagePlaceholder';
 import { Post } from '@/types/post';
 import { Link } from '@inertiajs/react';
 import { ArrowRight, Calendar, User } from 'lucide-react';
@@ -10,6 +11,8 @@ interface PostCardProps {
 }
 
 export const PostCard: FC<PostCardProps> = ({ post, className = '', featured = false }) => {
+	const coverImage = post.cover_image_url || post.cover_url;
+
 	const formattedDate = post.published_at
 		? new Date(post.published_at).toLocaleDateString('id-ID', {
 				year: 'numeric',
@@ -30,29 +33,27 @@ export const PostCard: FC<PostCardProps> = ({ post, className = '', featured = f
 				featured ? 'md:col-span-2 md:grid md:grid-cols-12 md:items-center' : ''
 			} ${className}`}
 		>
-			{/* Image Cover */}
+			{/* Image Cover or Placeholder */}
 			<div
 				className={`relative overflow-hidden bg-slate-900 ${
 					featured ? 'h-64 md:col-span-6 md:h-full min-h-[260px]' : 'h-52 w-full'
 				}`}
 			>
-				{post.cover_url ? (
+				{coverImage ? (
 					<img
-						src={post.cover_url}
+						src={coverImage}
 						alt={post.title}
 						className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
 						loading="lazy"
 					/>
 				) : (
-					<div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-purple-900 to-indigo-950 text-white/40">
-						<span className="text-xl font-black">KPA EMC²</span>
-					</div>
+					<ImagePlaceholder type="post" title={post.title} />
 				)}
-				<div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-transparent" />
+				<div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-transparent pointer-events-none" />
 
 				{/* Category Badge */}
 				{post.category && (
-					<div className="absolute left-4 top-4">
+					<div className="absolute left-4 top-4 z-10">
 						<span className="inline-flex items-center rounded-full bg-purple-900/90 px-3 py-1 text-xs font-bold text-white backdrop-blur-md shadow-xs">
 							{post.category.name}
 						</span>

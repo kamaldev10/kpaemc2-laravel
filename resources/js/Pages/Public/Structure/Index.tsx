@@ -74,7 +74,6 @@ export const StructureIndex: FC<StructureIndexProps> = ({ aboutInfo, divisions, 
 				subtitle={`Bagan hierarki kepemimpinan, Badan Pengurus Harian, dan personil operasional 4 divisi KPA EMC² Periode ${
 					currentAbout?.active_term || '2025'
 				}.`}
-				backgroundImageUrl="https://images.unsplash.com/photo-1526772662000-3f88f10405ff?auto=format&fit=crop&w=1920&q=80"
 			/>
 
 			{/* Filter Bar */}

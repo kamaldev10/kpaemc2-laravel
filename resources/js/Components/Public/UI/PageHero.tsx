@@ -10,23 +10,29 @@ interface PageHeroProps {
 export const PageHero: FC<PageHeroProps> = ({
 	title,
 	subtitle,
-	backgroundImageUrl = 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1920&q=80',
+	backgroundImageUrl = null,
 	className = '',
 }) => {
 	return (
 		<section
 			className={`relative overflow-hidden bg-slate-950 py-20 text-white md:py-28 ${className}`}
 		>
-			{/* Background Image with Dark Purple Gradient Overlay */}
+			{/* Background Image / Ambient Gradient */}
 			<div className="absolute inset-0 z-0">
-				<img
-					src={
-						backgroundImageUrl ??
-						'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1920&q=80'
-					}
-					alt={title}
-					className="h-full w-full object-cover object-center opacity-30"
-				/>
+				{backgroundImageUrl ? (
+					<img
+						src={backgroundImageUrl}
+						alt={title}
+						className="h-full w-full object-cover object-center opacity-30"
+					/>
+				) : (
+					/* Placeholder Gradient with Decorative Elements when no image from server */
+					<div className="h-full w-full bg-gradient-to-br from-slate-950 via-purple-950/80 to-slate-950">
+						<div className="pointer-events-none absolute -right-24 -top-24 h-96 w-96 rounded-full bg-purple-600/20 blur-3xl" />
+						<div className="pointer-events-none absolute -bottom-24 -left-24 h-96 w-96 rounded-full bg-indigo-600/20 blur-3xl" />
+						<div className="pointer-events-none absolute inset-0 bg-[radial-gradient(#ffffff0a_1px,transparent_1px)] [background-size:24px_24px] opacity-50" />
+					</div>
+				)}
 				<div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-purple-950/70 to-slate-950/90" />
 			</div>
 

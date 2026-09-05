@@ -16,6 +16,9 @@ export interface Post {
 	slug: string;
 	excerpt?: string | null;
 	content: string;
+	cover_image_url?: string | null;
+	cover_image_public_id?: string | null;
+	cover_image_source?: string | null;
 	cover_url?: string | null;
 	cover_public_id?: string | null;
 	tags: string[];

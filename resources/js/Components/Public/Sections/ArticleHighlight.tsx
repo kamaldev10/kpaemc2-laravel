@@ -1,3 +1,4 @@
+import { ImagePlaceholder } from '@/Components/Public/UI/ImagePlaceholder';
 import { mockHomePosts } from '@/mocks/homeMock';
 import { Post } from '@/types/post';
 import { Link } from '@inertiajs/react';
@@ -25,8 +26,7 @@ export const ArticleHighlight: FC<ArticleHighlightProps> = ({ posts = mockHomePo
 							Berita, Kegiatan, Artikel & Lainnya
 						</h2>
 						<p className="mt-3 text-base text-slate-600">
-							Setiap postingan memiliki makna yang mendalam demi terjaganya
-							kelestarian alam
+							Setiap postingan memiliki makna yang mendalam demi terjaganya kelestarian alam
 						</p>
 					</div>
 
@@ -44,9 +44,7 @@ export const ArticleHighlight: FC<ArticleHighlightProps> = ({ posts = mockHomePo
 				{/* 3 Articles Grid */}
 				<div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
 					{currentPosts.map((post) => {
-						const cover =
-							post.cover_url ||
-							'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800&q=80';
+						const cover = post.cover_image_url || post.cover_url;
 						const dateFormatted = post.published_at
 							? new Date(post.published_at).toLocaleDateString('id-ID', {
 									year: 'numeric',
@@ -60,16 +58,21 @@ export const ArticleHighlight: FC<ArticleHighlightProps> = ({ posts = mockHomePo
 								key={post.id}
 								className="group flex flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition-all duration-200 hover:-translate-y-1 hover:border-purple-200 hover:shadow-xl hover:shadow-purple-950/10"
 							>
-								{/* Thumbnail */}
-								<div className="relative aspect-video w-full overflow-hidden bg-slate-100">
-									<img
-										src={cover}
-										alt={post.title}
-										loading="lazy"
-										className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-									/>
+								{/* Thumbnail or Placeholder */}
+								<div className="relative aspect-video w-full overflow-hidden bg-slate-900">
+									{cover ? (
+										<img
+											src={cover}
+											alt={post.title}
+											loading="lazy"
+											className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+										/>
+									) : (
+										<ImagePlaceholder type="post" title={post.title} />
+									)}
+									<div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-transparent pointer-events-none" />
 									{post.category && (
-										<div className="absolute left-3 top-3">
+										<div className="absolute left-3 top-3 z-10">
 											<span className="inline-flex items-center rounded-full bg-purple-900/90 px-3 py-1 text-xs font-semibold text-white shadow-md backdrop-blur-sm">
 												{post.category.name}
 											</span>

@@ -10,19 +10,25 @@ interface HeroSectionProps {
 
 export const HeroSection: FC<HeroSectionProps> = ({ aboutInfo = mockHomeAboutInfo }) => {
 	const currentInfo = aboutInfo ?? mockHomeAboutInfo;
-	const bannerImage =
-		currentInfo.hero_banner_url ||
-		'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1920&q=80';
+	const bannerImage = currentInfo.hero_banner_url || currentInfo.cover_url;
 
 	return (
 		<section className="relative flex min-h-[85vh] items-center overflow-hidden bg-slate-950 text-white">
-			{/* High-Resolution Background Image with Purple Radial/Gradient Overlay */}
+			{/* High-Resolution Background Image or Ambient Gradient Placeholder */}
 			<div className="absolute inset-0 z-0">
-				<img
-					src={bannerImage}
-					alt="KPA EMC² Hero Banner"
-					className="h-full w-full object-cover object-center brightness-75 filter"
-				/>
+				{bannerImage ? (
+					<img
+						src={bannerImage}
+						alt="KPA EMC² Hero Banner"
+						className="h-full w-full object-cover object-center brightness-75 filter"
+					/>
+				) : (
+					<div className="h-full w-full bg-gradient-to-br from-slate-950 via-purple-950/90 to-slate-950">
+						<div className="pointer-events-none absolute -right-24 -top-24 h-96 w-96 rounded-full bg-purple-600/20 blur-3xl" />
+						<div className="pointer-events-none absolute -bottom-24 -left-24 h-96 w-96 rounded-full bg-indigo-600/20 blur-3xl" />
+						<div className="pointer-events-none absolute inset-0 bg-[radial-gradient(#ffffff0a_1px,transparent_1px)] [background-size:24px_24px] opacity-40" />
+					</div>
+				)}
 				<div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-purple-950/80 to-slate-950/90" />
 				<div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-purple-900/40 via-transparent to-black/80" />
 			</div>
@@ -31,7 +37,7 @@ export const HeroSection: FC<HeroSectionProps> = ({ aboutInfo = mockHomeAboutInf
 				<div className="max-w-3xl">
 					{/* Title / Tagline */}
 					<h1 className="text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl">
-						{currentInfo.motto}
+						{currentInfo.motto || 'Lestari Alamku, Jaya Negeriku'}
 					</h1>
 
 					{/* Description */}
@@ -60,7 +66,7 @@ export const HeroSection: FC<HeroSectionProps> = ({ aboutInfo = mockHomeAboutInf
 						</Link>
 
 						<Link
-							href="/tentang"
+							href="/about"
 							className="inline-flex items-center justify-center px-5 py-4 text-sm font-semibold text-purple-300 transition hover:text-white hover:underline"
 						>
 							<span>Tentang Kami</span>

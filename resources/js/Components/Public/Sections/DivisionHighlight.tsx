@@ -1,3 +1,4 @@
+import { ImagePlaceholder } from '@/Components/Public/UI/ImagePlaceholder';
 import { mockHomeDivisions } from '@/mocks/homeMock';
 import { Division } from '@/types/division';
 import { Link } from '@inertiajs/react';
@@ -54,25 +55,26 @@ export const DivisionHighlight: FC<DivisionHighlightProps> = ({
 					{currentDivisions.map((div) => {
 						const IconComponent =
 							div.icon_name && iconMap[div.icon_name] ? iconMap[div.icon_name] : Compass;
-						const cover =
-							div.cover_url ||
-							'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800&q=80';
 
 						return (
 							<article
 								key={div.id}
 								className="group flex flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition-all duration-200 hover:-translate-y-1 hover:border-purple-200 hover:shadow-xl hover:shadow-purple-950/10"
 							>
-								{/* Image with Purple Gradient Overlay */}
-								<div className="relative aspect-video w-full overflow-hidden bg-slate-100">
-									<img
-										src={cover}
-										alt={div.name}
-										loading="lazy"
-										className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-									/>
-									<div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-purple-950/30 to-transparent" />
-									<div className="absolute bottom-3 left-3 flex items-center gap-2">
+								{/* Image or Placeholder with Purple Gradient Overlay */}
+								<div className="relative aspect-video w-full overflow-hidden bg-slate-900">
+									{div.cover_url ? (
+										<img
+											src={div.cover_url}
+											alt={div.name}
+											loading="lazy"
+											className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+										/>
+									) : (
+										<ImagePlaceholder type="division" title={div.name} showBadge={false} />
+									)}
+									<div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-purple-950/30 to-transparent pointer-events-none" />
+									<div className="absolute bottom-3 left-3 z-10 flex items-center gap-2">
 										<div className="flex h-9 w-9 items-center justify-center rounded-xl bg-purple-800 text-white shadow-md">
 											<IconComponent className="h-5 w-5" />
 										</div>
@@ -83,7 +85,7 @@ export const DivisionHighlight: FC<DivisionHighlightProps> = ({
 								{/* Card Content */}
 								<div className="flex flex-1 flex-col justify-between p-6">
 									<p className="line-clamp-3 text-sm leading-relaxed text-slate-600">
-										{div.description || 'Deskripsi divisi operasional KPA EMC²...'}
+										{div.short_description || div.description || 'Deskripsi divisi operasional KPA EMC²...'}
 									</p>
 
 									<div className="mt-6 border-t border-slate-100 pt-4">

@@ -57,14 +57,17 @@ export const Home: FC<HomeProps> = ({
 				<meta name="description" content={pageDescription} />
 				<meta property="og:title" content={pageTitle} />
 				<meta property="og:description" content={pageDescription} />
-				<meta
-					property="og:image"
-					content={
-						currentInfo?.hero_banner_url ||
-						currentInfo?.cover_url ||
-						'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=80'
-					}
-				/>
+				{currentInfo?.hero_banner_url || currentInfo?.cover_url || currentInfo?.logo_url ? (
+					<meta
+						property="og:image"
+						content={
+							currentInfo?.hero_banner_url ||
+							currentInfo?.cover_url ||
+							currentInfo?.logo_url ||
+							''
+						}
+					/>
+				) : null}
 				<meta property="og:type" content="website" />
 			</Head>
 
@@ -90,7 +93,7 @@ export const Home: FC<HomeProps> = ({
 				primaryButtonText="Lihat Agenda Terbuka"
 				primaryButtonHref="/events"
 				secondaryButtonText="Hubungi Kami"
-				secondaryButtonHref="/kontak"
+				secondaryButtonHref="/contact"
 			/>
 		</PublicLayout>
 	);

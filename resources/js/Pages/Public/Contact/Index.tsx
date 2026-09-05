@@ -74,7 +74,6 @@ export const ContactIndex: FC<ContactIndexProps> = ({ aboutInfo = null, siteSett
 			<PageHero
 				title="Hubungi Sekretariat & Pengurus"
 				subtitle="Punya pertanyaan seputar organisasi, agenda kegiatan, atau ingin berkolaborasi? Kami siap menyambut Anda dengan hangat."
-				backgroundImageUrl="https://images.unsplash.com/photo-1470246973918-29a93221c455?auto=format&fit=crop&w=1920&q=80"
 			/>
 
 			{/* Quick Contact Cards */}

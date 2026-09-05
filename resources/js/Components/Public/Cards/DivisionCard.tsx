@@ -1,3 +1,4 @@
+import { ImagePlaceholder } from '@/Components/Public/UI/ImagePlaceholder';
 import { Division } from '@/types/division';
 import { Link } from '@inertiajs/react';
 import { ArrowRight, Compass, Home, TreePine, Users } from 'lucide-react';
@@ -22,7 +23,7 @@ export const DivisionCard: FC<DivisionCardProps> = ({ division, className = '' }
 		<div
 			className={`group flex flex-col overflow-hidden rounded-3xl border border-slate-200/80 bg-white shadow-xs transition-all duration-300 hover:-translate-y-1 hover:border-purple-200 hover:shadow-xl hover:shadow-purple-900/5 ${className}`}
 		>
-			{/* Cover Image */}
+			{/* Cover Image or Placeholder */}
 			<div className="relative h-48 w-full overflow-hidden bg-slate-900">
 				{division.cover_url ? (
 					<img
@@ -31,14 +32,12 @@ export const DivisionCard: FC<DivisionCardProps> = ({ division, className = '' }
 						className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
 					/>
 				) : (
-					<div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-purple-900 to-indigo-950">
-						<IconComponent className="h-16 w-16 text-purple-400/50" />
-					</div>
+					<ImagePlaceholder type="division" title={division.name} showBadge={false} />
 				)}
-				<div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-transparent" />
+				<div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-transparent pointer-events-none" />
 
 				{/* Floating Badge */}
-				<div className="absolute bottom-4 left-4 right-4 flex items-center justify-between">
+				<div className="absolute bottom-4 left-4 right-4 z-10 flex items-center justify-between">
 					<div className="flex items-center gap-2 rounded-xl bg-white/95 px-3 py-1.5 backdrop-blur-md shadow-xs">
 						<IconComponent className="h-4 w-4 text-purple-700" />
 						<span className="text-xs font-bold text-slate-900">{division.name}</span>
@@ -75,10 +74,10 @@ export const DivisionCard: FC<DivisionCardProps> = ({ division, className = '' }
 
 				<div className="mt-6 pt-4 border-t border-slate-100">
 					<Link
-						href={`/divisi/${division.slug}`}
+						href="/about#divisi"
 						className="inline-flex items-center gap-2 text-xs font-bold text-purple-800 transition group-hover:text-purple-600 group-hover:gap-3"
 					>
-						<span>Eksplorasi Divisi & Program</span>
+						<span>Lihat Profil & Fokus Divisi</span>
 						<ArrowRight className="h-4 w-4" />
 					</Link>
 				</div>
