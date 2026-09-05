@@ -14,14 +14,17 @@ export const Footer: FC = () => {
 					{/* Col 1: About Organization */}
 					<div className="space-y-4">
 						<div className="flex items-center gap-3">
-							<div className="flex h-10 w-10 items-center justify-center rounded-xl bg-purple-900/60 p-1.5 border border-purple-800/60">
+							<div className="flex h-10 w-10 items-center justify-center rounded-xl border border-purple-800/60 bg-purple-900/60 p-1.5">
 								<ApplicationLogo className="h-7 w-7 object-contain" />
 							</div>
-							<h4 className="text-base font-bold text-white tracking-wide">KPA EMC²</h4>
+							<h4 className="text-base font-bold tracking-wide text-white">
+								KPA EMC²
+							</h4>
 						</div>
 						<p className="text-sm leading-relaxed text-slate-400">
-							Wadah pembinaan kepemimpinan, kepribadian tangguh, ekspedisi ilmiah, serta aksi nyata
-							pelestarian lingkungan hidup mahasiswa FMIPA Universitas Riau sejak 1984.
+							Wadah pembinaan kepemimpinan, kepribadian tangguh, ekspedisi ilmiah,
+							serta aksi nyata pelestarian lingkungan hidup mahasiswa FMIPA
+							Universitas Riau sejak 1984.
 						</p>
 						<div className="pt-2">
 							<Link
@@ -41,22 +44,34 @@ export const Footer: FC = () => {
 						</h4>
 						<ul className="space-y-2.5 text-sm">
 							<li>
-								<a href="/about#divisi" className="text-slate-400 transition hover:text-purple-300">
+								<a
+									href="/about#divisi"
+									className="text-slate-400 transition hover:text-purple-300"
+								>
 									Divisi Kaderisasi (Pendidikan & Sekolah Lingkungan)
 								</a>
 							</li>
 							<li>
-								<a href="/about#divisi" className="text-slate-400 transition hover:text-purple-300">
+								<a
+									href="/about#divisi"
+									className="text-slate-400 transition hover:text-purple-300"
+								>
 									Divisi SKLH (Sosial & Lingkungan Hidup)
 								</a>
 							</li>
 							<li>
-								<a href="/about#divisi" className="text-slate-400 transition hover:text-purple-300">
+								<a
+									href="/about#divisi"
+									className="text-slate-400 transition hover:text-purple-300"
+								>
 									Divisi Litbang (Riset & Eksplorasi)
 								</a>
 							</li>
 							<li>
-								<a href="/about#divisi" className="text-slate-400 transition hover:text-purple-300">
+								<a
+									href="/about#divisi"
+									className="text-slate-400 transition hover:text-purple-300"
+								>
 									Divisi Karata (Rumah Tangga & Logistik)
 								</a>
 							</li>
@@ -78,22 +93,34 @@ export const Footer: FC = () => {
 						</h4>
 						<ul className="space-y-2.5 text-sm">
 							<li>
-								<Link href="/posts" className="text-slate-400 transition hover:text-purple-300">
+								<Link
+									href="/posts"
+									className="text-slate-400 transition hover:text-purple-300"
+								>
 									Artikel & Postingan Ekspedisi
 								</Link>
 							</li>
 							<li>
-								<Link href="/events" className="text-slate-400 transition hover:text-purple-300">
+								<Link
+									href="/events"
+									className="text-slate-400 transition hover:text-purple-300"
+								>
 									Katalog Agenda & Workshop
 								</Link>
 							</li>
 							<li>
-								<Link href="/about" className="text-slate-400 transition hover:text-purple-300">
+								<Link
+									href="/about"
+									className="text-slate-400 transition hover:text-purple-300"
+								>
 									Kode Etik Pecinta Alam
 								</Link>
 							</li>
 							<li>
-								<a href="/admin" className="text-slate-400 transition hover:text-purple-300">
+								<a
+									href="/admin"
+									className="text-slate-400 transition hover:text-purple-300"
+								>
 									Portal CMS Admin
 								</a>
 							</li>
@@ -112,13 +139,19 @@ export const Footer: FC = () => {
 							</li>
 							<li className="flex items-center gap-3">
 								<Mail className="h-4 w-4 shrink-0 text-purple-400" />
-								<a href="mailto:sekretariat@kpa-emc2.org" className="transition hover:text-white">
+								<a
+									href="mailto:sekretariat@kpa-emc2.org"
+									className="transition hover:text-white"
+								>
 									kpaemc2fmipaunri@gmail.com
 								</a>
 							</li>
 							<li className="flex items-center gap-3">
 								<Phone className="h-4 w-4 shrink-0 text-purple-400" />
-								<a href="tel:+6281234567890" className="transition hover:text-white">
+								<a
+									href="tel:+6281234567890"
+									className="transition hover:text-white"
+								>
 									+62 812-3456-7890
 								</a>
 							</li>
@@ -130,9 +163,7 @@ export const Footer: FC = () => {
 			{/* Bottom Copyright Bar */}
 			<div className="border-t border-slate-900 bg-slate-950 py-6 text-xs text-slate-500">
 				<div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-4 sm:flex-row sm:px-6 lg:px-8">
-					<p>
-						© {currentYear} KPA EMC² (Kelompok Pecinta Alam FMIPA UNRI). Hak Cipta Dilindungi.
-					</p>
+					<p>© {currentYear} KPA EMC² FMIPA UNRI. Hak Cipta Dilindungi.</p>
 					<p className="flex items-center gap-1">
 						<span>Didedikasikan untuk Kelestarian Alam Indonesia</span>
 						<Heart className="h-3.5 w-3.5 fill-rose-500 text-rose-500" />
