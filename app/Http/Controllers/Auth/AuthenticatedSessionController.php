@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Enums\RoleTypeEnum;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use Illuminate\Http\RedirectResponse;
@@ -33,7 +34,12 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(route('dashboard', absolute: false));
+        // Redirect admin+ users to admin dashboard, others to home
+        $defaultRoute = $request->user()->isAtLeast(RoleTypeEnum::ADMIN)
+            ? route('admin.dashboard', absolute: false)
+            : route('home', absolute: false);
+
+        return redirect()->intended($defaultRoute);
     }
 
     /**

@@ -19,15 +19,28 @@ class AuthenticationTest extends TestCase
 
     public function test_users_can_authenticate_using_the_login_screen(): void
     {
-        $user = User::factory()->create();
+        $admin = User::factory()->admin()->create();
 
         $response = $this->post('/login', [
-            'email' => $user->email,
+            'email' => $admin->email,
             'password' => 'password',
         ]);
 
         $this->assertAuthenticated();
-        $response->assertRedirect(route('dashboard', absolute: false));
+        $response->assertRedirect(route('admin.dashboard', absolute: false));
+    }
+
+    public function test_editors_are_redirected_to_home_upon_login(): void
+    {
+        $editor = User::factory()->editor()->create();
+
+        $response = $this->post('/login', [
+            'email' => $editor->email,
+            'password' => 'password',
+        ]);
+
+        $this->assertAuthenticated();
+        $response->assertRedirect(route('home', absolute: false));
     }
 
     public function test_users_can_not_authenticate_with_invalid_password(): void

@@ -8,7 +8,6 @@ use App\Http\Controllers\Public\HomeController;
 use App\Http\Controllers\Public\MemberController;
 use App\Http\Controllers\Public\PostController;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 
 // Public Core Pages (English URLs)
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -30,25 +29,20 @@ Route::post('/events/{slug}/register', [EventController::class, 'register'])->na
 Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
-// Indonesian / Legacy URL Aliases (Redirects to English URLs)
-Route::get('/tentang', fn () => redirect()->route('about'));
-Route::get('/artikel', fn () => redirect()->route('posts.index'));
-Route::get('/artikel/{slug}', fn ($slug) => redirect()->route('posts.show', $slug));
-Route::get('/struktur', fn () => redirect()->route('structure.index'));
-Route::get('/members', fn () => redirect()->route('structure.index'));
-Route::get('/kegiatan', fn () => redirect()->route('events.index'));
-Route::get('/kegiatan/{slug}', fn ($slug) => redirect()->route('events.show', $slug));
-Route::get('/kontak', fn () => redirect()->route('contact.index'));
-
 // Authenticated Routes
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+// Admin Dashboard Routes (auth + verified + role >= ADMIN)
+Route::middleware(['auth', 'verified', App\Http\Middleware\EnsureAdmin::class])
+    ->prefix('admin')
+    ->name('admin.')
+    ->group(function () {
+        Route::get('/', [App\Http\Controllers\Admin\DashboardController::class, 'index'])
+            ->name('dashboard');
+    });
 
 require __DIR__ . '/auth.php';
