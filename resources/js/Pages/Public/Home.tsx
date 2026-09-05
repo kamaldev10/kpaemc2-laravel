@@ -77,11 +77,11 @@ export const Home: FC<HomeProps> = ({
 			{/* 2. Stats Bar */}
 			<StatsBar siteSettings={currentSettings} />
 
-			{/* 3. 4 Divisions Highlight */}
-			<DivisionHighlight divisions={currentDivisions} />
-
 			{/* 4. Recent Articles & Expedition Journals */}
 			<ArticleHighlight posts={currentPosts} />
+
+			{/* 3. 4 Divisions Highlight */}
+			<DivisionHighlight divisions={currentDivisions} />
 
 			{/* 5. Upcoming Open Events */}
 			<EventHighlight events={currentEvents} />

@@ -17,8 +17,8 @@
 2. **Kebutuhan Digitalisasi**: Seiring berkembangnya organisasi, KPA EMC² memerlukan representasi digital resmi berupa website _company profile_ modern untuk mempublikasikan citra positif organisasi, memamerkan rekam jejak ekspedisi, mendokumentasikan riset lingkungan, mengelola agenda kegiatan publik (Sekolah Lingkungan, Seminar Lingkungan, Aksi Konservasi, Pengabdian Masyarakat, EMC Expo, Open Recruitment), serta menyediakan sistem pendaftaran online terpusat.
 
 3. **Pendekatan Arsitektur Dua Sisi (_Two-Tier Architecture_)**:
-   - **Public Facing Website**: Dibangun dengan **Inertia.js + React 19 + Tailwind CSS v4** yang mengutamakan _tampilan responsif, fluid micro-interactions, mobile-first design, SEO-friendly_, dan kecepatan akses bagi pengunjung umum, mitra, alumni, serta calon peserta kegiatan.
-   - **Dashboard Admin CMS**: Dibangun menggunakan **Filament PHP v3** di atas **PostgreSQL 18+** yang mengutamakan _kinerja tinggi, JSONB querying, optimasi partial indexing, kemudahan pengelolaan data (CRUD), efisiensi resource server_, serta sistem autentikasi dan manajemen hak akses terstruktur bagi pengurus harian organisasi.
+    - **Public Facing Website**: Dibangun dengan **Inertia.js + React 19 + Tailwind CSS v4** yang mengutamakan _tampilan responsif, fluid micro-interactions, mobile-first design, SEO-friendly_, dan kecepatan akses bagi pengunjung umum, mitra, alumni, serta calon peserta kegiatan.
+    - **Dashboard Admin CMS**: Dibangun menggunakan **Filament PHP v3** di atas **PostgreSQL 18+** yang mengutamakan _kinerja tinggi, JSONB querying, optimasi partial indexing, kemudahan pengelolaan data (CRUD), efisiensi resource server_, serta sistem autentikasi dan manajemen hak akses terstruktur bagi pengurus harian organisasi.
 
 4. **Media Management Cloudinary**: Dokumentasi kegiatan alam bebas memiliki volume foto/video resolusi tinggi yang sangat besar. Penyimpanan dan _delivery_ aset media diintegrasikan secara _native_ dengan **Cloudinary** (auto format WebP/AVIF, auto quality `f_auto,q_auto`, responsive resizing CDN) agar server lokal tidak terbebani penyimpanan disk dan bandwidth pengunjung hemat.
 
