@@ -9,7 +9,7 @@ interface ArticleHighlightProps {
 	posts?: Post[] | null;
 }
 
-export const ArticleHighlight: FC<ArticleHighlightProps> = ({ posts = mockHomePosts }) => {
+export const ArticleHighlight: FC<ArticleHighlightProps> = ({ posts }) => {
 	const currentPosts = posts && posts.length > 0 ? posts : mockHomePosts;
 
 	return (
@@ -26,7 +26,8 @@ export const ArticleHighlight: FC<ArticleHighlightProps> = ({ posts = mockHomePo
 							Berita, Kegiatan, Artikel & Lainnya
 						</h2>
 						<p className="mt-3 text-base text-slate-600">
-							Setiap postingan memiliki makna yang mendalam demi terjaganya kelestarian alam
+							Setiap postingan memiliki makna yang mendalam demi terjaganya
+							kelestarian alam
 						</p>
 					</div>
 
@@ -70,7 +71,7 @@ export const ArticleHighlight: FC<ArticleHighlightProps> = ({ posts = mockHomePo
 									) : (
 										<ImagePlaceholder type="post" title={post.title} />
 									)}
-									<div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-transparent pointer-events-none" />
+									<div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-transparent" />
 									{post.category && (
 										<div className="absolute left-3 top-3 z-10">
 											<span className="inline-flex items-center rounded-full bg-purple-900/90 px-3 py-1 text-xs font-semibold text-white shadow-md backdrop-blur-sm">
