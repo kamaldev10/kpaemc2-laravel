@@ -34,12 +34,19 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        // Redirect admin+ users to admin dashboard, others to home
-        $defaultRoute = $request->user()->isAtLeast(RoleTypeEnum::ADMIN)
-            ? route('admin.dashboard', absolute: false)
-            : route('home', absolute: false);
+        // Admin & Super Admin always go straight to the admin dashboard
+        // unless they explicitly were trying to access a specific admin subpath
+        if ($request->user()->isAtLeast(RoleTypeEnum::ADMIN)) {
+            $intended = $request->session()->pull('url.intended');
 
-        return redirect()->intended($defaultRoute);
+            if ($intended && str_contains($intended, '/admin')) {
+                return redirect()->to($intended);
+            }
+
+            return redirect()->route('admin.dashboard');
+        }
+
+        return redirect()->intended(route('home', absolute: false));
     }
 
     /**
