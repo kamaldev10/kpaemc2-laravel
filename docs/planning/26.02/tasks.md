@@ -48,13 +48,13 @@
 
 | #   | Task                                                                    | Layer | Status |
 | --- | ----------------------------------------------------------------------- | ----- | ------ |
-| 4.1 | `MemberController` (Admin resource endpoints)                           | BE    | ⏳     |
-| 4.2 | `StoreMemberRequest` & `UpdateMemberRequest`                            | BE    | ⏳     |
-| 4.3 | `MemberService` (caching, Cloudinary avatar upload)                     | BE    | ⏳     |
-| 4.4 | `MemberResource`                                                        | BE    | ⏳     |
-| 4.5 | Policy rules in `DashboardPolicy`                                       | BE    | ⏳     |
-| 4.6 | Frontend Member Table & Form modal/page                                 | FE    | ⏳     |
-| 4.7 | Feature tests `MemberCrudTest.php` & unit tests `MemberServiceTest.php` | TEST  | ⏳     |
+| 4.1 | `MemberController` (Admin resource endpoints)                           | BE    | ✅     |
+| 4.2 | `StoreMemberRequest` & `UpdateMemberRequest`                            | BE    | ✅     |
+| 4.3 | `MemberService` (caching, Cloudinary avatar upload)                     | BE    | ✅     |
+| 4.4 | `MemberResource`                                                        | BE    | ✅     |
+| 4.5 | Policy rules in `MemberPolicy`                                          | BE    | ✅     |
+| 4.6 | Frontend Member Table & Form modal/page                                 | FE    | ✅     |
+| 4.7 | Feature tests `MemberCrudTest.php` & unit tests `MemberServiceTest.php` | TEST  | ✅     |
 
 ---
 
