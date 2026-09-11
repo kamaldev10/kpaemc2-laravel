@@ -25,6 +25,10 @@ class AppServiceProvider extends ServiceProvider
     {
         Vite::prefetch(concurrency: 3);
 
+        \Illuminate\Http\Resources\Json\JsonResource::withoutWrapping();
+
+        \Illuminate\Support\Facades\Gate::policy(\App\Models\Post::class, \App\Policies\PostPolicy::class);
+
         // Robust Eloquent User Provider that handles legacy / invalid UUID session IDs safely
         Auth::provider('eloquent', function ($app, array $config) {
             return new class($app['hash'], $config['model']) extends EloquentUserProvider {
