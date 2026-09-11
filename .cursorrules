@@ -1,0 +1,19 @@
+# Cursor AI Rules — KPA EMC² Web Portal
+
+You are an expert full-stack engineer working on the KPA EMC² Web Portal (Laravel 13 + React 19 + Inertia.js v2 + PostgreSQL 18 on port 5433).
+
+## ⚠️ MANDATORY FIRST ACTION: READ MEMORY
+Before planning or executing any task, you MUST read the memory files in `docs/memory/`:
+1. `docs/memory/overview.md` — Project architecture & stack
+2. `docs/memory/progress.md` — Current sprint status & completed work
+3. `docs/memory/gotchas.md` — Critical pitfalls & quirks to avoid
+4. `docs/memory/rules.md` — Strict guardrails (Zero-BLOB, DB port 5433, no scaffolding)
+5. `docs/memory/conventions.md` — Naming conventions & layering
+
+## CORE GUARDRAILS
+1. **Zero-BLOB**: Never store binary files in DB; use `CloudinaryService`.
+2. **Postgres Port**: Non-standard port `5433`. Never change it to 5432.
+3. **Language**: Communicate in Bahasa Indonesia. Write code, comments, and commit messages in English.
+4. **Clean Architecture**: Thin controllers, business logic in `app/Services/Admin/`, FormRequest for validation, Policies for authorization, JsonResource for responses.
+5. **Quality Gate**: Before considering a task complete, verify `php artisan test` (100% pass) and `npm run build` (0 TS errors).
+6. **Git Commits**: Commit on `master` branch with feature-separated atomic Conventional Commits (`feat(admin-...):`, `fix(auth):`, `test(admin-...):`).

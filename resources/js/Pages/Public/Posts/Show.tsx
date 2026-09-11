@@ -19,9 +19,7 @@ export const PostShow: FC<PostShowProps> = ({ post, relatedPosts }) => {
 
 	const currentPost = resolveData(post, mockPosts[0], isMockEnabled) ?? post;
 
-	const fallbackRelated = mockPosts
-		.filter((p) => p.id !== currentPost?.id)
-		.slice(0, 3);
+	const fallbackRelated = mockPosts.filter((p) => p.id !== currentPost?.id).slice(0, 3);
 	const currentRelated = resolveData(relatedPosts, fallbackRelated, isMockEnabled) ?? [];
 
 	const formattedDate = currentPost.published_at
@@ -52,7 +50,10 @@ export const PostShow: FC<PostShowProps> = ({ post, relatedPosts }) => {
 				<title>{`${currentPost.title} — KPA EMC²`}</title>
 				<meta name="description" content={currentPost.excerpt || currentPost.title} />
 				<meta property="og:title" content={`${currentPost.title} — KPA EMC²`} />
-				<meta property="og:description" content={currentPost.excerpt || currentPost.title} />
+				<meta
+					property="og:description"
+					content={currentPost.excerpt || currentPost.title}
+				/>
 				<meta property="og:type" content="article" />
 				{currentPost.cover_url && (
 					<meta property="og:image" content={currentPost.cover_url} />
@@ -66,14 +67,14 @@ export const PostShow: FC<PostShowProps> = ({ post, relatedPosts }) => {
 						{/* Back Link */}
 						<Link
 							href="/posts"
-							className="inline-flex items-center gap-1.5 rounded-full bg-white px-3.5 py-1 text-xs font-semibold text-slate-600 border border-slate-200 transition hover:border-purple-200 hover:text-purple-900 mb-6"
+							className="mb-6 inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-white px-3.5 py-1 text-xs font-semibold text-slate-600 transition hover:border-purple-200 hover:text-purple-900"
 						>
 							<ChevronLeft className="h-4 w-4" />
 							<span>Kembali ke Semua Artikel</span>
 						</Link>
 
 						{/* Category & Read Time */}
-						<div className="flex flex-wrap items-center gap-3 mb-4">
+						<div className="mb-4 flex flex-wrap items-center gap-3">
 							{currentPost.category && (
 								<span className="rounded-full bg-purple-100 px-3.5 py-1 text-xs font-bold text-purple-900">
 									{currentPost.category.name}
@@ -86,7 +87,7 @@ export const PostShow: FC<PostShowProps> = ({ post, relatedPosts }) => {
 						</div>
 
 						{/* Title */}
-						<h1 className="text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl lg:text-5xl leading-tight">
+						<h1 className="text-3xl font-extrabold leading-tight tracking-tight text-slate-900 sm:text-4xl lg:text-5xl">
 							{currentPost.title}
 						</h1>
 
@@ -94,11 +95,13 @@ export const PostShow: FC<PostShowProps> = ({ post, relatedPosts }) => {
 						<div className="mt-6 flex flex-wrap items-center gap-6 border-t border-slate-200/60 pt-6 text-xs text-slate-600">
 							{currentPost.author_name && (
 								<div className="flex items-center gap-2">
-									<div className="flex h-8 w-8 items-center justify-center rounded-full bg-purple-100 text-purple-900 font-bold">
+									<div className="flex h-8 w-8 items-center justify-center rounded-full bg-purple-100 font-bold text-purple-900">
 										<User className="h-4 w-4" />
 									</div>
 									<div>
-										<span className="text-[11px] text-slate-400 block">Penulis</span>
+										<span className="block text-[11px] text-slate-400">
+											Penulis
+										</span>
 										<span className="font-semibold text-slate-900">
 											{currentPost.author_name}
 										</span>
@@ -108,12 +111,16 @@ export const PostShow: FC<PostShowProps> = ({ post, relatedPosts }) => {
 
 							{formattedDate && (
 								<div className="flex items-center gap-2">
-									<div className="flex h-8 w-8 items-center justify-center rounded-full bg-slate-100 text-slate-600 font-bold">
+									<div className="flex h-8 w-8 items-center justify-center rounded-full bg-slate-100 font-bold text-slate-600">
 										<Calendar className="h-4 w-4" />
 									</div>
 									<div>
-										<span className="text-[11px] text-slate-400 block">Diterbitkan</span>
-										<span className="font-semibold text-slate-900">{formattedDate}</span>
+										<span className="block text-[11px] text-slate-400">
+											Diterbitkan
+										</span>
+										<span className="font-semibold text-slate-900">
+											{formattedDate}
+										</span>
 									</div>
 								</div>
 							)}
@@ -123,29 +130,29 @@ export const PostShow: FC<PostShowProps> = ({ post, relatedPosts }) => {
 
 				{/* Featured Cover Image */}
 				{(currentPost.cover_image_url || currentPost.cover_url) && (
-					<div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 -mt-6">
-						<div className="overflow-hidden rounded-3xl shadow-xl shadow-purple-950/5 border border-slate-100 bg-slate-900 max-h-[520px]">
+					<div className="mx-auto -mt-6 max-w-5xl px-4 sm:px-6 lg:px-8">
+						<div className="max-h-[520px] overflow-hidden rounded-3xl border border-slate-100 bg-slate-900 shadow-xl shadow-purple-950/5">
 							<img
 								src={currentPost.cover_image_url || currentPost.cover_url || ''}
 								alt={currentPost.title}
-								className="w-full h-full object-cover max-h-[520px]"
+								className="h-full max-h-[520px] w-full object-cover"
 							/>
 						</div>
 					</div>
 				)}
 
 				{/* Article Main Body Content */}
-				<div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-16">
+				<div className="mx-auto max-w-4xl px-4 py-16 sm:px-6 lg:px-8">
 					{/* Excerpt Lead Paragraph */}
 					{currentPost.excerpt && (
-						<p className="text-lg sm:text-xl font-medium leading-relaxed text-slate-700 mb-10 border-l-4 border-purple-700 pl-6 italic">
+						<p className="mb-10 border-l-4 border-purple-700 pl-6 text-lg font-medium italic leading-relaxed text-slate-700 sm:text-xl">
 							{currentPost.excerpt}
 						</p>
 					)}
 
 					{/* Rich Text Body */}
 					<div
-						className="prose prose-slate prose-lg max-w-none text-slate-700 leading-relaxed prose-headings:font-bold prose-headings:tracking-tight prose-headings:text-slate-900 prose-a:text-purple-700 prose-a:underline hover:prose-a:text-purple-900 prose-img:rounded-2xl"
+						className="prose prose-slate prose-lg prose-headings:font-bold prose-headings:tracking-tight prose-headings:text-slate-900 prose-a:text-purple-700 prose-a:underline hover:prose-a:text-purple-900 prose-img:rounded-2xl max-w-none text-justify text-xl leading-relaxed text-slate-700"
 						dangerouslySetInnerHTML={{
 							__html:
 								currentPost.content ||
@@ -154,10 +161,10 @@ export const PostShow: FC<PostShowProps> = ({ post, relatedPosts }) => {
 					/>
 
 					{/* Tags & Share Footer */}
-					<div className="mt-16 border-t border-slate-100 pt-8 space-y-6">
+					<div className="mt-16 space-y-6 border-t border-slate-100 pt-8">
 						{currentPost.tags && currentPost.tags.length > 0 && (
 							<div>
-								<div className="flex items-center gap-2 text-xs font-bold text-slate-500 mb-3">
+								<div className="mb-3 flex items-center gap-2 text-xs font-bold text-slate-500">
 									<Tag className="h-3.5 w-3.5" />
 									<span>TOPIK ARTIKEL:</span>
 								</div>
@@ -165,7 +172,7 @@ export const PostShow: FC<PostShowProps> = ({ post, relatedPosts }) => {
 							</div>
 						)}
 
-						<div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-4 border-t border-slate-100">
+						<div className="flex flex-col justify-between gap-4 border-t border-slate-100 pt-4 sm:flex-row sm:items-center">
 							<ShareButtons title={currentPost.title} />
 						</div>
 					</div>

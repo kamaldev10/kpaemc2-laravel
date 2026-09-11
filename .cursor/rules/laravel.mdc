@@ -1,0 +1,15 @@
+---
+description: Laravel backend development rules, clean architecture, and services
+globs: app/**/*.php, routes/**/*.php, database/**/*.php, tests/**/*.php
+alwaysApply: false
+---
+
+# Laravel Backend Rules — KPA EMC²
+
+## Architecture Principles
+- **Thin Controllers:** Keep controllers minimal. Delegate business logic, transactions, and slug generation to `App\Services\Admin\*`.
+- **FormRequest:** Always validate input through dedicated FormRequest classes (`Store*Request`, `Update*Request`). Never use `request()->all()`.
+- **Policies:** Authorize actions using Policies (`App\Policies\*`) with `RoleTypeEnum`.
+- **API/Inertia Resources:** Format output using `JsonResource` without wrapping.
+- **Traits:** Models use `HasAuditColumns` (auto-audit `created_by`, `updated_by`, `is_active`) and `HasUuidKey`.
+- **Database:** PostgreSQL on port `5433`. Use transactions for multi-step mutations.

@@ -1,0 +1,16 @@
+---
+description: React 19, Inertia.js v2, and Tailwind CSS rules for frontend development
+globs: resources/js/**/*.{ts,tsx}
+alwaysApply: false
+---
+
+# React & Inertia Frontend Rules — KPA EMC²
+
+## Component & Page Standards
+- **Admin Layout:** Wrap all admin pages in `<AdminLayout title="..." breadcrumbs={...}>`.
+- **Inertia Form Handling:** Define explicit `interface FormData` for `useForm<FormData>`.
+- **File Upload with PUT:** When updating files via Inertia, use `router.post(url, { _method: 'PUT', ...data })`.
+- **Lucide Icons:** Use `lucide-react` for all UI icons.
+- **Tailwind CSS:** Use Tailwind utility classes; avoid inline CSS.
+- **Language:** Indonesian for all user-visible labels, notifications, and button text.
+- **TypeScript:** Strict types, interfaces over type aliases, no unannotated `any`.

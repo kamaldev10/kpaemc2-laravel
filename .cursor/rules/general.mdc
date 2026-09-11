@@ -1,0 +1,22 @@
+---
+description: Project core standards, AI memory reading, and operating rules
+globs: *
+alwaysApply: true
+---
+
+# KPA EMC² Web Portal — Core AI Rules
+
+## Mandatory Reading
+Before performing any action, consult the memory files in `docs/memory/`:
+- `docs/memory/overview.md`
+- `docs/memory/progress.md`
+- `docs/memory/gotchas.md`
+- `docs/memory/rules.md`
+- `docs/memory/conventions.md`
+
+## Absolute Constraints
+- **Communication:** Always use Bahasa Indonesia when explaining to the user.
+- **Code Standards:** Production-ready code only. No placeholders or empty TODO stubs.
+- **Database:** PostgreSQL runs on port **`5433`**. Never store raw binary in DB; use `CloudinaryService`.
+- **RBAC:** Roles are `SUPER_ADMIN`, `ADMIN`, `EDITOR` via `RoleTypeEnum`. Guard admin routes with `EnsureAdmin` middleware.
+- **Verification:** Run `php artisan test` and `npm run build` before committing.
