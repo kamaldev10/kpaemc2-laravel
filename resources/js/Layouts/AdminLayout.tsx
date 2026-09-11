@@ -3,6 +3,7 @@ import AdminSidebar from '@/Components/Admin/Layout/AdminSidebar';
 import { BreadcrumbItem } from '@/types/admin';
 import { PageProps } from '@/types';
 import { Head, usePage } from '@inertiajs/react';
+import { AlertCircle, CheckCircle2, Info, X } from 'lucide-react';
 import { FC, PropsWithChildren, ReactNode, useState } from 'react';
 
 interface AdminLayoutProps extends PropsWithChildren {
@@ -21,7 +22,7 @@ export const AdminLayout: FC<AdminLayoutProps> = ({
     breadcrumbs = [],
     children,
 }) => {
-    const { auth } = usePage<PageProps>().props;
+    const { auth, flash } = usePage<PageProps>().props;
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
     const user = auth.user;
@@ -77,7 +78,35 @@ export const AdminLayout: FC<AdminLayoutProps> = ({
 
                 {/* Main Content Body */}
                 <main className="flex-1 px-4 py-6 sm:px-6 lg:px-8">
-                    <div className="mx-auto max-w-7xl">{children}</div>
+                    <div className="mx-auto max-w-7xl">
+                        {/* Flash Alerts */}
+                        {flash?.success && (
+                            <div className="mb-6 flex items-start justify-between rounded-xl border border-emerald-200 bg-emerald-50/90 p-4 text-emerald-900 shadow-sm">
+                                <div className="flex items-start gap-3">
+                                    <CheckCircle2 className="mt-0.5 h-5 w-5 text-emerald-600 shrink-0" />
+                                    <p className="text-sm font-medium">{flash.success}</p>
+                                </div>
+                            </div>
+                        )}
+                        {flash?.error && (
+                            <div className="mb-6 flex items-start justify-between rounded-xl border border-rose-200 bg-rose-50/90 p-4 text-rose-900 shadow-sm">
+                                <div className="flex items-start gap-3">
+                                    <AlertCircle className="mt-0.5 h-5 w-5 text-rose-600 shrink-0" />
+                                    <p className="text-sm font-medium">{flash.error}</p>
+                                </div>
+                            </div>
+                        )}
+                        {flash?.message && (
+                            <div className="mb-6 flex items-start justify-between rounded-xl border border-blue-200 bg-blue-50/90 p-4 text-blue-900 shadow-sm">
+                                <div className="flex items-start gap-3">
+                                    <Info className="mt-0.5 h-5 w-5 text-blue-600 shrink-0" />
+                                    <p className="text-sm font-medium">{flash.message}</p>
+                                </div>
+                            </div>
+                        )}
+
+                        {children}
+                    </div>
                 </main>
 
                 {/* Admin Footer */}

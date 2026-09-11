@@ -33,4 +33,9 @@ export type PageProps<T extends Record<string, unknown> = Record<string, unknown
 	ziggy: Config & { location: string };
 	use_mock_data?: boolean;
 	app_logo_url?: string;
+	flash?: {
+		success?: string | null;
+		error?: string | null;
+		message?: string | null;
+	};
 };
