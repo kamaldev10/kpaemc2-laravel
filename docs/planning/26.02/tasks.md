@@ -34,13 +34,13 @@
 
 | #   | Task                                                                           | Layer | Status |
 | --- | ------------------------------------------------------------------------------ | ----- | ------ |
-| 3.1 | `PostController` & `ArticleController` (Admin resource endpoints)              | BE    | ⏳     |
-| 3.2 | `StorePostRequest` & `UpdatePostRequest` (Form validation & slug generation)   | BE    | ⏳     |
-| 3.3 | `PostService` (Business logic, transactions, cache tags invalidation)          | BE    | ⏳     |
-| 3.4 | `PostResource` (API & Inertia clean JSON formatting)                           | BE    | ⏳     |
-| 3.5 | Post Policy authorization (`SUPER_ADMIN`, `ADMIN`, `EDITOR` own-content rules) | BE    | ⏳     |
-| 3.6 | Frontend Post List, Create, and Edit forms with Rich Text Editor               | FE    | ⏳     |
-| 3.7 | Feature & Unit tests for Post CRUD endpoints and service caching               | TEST  | ⏳     |
+| 3.1 | `PostController` & `ArticleController` (Admin resource endpoints)              | BE    | ✅     |
+| 3.2 | `StorePostRequest` & `UpdatePostRequest` (Form validation & slug generation)   | BE    | ✅     |
+| 3.3 | `PostService` (Business logic, transactions, cache tags invalidation)          | BE    | ✅     |
+| 3.4 | `PostResource` (API & Inertia clean JSON formatting)                           | BE    | ✅     |
+| 3.5 | Post Policy authorization (`SUPER_ADMIN`, `ADMIN`, `EDITOR` own-content rules) | BE    | ✅     |
+| 3.6 | Frontend Post List, Create, and Edit forms with Rich Text Editor               | FE    | ✅     |
+| 3.7 | Feature & Unit tests for Post CRUD endpoints and service caching               | TEST  | ✅     |
 
 ---
 
