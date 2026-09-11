@@ -46,6 +46,8 @@ Route::middleware(['auth', 'verified', App\Http\Middleware\EnsureAdmin::class])
 
         Route::resource('posts', App\Http\Controllers\Admin\PostController::class);
         Route::get('articles', fn () => redirect()->route('admin.posts.index'))->name('articles.index');
+
+        Route::resource('members', App\Http\Controllers\Admin\MemberController::class);
     });
 
 require __DIR__ . '/auth.php';
