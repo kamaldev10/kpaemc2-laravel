@@ -48,6 +48,14 @@ Route::middleware(['auth', 'verified', App\Http\Middleware\EnsureAdmin::class])
         Route::get('articles', fn () => redirect()->route('admin.posts.index'))->name('articles.index');
 
         Route::resource('members', App\Http\Controllers\Admin\MemberController::class);
+
+        Route::get('events/{event}/registrations', [App\Http\Controllers\Admin\EventController::class, 'registrations'])
+            ->name('events.registrations');
+        Route::patch('events/{event}/registrations/{registration}', [App\Http\Controllers\Admin\EventController::class, 'updateRegistrationStatus'])
+            ->name('events.registrations.update');
+        Route::get('events/{event}/registrations/export', [App\Http\Controllers\Admin\EventController::class, 'exportRegistrations'])
+            ->name('events.registrations.export');
+        Route::resource('events', App\Http\Controllers\Admin\EventController::class);
     });
 
 require __DIR__ . '/auth.php';
