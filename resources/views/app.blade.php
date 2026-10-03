@@ -10,6 +10,26 @@
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
+        @php
+            $gaId = \App\Models\SiteSetting::get('google_analytics_id') ?: env('VITE_GA_MEASUREMENT_ID');
+            $googleVerification = \App\Models\SiteSetting::get('google_site_verification');
+        @endphp
+
+        @if(!empty($googleVerification))
+            <meta name="google-site-verification" content="{{ $googleVerification }}">
+        @endif
+
+        @if(!empty($gaId))
+            <!-- Google tag (gtag.js) -->
+            <script async src="https://www.googletagmanager.com/gtag/js?id={{ $gaId }}"></script>
+            <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', '{{ $gaId }}');
+            </script>
+        @endif
+
         <!-- Scripts -->
         @routes
         @viteReactRefresh

@@ -14,6 +14,7 @@ const navItems: NavItem[] = [
 	{ name: 'Tentang Kami', href: '/about', route_name: 'about' },
 	{ name: 'Artikel', href: '/posts', route_name: 'posts' },
 	{ name: 'Kegiatan', href: '/events', route_name: 'events' },
+	{ name: 'Galeri', href: '/gallery', route_name: 'gallery' },
 	{ name: 'Kontak', href: '/contact', route_name: 'contact' },
 ];
 

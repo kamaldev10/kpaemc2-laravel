@@ -1,7 +1,7 @@
 # Progress Tracker — KPA EMC² Web Portal
 
-> **Terakhir Diperbarui:** 2026-09-12
-> **Sprint Aktif:** Sprint 26.02 (Admin Dashboard & Content Management)
+> **Terakhir Diperbarui:** 2026-10-04
+> **Sprint Terakhir:** Sprint 26.03 (CMS Completion, SEO & Analytics, Public Portal Polish, and Production Readiness)
 > **Branch Aktif:** `master`
 
 ---
@@ -9,56 +9,40 @@
 ## 1. Roadmap & Status Sprint
 
 ### Sprint 26.01 — Core Portal & Public Website (SELESAI ✅)
-
 - [x] Desain skema basis data, model Eloquent, traits (`HasAuditColumns`, `HasUuidKey`), migrasi, dan seeder.
 - [x] Service integrasi Cloudinary (`CloudinaryService`).
 - [x] Mock-First Frontend & Typed MockData (`resources/js/mocks/`).
-- [x] Halaman Publik:
-    - [x] Home (`/`)
-    - [x] About / Profil Organisasi (`/about`)
-    - [x] Posts / Artikel & Berita (`/posts`, `/posts/{slug}`)
-    - [x] Events / Agenda & Registrasi (`/events`, `/events/{slug}`)
-    - [x] Structure & Anggota (`/structure`)
-    - [x] Contact Form (`/contact`)
-- [x] Pembersihan legacy route aliases Bahasa Indonesia (`/tentang`, `/artikel`, `/kegiatan`, `/kontak`).
+- [x] Halaman Publik: Home, About, Posts, Events, Structure, Contact.
 
 ---
 
-### Sprint 26.02 — Admin Dashboard & Manajemen Konten (SEDANG BERJALAN ⏳)
+### Sprint 26.02 — Admin Dashboard & Manajemen Konten (SELESAI ✅)
+- [x] Auth & Role Foundation (`RoleTypeEnum`, `EnsureAdmin` middleware).
+- [x] Admin Layout & Sidebar UI (`AdminLayout`, `AdminSidebar`, `AdminNavbar`).
+- [x] Admin CRUD – Articles & Posts (`/admin/posts`).
+- [x] Admin CRUD – Members (`/admin/members`).
+- [x] Admin CRUD – Events & Registrations (`/admin/events`).
+- [x] Background Jobs & CI/CD workflow.
 
-Dokumen acuan: `docs/planning/26.02/tasks.md`
+---
 
-| Section | Modul                             | Layer    | Status        | Keterangan                                                                                                                                                                                                      |
-| ------- | --------------------------------- | -------- | ------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **1**   | **Auth & Role Foundation**        | BE & SEC | ✅ Selesai    | `RoleTypeEnum`, migrasi role, User method `isAtLeast()`, `EnsureAdmin` middleware, fix intended login redirect.                                                                                                 |
-| **2**   | **Admin Layout UI**               | FE       | ✅ Selesai    | `AdminLayout`, `AdminSidebar` (role-filtered), `AdminNavbar`, dynamic breadcrumbs, user dropdown, flash alerts.                                                                                                 |
-| **3**   | **Admin CRUD – Articles & Posts** | FULL     | ✅ Selesai    | `PostController`, `ArticleController`, `StorePostRequest`, `UpdatePostRequest`, `PostService`, `PostResource`, `PostPolicy`, `RichTextEditor`, `ImageUploader`, Index/Create/Edit pages, 20 unit/feature tests. |
-| **4**   | **Admin CRUD – Members**          | FULL     | ✅ Selesai    | Pengurus & Anggota: `MemberController`, `MemberService`, `StoreMemberRequest`, `UpdateMemberRequest`, `MemberResource`, `MemberPolicy`, `AvatarUploader`, Index/Create/Edit, 21 unit/feature tests. |
-| **5**   | **Admin CRUD – Events**           | FULL     | ✅ Selesai    | Agenda Kegiatan & Pendaftaran: `EventController`, `EventService`, `StoreEventRequest`, `UpdateEventRequest`, `EventResource`, `RegistrationResource`, `EventPolicy`, Index/Create/Edit/Registrations, 23 unit/feature tests. |
-| **6**   | **Supporting Infrastructure**     | FULL     | ✅ Selesai    | Background job `ProcessMediaUpload`, cache invalidation tags, GitHub Actions CI workflow.                                                                                                                        |
+### Sprint 26.03 — CMS Completion, SEO & Public Polish (SELESAI ✅)
+Dokumen acuan: `docs/planning/26.03/tasks.md`
+
+| Section | Modul                                | Layer | Status     | Keterangan |
+| ------- | ------------------------------------ | ----- | ---------- | ---------- |
+| **1**   | **Admin CRUD – Categories**          | FULL  | ✅ Selesai | `CategoryController`, `CategoryService`, `CategoryPolicy`, Index with Modal Create/Edit. |
+| **2**   | **Admin CRUD – Media Galleries**     | FULL  | ✅ Selesai | `GalleryController`, `GalleryService` (Cloudinary multi-photo upload), Index/Create/Edit. |
+| **3**   | **Admin Site Settings & About Info** | FULL  | ✅ Selesai | `SettingController`, `SettingService`, dynamic mission & settings tabbed editor. |
+| **4**   | **Admin Contact Inquiries Inbox**    | FULL  | ✅ Selesai | `ContactController`, `ContactService`, inbox view, mark as read, delete. |
+| **5**   | **SEO, Sitemap, RSS Feed & Gallery** | FULL  | ✅ Selesai | Dynamic `/sitemap.xml`, `/feed.xml`, GA4 tracker, and public `/gallery` with lightbox. |
 
 ---
 
 ## 2. Test Suite Health
 
-- Total Tests Passing: **129 tests** (100% pass)
-- Assertions: **563 assertions**
+- Total Tests Passing: **166 tests** (100% pass)
+- Total Assertions: **664 assertions**
 - Frontend Build: `npm run build` (0 TypeScript errors, SSR & Client bundles clean)
-- Lint & Code Style: ESLint & Prettier passing
-
----
-
-## 3. Catatan Tiap Sesi Baru
-
-Setiap AI yang melanjutkan task berikutnya (misal: Section 4 - Admin CRUD Members):
-
-1. Periksa `docs/planning/26.02/tasks.md` untuk detail task layer BE/FE/TEST.
-2. Ikuti pola arsitektur yang sudah berhasil dibangun di Section 3:
-    - Request validation: `app/Http/Requests/Admin/`
-    - Business logic & Cloudinary: `app/Services/Admin/`
-    - Resource formatter: `app/Http/Resources/Admin/`
-    - Policy otorisasi: `app/Policies/`
-    - Controller: `app/Http/Controllers/Admin/`
-    - Frontend: `resources/js/Pages/Admin/Members/` menggunakan `AdminLayout`
-    - Testing: `tests/Unit/Services/Admin/` dan `tests/Feature/Admin/`
-3. Perbarui file `progress.md` ini setelah task selesai.
+- Database: PostgreSQL (Port 5433)
+- Media Storage: Cloudinary Zero-BLOB Architecture

@@ -25,6 +25,13 @@ Route::get('/events', [EventController::class, 'index'])->name('events.index');
 Route::get('/events/{slug}', [EventController::class, 'show'])->name('events.show');
 Route::post('/events/{slug}/register', [EventController::class, 'register'])->name('events.register');
 
+// Public Gallery (English URLs)
+Route::get('/gallery', [App\Http\Controllers\Public\GalleryController::class, 'index'])->name('gallery.index');
+
+// SEO & Syndication Feeds
+Route::get('/sitemap.xml', [App\Http\Controllers\Public\SitemapController::class, 'index'])->name('sitemap');
+Route::get('/feed.xml', [App\Http\Controllers\Public\FeedController::class, 'index'])->name('feed');
+
 // Public Contact (English URLs)
 Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
