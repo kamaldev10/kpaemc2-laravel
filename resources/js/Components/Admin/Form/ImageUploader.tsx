@@ -3,6 +3,7 @@ import { FC, useState } from 'react';
 
 interface ImageUploaderProps {
 	id?: string;
+	label?: string;
 	currentImageUrl?: string | null;
 	onFileSelect: (file: File | null) => void;
 	imageUrlValue: string;
@@ -12,6 +13,7 @@ interface ImageUploaderProps {
 
 export const ImageUploader: FC<ImageUploaderProps> = ({
 	id = 'cover_image',
+	label = 'Gambar Sampul (Cover Image)',
 	currentImageUrl,
 	onFileSelect,
 	imageUrlValue,
@@ -47,7 +49,7 @@ export const ImageUploader: FC<ImageUploaderProps> = ({
 		<div className="space-y-3">
 			<div className="flex items-center justify-between">
 				<label htmlFor={id} className="block text-sm font-semibold text-slate-700">
-					Gambar Sampul (Cover Image)
+					{label}
 				</label>
 				<div className="flex items-center gap-1 rounded-lg bg-slate-100 p-0.5 text-xs font-medium text-slate-600">
 					<button
