@@ -330,6 +330,25 @@ export const EventsShow: FC<EventsShowProps> = ({ event = null, relatedEvents = 
 											</div>
 										</div>
 
+										{/* Gender */}
+										<div>
+											<label
+												htmlFor="gender"
+												className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1"
+											>
+												Jenis Kelamin
+											</label>
+											<select
+												id="gender"
+												value={data.gender}
+												onChange={(e) => setData('gender', e.target.value)}
+												className="w-full rounded-xl border border-slate-300 px-3.5 py-2.5 text-xs sm:text-sm text-slate-900 focus:border-purple-600 focus:outline-none focus:ring-2 focus:ring-purple-600/20"
+											>
+												<option value="male">Laki-laki</option>
+												<option value="female">Perempuan</option>
+											</select>
+										</div>
+
 										{/* Institution & Major */}
 										<div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
 											<div>

@@ -1,7 +1,7 @@
 # Progress Tracker — KPA EMC² Web Portal
 
 > **Terakhir Diperbarui:** 2026-10-04
-> **Sprint Terakhir:** Sprint 26.03 (CMS Completion, SEO & Analytics, Public Portal Polish, and Production Readiness)
+> **Sprint Terakhir:** Sprint 26.05 (Phase 4 Completion — Check Status, Dashboard Stats, Gender Select)
 > **Branch Aktif:** `master`
 
 ---
@@ -53,10 +53,23 @@ Dokumen acuan: `docs/planning/26.04/tasks.md`
 
 ---
 
+### Sprint 26.05 — Phase 4 Completion (SELESAI ✅)
+
+| Section | Modul                                              | Layer   | Status     | Keterangan |
+| ------- | -------------------------------------------------- | ------- | ---------- | ---------- |
+| **1**   | **Cek Status Pendaftaran (`/events/check-status`)** | FULL   | ✅ Selesai | GET (form) + POST (lookup by code+email). Halaman baru `CheckStatus.tsx`. |
+| **2**   | **Gender Select di Form Registrasi**               | FE      | ✅ Selesai | Tambahkan `<select>` gender Laki-laki/Perempuan di `Events/Show.tsx`. |
+| **3**   | **Admin Dashboard Real Stats**                     | BE/FE   | ✅ Selesai | `DashboardController` query DB nyata; Dashboard.tsx tampilkan stat + alert badge. |
+| **4**   | **Custom Migration Creator Cleanup**               | BE      | ✅ Selesai | Hapus duplikat `extend()` di `AppServiceProvider`, commit format `YYYYMMDD_XXXX`. |
+| **5**   | **Feature Tests — Registration & Check Status**    | TEST    | ✅ Selesai | 4 test baru: closed-event rejection, check-status page, valid lookup, wrong-email lookup. |
+| **6**   | **RegistrationFactory Gender Fix**                 | TEST    | ✅ Selesai | Factory gender dari `'M'/'F'` → `'male'/'female'` sesuai validasi. |
+
+---
+
 ## 2. Test Suite Health
 
-- Total Tests Passing: **172 tests** (100% pass)
-- Total Assertions: **682 assertions**
+- Total Tests Passing: **176 tests** (100% pass)
+- Total Assertions: **730 assertions**
 - Frontend Build: `npm run build` (0 TypeScript errors, SSR & Client bundles clean)
 - Database: PostgreSQL (Port 5433)
 - Media Storage: Cloudinary Zero-BLOB Architecture

@@ -81,4 +81,97 @@ class EventTest extends TestCase
             'email' => 'fulan@example.com',
         ]);
     }
+
+    public function test_registration_is_rejected_when_event_is_closed(): void
+    {
+        Event::factory()->create([
+            'slug' => 'closed-event-test',
+            'is_published' => true,
+            'is_active' => true,
+            'registration_open_at' => now()->subDays(10),
+            'registration_close_at' => now()->subDay(), // already closed
+        ]);
+
+        $response = $this->post(route('events.register', 'closed-event-test'), [
+            'full_name' => 'Fulan bin Fulan',
+            'email' => 'fulan@example.com',
+            'phone' => '081234567890',
+        ]);
+
+        $response->assertSessionHasErrors();
+        $this->assertDatabaseMissing('registrations', [
+            'email' => 'fulan@example.com',
+        ]);
+    }
+
+    public function test_check_status_page_can_be_rendered(): void
+    {
+        $response = $this->get(route('events.check-status'));
+
+        $response->assertStatus(200);
+        $response->assertInertia(fn (Assert $page) => $page
+            ->component('Public/Events/CheckStatus')
+            ->where('searched', false)
+            ->where('registration', null)
+        );
+    }
+
+    public function test_can_lookup_registration_status_with_valid_code_and_email(): void
+    {
+        $event = Event::factory()->create([
+            'is_published' => true,
+            'is_active' => true,
+        ]);
+
+        \App\Models\Registration::factory()->create([
+            'event_id' => $event->id,
+            'registration_code' => 'REG-TESTCODE',
+            'full_name' => 'Budi Santoso',
+            'email' => 'budi@example.com',
+            'status' => 'pending',
+            'is_active' => true,
+        ]);
+
+        $response = $this->post(route('events.lookup-status'), [
+            'registration_code' => 'REG-TESTCODE',
+            'email' => 'budi@example.com',
+        ]);
+
+        $response->assertStatus(200);
+        $response->assertInertia(fn (Assert $page) => $page
+            ->component('Public/Events/CheckStatus')
+            ->where('searched', true)
+            ->where('registration.registration_code', 'REG-TESTCODE')
+            ->where('registration.full_name', 'Budi Santoso')
+            ->where('registration.status', 'pending')
+        );
+    }
+
+    public function test_check_status_returns_null_for_wrong_email(): void
+    {
+        $event = Event::factory()->create([
+            'is_published' => true,
+            'is_active' => true,
+        ]);
+
+        \App\Models\Registration::factory()->create([
+            'event_id' => $event->id,
+            'registration_code' => 'REG-WRONGTEST',
+            'email' => 'real@example.com',
+            'status' => 'pending',
+            'is_active' => true,
+        ]);
+
+        $response = $this->post(route('events.lookup-status'), [
+            'registration_code' => 'REG-WRONGTEST',
+            'email' => 'wrong@example.com',
+        ]);
+
+        $response->assertStatus(200);
+        $response->assertInertia(fn (Assert $page) => $page
+            ->component('Public/Events/CheckStatus')
+            ->where('searched', true)
+            ->where('registration', null)
+        );
+    }
 }

@@ -22,6 +22,8 @@ Route::get('/structure', [MemberController::class, 'index'])->name('structure.in
 
 // Public Events / Kegiatan (English URLs)
 Route::get('/events', [EventController::class, 'index'])->name('events.index');
+Route::get('/events/check-status', [EventController::class, 'checkStatus'])->name('events.check-status');
+Route::post('/events/check-status', [EventController::class, 'lookupStatus'])->name('events.lookup-status');
 Route::get('/events/{slug}', [EventController::class, 'show'])->name('events.show');
 Route::post('/events/{slug}/register', [EventController::class, 'register'])->name('events.register');
 

@@ -7,8 +7,8 @@ import { SearchBar } from '@/Components/Public/UI/SearchBar';
 import { useSearch } from '@/hooks/useSearch';
 import { Event } from '@/types/event';
 import { PaginatedData } from '@/types/pagination';
-import { Head, router } from '@inertiajs/react';
-import { Calendar, Compass, Sparkles } from 'lucide-react';
+import { Head, Link, router } from '@inertiajs/react';
+import { Calendar, ClipboardList, Compass, Sparkles } from 'lucide-react';
 import { FC, useMemo } from 'react';
 
 interface EventsIndexProps {
@@ -67,12 +67,21 @@ export const EventsIndex: FC<EventsIndexProps> = ({ events = null, filters = {} 
 			{/* Search Bar Section */}
 			<section className="shadow-xs sticky top-20 z-30 border-b border-purple-100 bg-white/95 py-4 backdrop-blur-md">
 				<div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-					<div className="mx-auto max-w-2xl">
-						<SearchBar
-							value={term}
-							onChange={setTerm}
-							placeholder="Cari kegiatan, lokasi, atau topik pelaksanaan..."
-						/>
+					<div className="flex flex-col sm:flex-row items-center gap-3">
+						<div className="flex-1 w-full">
+							<SearchBar
+								value={term}
+								onChange={setTerm}
+								placeholder="Cari kegiatan, lokasi, atau topik pelaksanaan..."
+							/>
+						</div>
+						<Link
+							href="/events/check-status"
+							className="inline-flex shrink-0 items-center gap-1.5 rounded-xl border border-purple-200 bg-purple-50 px-4 py-2.5 text-xs font-bold text-purple-800 transition hover:bg-purple-100 hover:text-purple-900"
+						>
+							<ClipboardList className="h-4 w-4" />
+							<span>Cek Status Pendaftaran</span>
+						</Link>
 					</div>
 				</div>
 			</section>

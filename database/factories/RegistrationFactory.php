@@ -19,7 +19,7 @@ class RegistrationFactory extends Factory
             'full_name' => fake()->name(),
             'email' => fake()->safeEmail(),
             'phone' => '08' . fake()->numerify('##########'),
-            'gender' => fake()->randomElement(['M', 'F']),
+            'gender' => fake()->randomElement(['male', 'female']),
             'birth_date' => fake()->date('Y-m-d', '2005-01-01'),
             'place_of_birth' => fake()->city(),
             'address' => fake()->address(),
