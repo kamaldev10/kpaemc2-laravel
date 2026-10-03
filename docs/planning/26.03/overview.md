@@ -1,12 +1,12 @@
 # Sprint 26.03 — Public Portal Enhancements (SEO, Analytics, CI/CD, Refactor, Docs)
 
-| Field       | Value                                              |
-|-------------|----------------------------------------------------|
-| **Sprint**  | 26.03 (Enhancements)                               |
+| Field       | Value                                                 |
+| ----------- | ----------------------------------------------------- |
+| **Sprint**  | 26.03 (Enhancements)                                  |
 | **Nama**    | Public Portal – SEO, Analytics, CI/CD, Refactor, Docs |
-| **Status**  | `planned`                                          |
-| **PIC**     | Full‑stack                                         |
-| **PRD Ref** | User Stories #8, #9, #10                           |
+| **Status**  | `planned`                                             |
+| **PIC**     | Full‑stack                                            |
+| **PRD Ref** | User Stories #8, #9, #10                              |
 
 ---
 
@@ -22,13 +22,13 @@
 
 ## Deliverables
 
-| # | Deliverable |
-|---|-------------|
-| 1 | SEO meta tags & sitemap generator |
-| 2 | Google Analytics integration (page view & event tracking) |
-| 3 | GitHub Actions workflow (`lint`, `test`, `build`, `deploy`) |
-| 4 | Refactor komponen UI ke dalam `src/components/ui/*` |
-| 5 | Unit & integration test coverage laporan |
-| 6 | Dokumentasi teknis dan panduan deployment |
+| #   | Deliverable                                                 |
+| --- | ----------------------------------------------------------- |
+| 1   | SEO meta tags & sitemap generator                           |
+| 2   | Google Analytics integration (page view & event tracking)   |
+| 3   | GitHub Actions workflow (`lint`, `test`, `build`, `deploy`) |
+| 4   | Refactor komponen UI ke dalam `src/components/ui/*`         |
+| 5   | Unit & integration test coverage laporan                    |
+| 6   | Dokumentasi teknis dan panduan deployment                   |
 
 ---

@@ -56,6 +56,10 @@ Route::middleware(['auth', 'verified', App\Http\Middleware\EnsureAdmin::class])
         Route::get('events/{event}/registrations/export', [App\Http\Controllers\Admin\EventController::class, 'exportRegistrations'])
             ->name('events.registrations.export');
         Route::resource('events', App\Http\Controllers\Admin\EventController::class);
+
+        Route::resource('categories', App\Http\Controllers\Admin\CategoryController::class)->except(['create', 'show', 'edit']);
+
+        Route::resource('galleries', App\Http\Controllers\Admin\GalleryController::class);
     });
 
 require __DIR__ . '/auth.php';
