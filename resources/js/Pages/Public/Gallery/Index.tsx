@@ -1,6 +1,7 @@
 import PublicLayout from '@/Components/Public/Layout/PublicLayout';
 import CTABanner from '@/Components/Public/UI/CTABanner';
 import PageHero from '@/Components/Public/UI/PageHero';
+import Pagination from '@/Components/Public/UI/Pagination';
 import { Head, router } from '@inertiajs/react';
 import {
     Calendar,
@@ -68,6 +69,7 @@ interface GalleryIndexProps {
     filters: {
         search: string;
         category: string;
+        per_page?: string;
     };
     aboutInfo?: {
         org_name?: string;
@@ -90,8 +92,8 @@ export const GalleryIndex: FC<GalleryIndexProps> = ({
     const handleSearch = (e: React.FormEvent) => {
         e.preventDefault();
         router.get(
-            route('gallery.index'),
-            { search: searchTerm, category: filters.category },
+            '/gallery',
+            { search: searchTerm, category: filters.category, per_page: filters.per_page },
             { preserveState: true }
         );
     };
@@ -99,8 +101,8 @@ export const GalleryIndex: FC<GalleryIndexProps> = ({
     const handleCategoryClick = (categorySlug: string) => {
         const nextCat = filters.category === categorySlug ? '' : categorySlug;
         router.get(
-            route('gallery.index'),
-            { search: searchTerm, category: nextCat },
+            '/gallery',
+            { search: searchTerm, category: nextCat, per_page: filters.per_page },
             { preserveState: true }
         );
     };
@@ -311,6 +313,22 @@ export const GalleryIndex: FC<GalleryIndexProps> = ({
                                 </div>
                             );
                         })}
+                    </div>
+                )}
+
+                {/* Pagination */}
+                {galleries?.links && galleries.links.length > 0 && (
+                    <div className="mt-12">
+                        <Pagination
+                            links={galleries.links}
+                            perPage={filters.per_page || 10}
+                            baseUrl="/gallery"
+                            filters={{
+                                search: searchTerm || undefined,
+                                category: filters.category || undefined,
+                            }}
+                            showPageLimit={true}
+                        />
                     </div>
                 )}
             </div>

@@ -1,4 +1,5 @@
 import AdminLayout from '@/Layouts/AdminLayout';
+import AdminPagination from '@/Components/Admin/UI/AdminPagination';
 import { BreadcrumbItem } from '@/types/admin';
 import { PaginatedResource } from '@/types';
 import { Event } from '@/types/event';
@@ -48,6 +49,7 @@ interface EventIndexProps {
 		division_id?: string;
 		type?: string;
 		status?: string;
+		per_page?: string;
 	};
 	metrics: {
 		total: number;
@@ -86,6 +88,7 @@ export const EventsIndex: FC<EventIndexProps> = ({
 				division_id: selectedDivision || undefined,
 				type: selectedType || undefined,
 				status: selectedStatus || undefined,
+				per_page: filters.per_page || undefined,
 			},
 			{ preserveState: true, replace: true }
 		);
@@ -459,32 +462,19 @@ export const EventsIndex: FC<EventIndexProps> = ({
 				</div>
 
 				{/* Pagination */}
-				{events.links && events.links.length > 3 && (
-					<div className="flex items-center justify-between border-t border-slate-200 px-5 py-3 bg-slate-50/50 text-xs">
-						<span className="text-slate-500">
-							Menampilkan <span className="font-semibold">{events.from || 0}</span> -{' '}
-							<span className="font-semibold">{events.to || 0}</span> dari{' '}
-							<span className="font-semibold">{events.total}</span> kegiatan
-						</span>
-
-						<div className="flex items-center gap-1">
-							{events.links.map((link, idx) => (
-								<Link
-									key={idx}
-									href={link.url || '#'}
-									dangerouslySetInnerHTML={{ __html: link.label }}
-									className={`rounded-lg px-3 py-1.5 text-xs font-semibold transition-colors ${
-										link.active
-											? 'bg-purple-700 text-white'
-											: link.url
-												? 'text-slate-600 hover:bg-slate-200'
-												: 'cursor-not-allowed text-slate-300'
-									}`}
-								/>
-							))}
-						</div>
-					</div>
-				)}
+				<AdminPagination
+					pagination={events}
+					perPage={filters.per_page || 10}
+					baseUrl="/admin/events"
+					filters={{
+						search: searchTerm || undefined,
+						category_id: selectedCategory || undefined,
+						division_id: selectedDivision || undefined,
+						type: selectedType || undefined,
+						status: selectedStatus || undefined,
+					}}
+					itemName="kegiatan"
+				/>
 			</div>
 
 			{/* Delete Modal */}

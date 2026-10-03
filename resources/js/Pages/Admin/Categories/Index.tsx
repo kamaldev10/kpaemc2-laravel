@@ -1,4 +1,5 @@
 import AdminLayout from '@/Layouts/AdminLayout';
+import AdminPagination from '@/Components/Admin/UI/AdminPagination';
 import { BreadcrumbItem } from '@/types/admin';
 import { PaginatedResource } from '@/types';
 import { Head, router, useForm } from '@inertiajs/react';
@@ -36,6 +37,7 @@ interface CategoriesIndexProps {
 	filters: {
 		search?: string;
 		type?: string;
+		per_page?: string;
 	};
 }
 
@@ -79,6 +81,7 @@ export const CategoriesIndex: FC<CategoriesIndexProps> = ({
 			{
 				search: searchTerm || undefined,
 				type: selectedType || undefined,
+				per_page: filters.per_page || undefined,
 			},
 			{ preserveState: true, replace: true }
 		);
@@ -369,32 +372,16 @@ export const CategoriesIndex: FC<CategoriesIndexProps> = ({
 				</div>
 
 				{/* Pagination */}
-				{categories.links && categories.links.length > 3 && (
-					<div className="flex items-center justify-between border-t border-slate-200 px-5 py-3 bg-slate-50/50 text-xs">
-						<span className="text-slate-500">
-							Menampilkan <span className="font-semibold">{categories.from || 0}</span> -{' '}
-							<span className="font-semibold">{categories.to || 0}</span> dari{' '}
-							<span className="font-semibold">{categories.total}</span> kategori
-						</span>
-
-						<div className="flex items-center gap-1">
-							{categories.links.map((link, idx) => (
-								<button
-									key={idx}
-									onClick={() => link.url && router.get(link.url)}
-									dangerouslySetInnerHTML={{ __html: link.label }}
-									className={`rounded-lg px-3 py-1.5 text-xs font-semibold transition-colors ${
-										link.active
-											? 'bg-purple-700 text-white'
-											: link.url
-												? 'text-slate-600 hover:bg-slate-200'
-												: 'cursor-not-allowed text-slate-300'
-									}`}
-								/>
-							))}
-						</div>
-					</div>
-				)}
+				<AdminPagination
+					pagination={categories}
+					perPage={filters.per_page || 10}
+					baseUrl="/admin/categories"
+					filters={{
+						search: searchTerm || undefined,
+						type: selectedType || undefined,
+					}}
+					itemName="kategori"
+				/>
 			</div>
 
 			{/* Create / Edit Modal */}

@@ -18,7 +18,12 @@ class EventController extends Controller
      */
     public function index(Request $request): Response
     {
-        $query = Event::with(['category', 'division'])
+        $perPage = (int) $request->input('per_page', 10);
+        if (! in_array($perPage, [10, 20, 50, 100])) {
+            $perPage = 10;
+        }
+
+        $query = Event::with(['category:id,name,slug,color', 'division:id,name,slug,icon_name'])
             ->where('is_published', true)
             ->where('is_active', true);
 
@@ -32,13 +37,14 @@ class EventController extends Controller
         }
 
         $events = $query->orderBy('start_date', 'asc')
-            ->paginate(6)
+            ->paginate($perPage)
             ->withQueryString();
 
         return Inertia::render('Public/Events/Index', [
             'events' => $events,
             'filters' => [
                 'search' => $request->input('search', ''),
+                'per_page' => (string) $perPage,
             ],
         ]);
     }

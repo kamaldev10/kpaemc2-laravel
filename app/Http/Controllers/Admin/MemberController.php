@@ -25,9 +25,18 @@ class MemberController extends Controller
      */
     public function index(Request $request): Response
     {
-        $filters = $request->only(['search', 'division_id', 'status', 'is_pengurus']);
+        $perPage = (int) $request->input('per_page', 10);
+        if (! in_array($perPage, [10, 20, 50, 100])) {
+            $perPage = 10;
+        }
 
-        $members = $this->memberService->paginate($filters, 10);
+        $filters = $request->only(['search', 'division_id', 'status', 'is_pengurus']);
+        if (! $request->has('is_pengurus')) {
+            $filters['is_pengurus'] = '1';
+        }
+        $filters['per_page'] = (string) $perPage;
+
+        $members = $this->memberService->paginate($filters, $perPage);
 
         $divisions = Division::where('is_active', true)
             ->orderBy('sort_order')

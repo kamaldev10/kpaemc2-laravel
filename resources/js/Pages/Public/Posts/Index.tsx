@@ -18,6 +18,7 @@ interface PostsIndexProps {
 	filters?: {
 		search?: string;
 		category?: string;
+		per_page?: string;
 	};
 }
 
@@ -139,11 +140,18 @@ export const PostsIndex: FC<PostsIndexProps> = ({ posts, categories, filters = {
 							</div>
 
 							{/* Pagination */}
-							{paginationLinks.length > 0 && (
-								<div className="pt-6">
-									<Pagination links={paginationLinks} />
-								</div>
-							)}
+							<div className="pt-6">
+								<Pagination
+									links={paginationLinks}
+									perPage={filters.per_page || 10}
+									baseUrl="/posts"
+									filters={{
+										search: term || undefined,
+										category: filters.category || undefined,
+									}}
+									showPageLimit={true}
+								/>
+							</div>
 						</div>
 					) : (
 						<div className="rounded-3xl border border-slate-200 bg-white p-16 text-center shadow-xs">

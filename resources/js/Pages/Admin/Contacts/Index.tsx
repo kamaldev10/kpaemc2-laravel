@@ -1,4 +1,5 @@
 import AdminLayout from '@/Layouts/AdminLayout';
+import AdminPagination from '@/Components/Admin/UI/AdminPagination';
 import { Head, Link, router, useForm } from '@inertiajs/react';
 import {
     CheckCheck,
@@ -39,11 +40,15 @@ interface ContactsPageProps {
         data: ContactItem[];
         meta?: PaginationMeta;
         links?: Array<{ url: string | null; label: string; active: boolean }>;
+        from?: number;
+        to?: number;
+        total?: number;
     };
     unreadCount: number;
     filters: {
         search: string;
         status: string;
+        per_page?: string;
     };
 }
 
@@ -58,16 +63,16 @@ export const ContactsIndex: FC<ContactsPageProps> = ({
     const handleSearch = (e: React.FormEvent) => {
         e.preventDefault();
         router.get(
-            route('admin.contacts.index'),
-            { search: searchTerm, status: filters.status },
+            '/admin/contacts',
+            { search: searchTerm, status: filters.status, per_page: filters.per_page },
             { preserveState: true }
         );
     };
 
     const handleStatusFilter = (status: string) => {
         router.get(
-            route('admin.contacts.index'),
-            { search: searchTerm, status },
+            '/admin/contacts',
+            { search: searchTerm, status, per_page: filters.per_page },
             { preserveState: true }
         );
     };
@@ -285,6 +290,18 @@ export const ContactsIndex: FC<ContactsPageProps> = ({
                             ))}
                         </div>
                     )}
+
+                    {/* Pagination */}
+                    <AdminPagination
+                        pagination={contacts.meta ? contacts.meta : contacts}
+                        perPage={filters.per_page || 10}
+                        baseUrl="/admin/contacts"
+                        filters={{
+                            search: searchTerm || undefined,
+                            status: filters.status || undefined,
+                        }}
+                        itemName="pesan kontak"
+                    />
                 </div>
             </div>
 

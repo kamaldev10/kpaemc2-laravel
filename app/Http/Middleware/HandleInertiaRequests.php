@@ -40,7 +40,7 @@ class HandleInertiaRequests extends Middleware
                 ...(new Ziggy)->toArray(),
                 'location' => $request->url(),
             ],
-            'app_logo_url' => fn () => AboutInfo::where('is_active', true)->first()?->logo_url,
+            'app_logo_url' => fn () => app(\App\Services\Admin\SettingService::class)->getAboutInfo()?->logo_url,
             'flash' => [
                 'success' => fn () => $request->session()->get('success'),
                 'error' => fn () => $request->session()->get('error'),

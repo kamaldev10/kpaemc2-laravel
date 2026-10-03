@@ -24,6 +24,7 @@ class MemberService
     public function paginate(array $filters = [], int $perPage = 10): LengthAwarePaginator
     {
         $query = Member::with(['division'])
+            ->orderByDesc('batch_year')
             ->orderBy('sort_order')
             ->orderBy('name');
 

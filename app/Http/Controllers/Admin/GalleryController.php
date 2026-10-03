@@ -23,8 +23,15 @@ class GalleryController extends Controller
 
     public function index(Request $request): Response
     {
+        $perPage = (int) $request->input('per_page', 10);
+        if (! in_array($perPage, [10, 20, 50, 100])) {
+            $perPage = 10;
+        }
+
         $filters = $request->only(['search', 'category_id', 'division_id']);
-        $galleries = $this->galleryService->paginate($filters, 12);
+        $filters['per_page'] = (string) $perPage;
+
+        $galleries = $this->galleryService->paginate($filters, $perPage);
 
         $categories = Category::where('type', 'gallery')
             ->where('is_active', true)

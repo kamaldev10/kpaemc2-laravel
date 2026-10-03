@@ -29,9 +29,15 @@ class EventController extends Controller
      */
     public function index(Request $request): Response
     {
-        $filters = $request->only(['search', 'category_id', 'division_id', 'type', 'status']);
+        $perPage = (int) $request->input('per_page', 10);
+        if (! in_array($perPage, [10, 20, 50, 100])) {
+            $perPage = 10;
+        }
 
-        $events = $this->eventService->paginate($filters, 10);
+        $filters = $request->only(['search', 'category_id', 'division_id', 'type', 'status']);
+        $filters['per_page'] = (string) $perPage;
+
+        $events = $this->eventService->paginate($filters, $perPage);
 
         $categories = Category::where('type', 'event')
             ->where('is_active', true)
@@ -163,8 +169,15 @@ class EventController extends Controller
             abort(403, 'Anda tidak memiliki izin untuk mengelola pendaftaran kegiatan ini.');
         }
 
+        $perPage = (int) $request->input('per_page', 10);
+        if (! in_array($perPage, [10, 20, 50, 100])) {
+            $perPage = 10;
+        }
+
         $filters = $request->only(['search', 'status']);
-        $registrations = $this->eventService->getRegistrations($event, $filters, 15);
+        $filters['per_page'] = (string) $perPage;
+
+        $registrations = $this->eventService->getRegistrations($event, $filters, $perPage);
 
         $event->load(['category', 'division']);
 

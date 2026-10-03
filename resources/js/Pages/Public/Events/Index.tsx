@@ -15,6 +15,7 @@ interface EventsIndexProps {
 	events?: PaginatedData<Event> | Event[] | null;
 	filters?: {
 		search?: string;
+		per_page?: string;
 	};
 }
 
@@ -136,7 +137,15 @@ export const EventsIndex: FC<EventsIndexProps> = ({ events = null, filters = {} 
 					{/* Pagination */}
 					{isPaginated && (
 						<div className="mt-12">
-							<Pagination links={paginationLinks} />
+							<Pagination
+								links={paginationLinks}
+								perPage={filters.per_page || 10}
+								baseUrl="/events"
+								filters={{
+									search: term || undefined,
+								}}
+								showPageLimit={true}
+							/>
 						</div>
 					)}
 				</div>

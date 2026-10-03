@@ -1,4 +1,5 @@
 import AdminLayout from '@/Layouts/AdminLayout';
+import AdminPagination from '@/Components/Admin/UI/AdminPagination';
 import { BreadcrumbItem } from '@/types/admin';
 import { PaginatedResource } from '@/types';
 import { Head, Link, router } from '@inertiajs/react';
@@ -48,6 +49,7 @@ interface GalleriesIndexProps {
 		search?: string;
 		category_id?: string;
 		division_id?: string;
+		per_page?: string;
 	};
 }
 
@@ -75,6 +77,7 @@ export const GalleriesIndex: FC<GalleriesIndexProps> = ({
 				search: searchTerm || undefined,
 				category_id: selectedCategory || undefined,
 				division_id: selectedDivision || undefined,
+				per_page: filters.per_page || undefined,
 			},
 			{ preserveState: true, replace: true }
 		);
@@ -288,6 +291,21 @@ export const GalleriesIndex: FC<GalleriesIndexProps> = ({
 					))}
 				</div>
 			)}
+
+			{/* Pagination */}
+			<div className="mt-6 overflow-hidden rounded-xl border border-slate-200 bg-white shadow-xs">
+				<AdminPagination
+					pagination={galleries}
+					perPage={filters.per_page || 10}
+					baseUrl="/admin/galleries"
+					filters={{
+						search: searchTerm || undefined,
+						category_id: selectedCategory || undefined,
+						division_id: selectedDivision || undefined,
+					}}
+					itemName="album galeri"
+				/>
+			</div>
 
 			{/* Delete Modal */}
 			{deleteModalGallery && (

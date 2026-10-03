@@ -23,11 +23,12 @@ class MemberController extends Controller
             ->orderBy('name')
             ->get(['id', 'slug', 'name', 'icon_name']);
 
-        $members = Member::with('division')
+        $members = Member::with(['division:id,name,slug,icon_name'])
             ->pengurus()
+            ->orderByDesc('batch_year')
             ->orderBy('sort_order')
             ->orderBy('name')
-            ->get();
+            ->get(['id', 'member_number', 'name', 'division_id', 'position', 'batch_year', 'major', 'bio', 'avatar_url', 'is_pengurus', 'sort_order', 'status']);
 
         return Inertia::render('Public/Structure/Index', [
             'aboutInfo' => $aboutInfo,

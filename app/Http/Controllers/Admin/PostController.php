@@ -21,14 +21,17 @@ class PostController extends Controller
         protected PostService $postService
     ) {}
 
-    /**
-     * Display a listing of posts/articles.
-     */
     public function index(Request $request): Response
     {
-        $filters = $request->only(['search', 'category_id', 'division_id', 'status']);
+        $perPage = (int) $request->input('per_page', 10);
+        if (! in_array($perPage, [10, 20, 50, 100])) {
+            $perPage = 10;
+        }
 
-        $posts = $this->postService->paginate($filters, 10);
+        $filters = $request->only(['search', 'category_id', 'division_id', 'status']);
+        $filters['per_page'] = (string) $perPage;
+
+        $posts = $this->postService->paginate($filters, $perPage);
 
         $categories = Category::where('is_active', true)
             ->whereIn('type', ['post', 'general'])

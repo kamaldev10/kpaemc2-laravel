@@ -39,10 +39,24 @@ Dokumen acuan: `docs/planning/26.03/tasks.md`
 
 ---
 
+### Sprint 26.04 — Mock Decommissioning & Database Optimization (SELESAI ✅)
+Dokumen acuan: `docs/planning/26.04/tasks.md`
+
+| Section | Modul                                              | Layer   | Status     | Keterangan |
+| ------- | -------------------------------------------------- | ------- | ---------- | ---------- |
+| **1**   | **Mock Decommissioning**                           | FE/BE   | ✅ Selesai | Hapus seluruh file `resources/js/mocks/*`, `mockData.ts`, refaktor 16 berkas page/component. |
+| **2**   | **PostgreSQL Composite & Trigram Indexes**         | DB      | ✅ Selesai | Migrasi index komposit dan GIN trigram (`members`, `events`, `galleries`, `posts`). |
+| **3**   | **Members Default Sort & Filter**                  | BE/FE   | ✅ Selesai | Default sort `batch_year` desc, default filter `is_pengurus=true`. |
+| **4**   | **Pagination & Page Limit (10, 20, 50, 100)**      | FULL    | ✅ Selesai | `AdminPagination` dan `Pagination` component dengan page limit (10, 20, 50, 100, default 10). |
+| **5**   | **N+1 Prevention & Caching Layer**                 | BE      | ✅ Selesai | Selective eager loading dan SettingService/CategoryService cache. |
+| **6**   | **Performance Benchmark Test**                    | TEST    | ✅ Selesai | `tests/Feature/Performance/QueryCountTest.php` 100% lulus. |
+
+---
+
 ## 2. Test Suite Health
 
-- Total Tests Passing: **166 tests** (100% pass)
-- Total Assertions: **664 assertions**
+- Total Tests Passing: **172 tests** (100% pass)
+- Total Assertions: **682 assertions**
 - Frontend Build: `npm run build` (0 TypeScript errors, SSR & Client bundles clean)
 - Database: PostgreSQL (Port 5433)
 - Media Storage: Cloudinary Zero-BLOB Architecture

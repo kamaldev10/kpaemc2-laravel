@@ -22,10 +22,15 @@ class ContactController extends Controller
     {
         Gate::authorize('viewAny', Contact::class);
 
+        $perPage = (int) $request->input('per_page', 10);
+        if (! in_array($perPage, [10, 20, 50, 100])) {
+            $perPage = 10;
+        }
+
         $search = $request->query('search');
         $status = $request->query('status');
 
-        $contacts = $this->contactService->getPaginatedContacts($search, $status);
+        $contacts = $this->contactService->getPaginatedContacts($search, $status, $perPage);
         $unreadCount = $this->contactService->getUnreadCount();
 
         return Inertia::render('Admin/Contacts/Index', [
@@ -34,6 +39,7 @@ class ContactController extends Controller
             'filters' => [
                 'search' => $search ?? '',
                 'status' => $status ?? '',
+                'per_page' => (string) $perPage,
             ],
         ]);
     }

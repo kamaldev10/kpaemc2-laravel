@@ -1,4 +1,5 @@
 import AdminLayout from '@/Layouts/AdminLayout';
+import AdminPagination from '@/Components/Admin/UI/AdminPagination';
 import { BreadcrumbItem } from '@/types/admin';
 import { PaginatedResource } from '@/types';
 import { Member } from '@/types/member';
@@ -38,6 +39,7 @@ interface MemberIndexProps {
 		division_id?: string;
 		status?: string;
 		is_pengurus?: string;
+		per_page?: string;
 	};
 	metrics: {
 		total: number;
@@ -56,7 +58,9 @@ export const MembersIndex: FC<MemberIndexProps> = ({
 	const [searchTerm, setSearchTerm] = useState(filters.search || '');
 	const [selectedDivision, setSelectedDivision] = useState(filters.division_id || '');
 	const [selectedStatus, setSelectedStatus] = useState(filters.status || '');
-	const [selectedPengurus, setSelectedPengurus] = useState(filters.is_pengurus || '');
+	const [selectedPengurus, setSelectedPengurus] = useState(
+		filters.is_pengurus !== undefined ? filters.is_pengurus : '1'
+	);
 	const [deleteModalMember, setDeleteModalMember] = useState<Member | null>(null);
 
 	const breadcrumbs: BreadcrumbItem[] = [
@@ -73,6 +77,7 @@ export const MembersIndex: FC<MemberIndexProps> = ({
 				division_id: selectedDivision || undefined,
 				status: selectedStatus || undefined,
 				is_pengurus: selectedPengurus !== '' ? selectedPengurus : undefined,
+				per_page: filters.per_page || undefined,
 			},
 			{ preserveState: true, replace: true }
 		);
@@ -82,7 +87,7 @@ export const MembersIndex: FC<MemberIndexProps> = ({
 		setSearchTerm('');
 		setSelectedDivision('');
 		setSelectedStatus('');
-		setSelectedPengurus('');
+		setSelectedPengurus('1');
 		router.get('/admin/members', {}, { preserveState: true, replace: true });
 	};
 
@@ -419,32 +424,18 @@ export const MembersIndex: FC<MemberIndexProps> = ({
 				</div>
 
 				{/* Pagination */}
-				{members.links && members.links.length > 3 && (
-					<div className="flex items-center justify-between border-t border-slate-200 px-5 py-3 bg-slate-50/50 text-xs">
-						<span className="text-slate-500">
-							Menampilkan <span className="font-semibold">{members.from || 0}</span> -{' '}
-							<span className="font-semibold">{members.to || 0}</span> dari{' '}
-							<span className="font-semibold">{members.total}</span> anggota
-						</span>
-
-						<div className="flex items-center gap-1">
-							{members.links.map((link, idx) => (
-								<Link
-									key={idx}
-									href={link.url || '#'}
-									dangerouslySetInnerHTML={{ __html: link.label }}
-									className={`rounded-lg px-3 py-1.5 text-xs font-semibold transition-colors ${
-										link.active
-											? 'bg-purple-700 text-white'
-											: link.url
-												? 'text-slate-600 hover:bg-slate-200'
-												: 'cursor-not-allowed text-slate-300'
-									}`}
-								/>
-							))}
-						</div>
-					</div>
-				)}
+				<AdminPagination
+					pagination={members}
+					perPage={filters.per_page || 10}
+					baseUrl="/admin/members"
+					filters={{
+						search: searchTerm || undefined,
+						division_id: selectedDivision || undefined,
+						status: selectedStatus || undefined,
+						is_pengurus: selectedPengurus !== '' ? selectedPengurus : undefined,
+					}}
+					itemName="anggota"
+				/>
 			</div>
 
 			{/* Delete Modal */}

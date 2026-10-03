@@ -36,6 +36,7 @@ class MemberCrudTest extends TestCase
 
         Member::factory()->count(3)->create([
             'division_id' => $division->id,
+            'is_pengurus' => true,
         ]);
 
         $response = $this->actingAs($admin)->get('/admin/members');

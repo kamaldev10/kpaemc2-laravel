@@ -16,6 +16,11 @@ class PostController extends Controller
      */
     public function index(Request $request): Response
     {
+        $perPage = (int) $request->input('per_page', 10);
+        if (! in_array($perPage, [10, 20, 50, 100])) {
+            $perPage = 10;
+        }
+
         $search = $request->query('search');
         $categorySlug = $request->query('category');
 
@@ -23,9 +28,9 @@ class PostController extends Controller
             ->whereIn('type', ['post', 'general'])
             ->orderBy('sort_order')
             ->orderBy('name')
-            ->get();
+            ->get(['id', 'name', 'slug', 'color']);
 
-        $posts = Post::with(['category', 'division'])
+        $posts = Post::with(['category:id,name,slug,color', 'division:id,name,slug'])
             ->published()
             ->when($search, fn ($query, $term) => $query->search($term))
             ->when($categorySlug, function ($query, $slug) {
@@ -33,7 +38,7 @@ class PostController extends Controller
             })
             ->orderByDesc('is_featured')
             ->latest('published_at')
-            ->paginate(6)
+            ->paginate($perPage)
             ->withQueryString();
 
         return Inertia::render('Public/Posts/Index', [
@@ -42,6 +47,7 @@ class PostController extends Controller
             'filters' => [
                 'search' => $search ?? '',
                 'category' => $categorySlug ?? '',
+                'per_page' => (string) $perPage,
             ],
         ]);
     }

@@ -18,7 +18,7 @@ class PostTest extends TestCase
         $user = User::factory()->create();
         $category = Category::factory()->create(['type' => 'post', 'is_active' => true]);
 
-        Post::factory()->count(8)->create([
+        Post::factory()->count(12)->create([
             'user_id' => $user->id,
             'category_id' => $category->id,
             'is_published' => true,
@@ -30,7 +30,7 @@ class PostTest extends TestCase
         $response->assertStatus(200);
         $response->assertInertia(fn (Assert $page) => $page
             ->component('Public/Posts/Index')
-            ->has('posts.data', 6) // per_page is 6
+            ->has('posts.data', 10) // per_page is 10
             ->has('categories', 1)
             ->has('filters')
         );
