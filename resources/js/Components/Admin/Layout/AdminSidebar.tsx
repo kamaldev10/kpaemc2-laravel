@@ -60,10 +60,16 @@ export const AdminSidebar: FC<AdminSidebarProps> = ({ isOpen, onClose, user }) =
 					icon: <FolderKanban className="h-4 w-4" />,
 					activeMatcher: '^/admin/categories',
 				},
+				{
+					name: 'Galeri & Media',
+					href: '/admin/galleries',
+					icon: <FileText className="h-4 w-4" />,
+					activeMatcher: '^/admin/galleries',
+				},
 			],
 		},
 		{
-			groupName: 'Organisasi',
+			groupName: 'Organisasi & Komunikasi',
 			items: [
 				{
 					name: 'Pengurus & Anggota',
@@ -71,31 +77,25 @@ export const AdminSidebar: FC<AdminSidebarProps> = ({ isOpen, onClose, user }) =
 					icon: <Users className="h-4 w-4" />,
 					activeMatcher: '^/admin/members',
 				},
+				{
+					name: 'Pesan Masuk',
+					href: '/admin/contacts',
+					icon: <ShieldAlert className="h-4 w-4" />,
+					activeMatcher: '^/admin/contacts',
+				},
 			],
 		},
-		...(isSuperAdmin
-			? [
-					{
-						groupName: 'Sistem & Konfigurasi',
-						items: [
-							{
-								name: 'Manajemen Pengguna',
-								href: '/admin/users',
-								icon: <ShieldAlert className="h-4 w-4" />,
-								activeMatcher: '^/admin/users',
-								minRole: 'super_admin' as const,
-							},
-							{
-								name: 'Pengaturan Situs',
-								href: '/admin/settings',
-								icon: <Settings className="h-4 w-4" />,
-								activeMatcher: '^/admin/settings',
-								minRole: 'super_admin' as const,
-							},
-						],
-					},
-				]
-			: []),
+		{
+			groupName: 'Sistem & Konfigurasi',
+			items: [
+				{
+					name: 'Pengaturan Situs',
+					href: '/admin/settings',
+					icon: <Settings className="h-4 w-4" />,
+					activeMatcher: '^/admin/settings',
+				},
+			],
+		},
 	];
 
 	const isItemActive = (matcher: string) => {

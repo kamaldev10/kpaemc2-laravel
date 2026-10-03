@@ -60,6 +60,17 @@ Route::middleware(['auth', 'verified', App\Http\Middleware\EnsureAdmin::class])
         Route::resource('categories', App\Http\Controllers\Admin\CategoryController::class)->except(['create', 'show', 'edit']);
 
         Route::resource('galleries', App\Http\Controllers\Admin\GalleryController::class);
+
+        // Site Settings & About Info
+        Route::get('settings', [App\Http\Controllers\Admin\SettingController::class, 'index'])->name('settings.index');
+        Route::put('settings', [App\Http\Controllers\Admin\SettingController::class, 'updateSettings'])->name('settings.update');
+        Route::post('settings/about', [App\Http\Controllers\Admin\SettingController::class, 'updateAboutInfo'])->name('settings.about.update');
+
+        // Contact Inquiries Inbox
+        Route::get('contacts', [App\Http\Controllers\Admin\ContactController::class, 'index'])->name('contacts.index');
+        Route::patch('contacts/{contact}/read', [App\Http\Controllers\Admin\ContactController::class, 'markAsRead'])->name('contacts.read');
+        Route::post('contacts/read-all', [App\Http\Controllers\Admin\ContactController::class, 'markAllAsRead'])->name('contacts.read-all');
+        Route::delete('contacts/{contact}', [App\Http\Controllers\Admin\ContactController::class, 'destroy'])->name('contacts.destroy');
     });
 
 require __DIR__ . '/auth.php';
