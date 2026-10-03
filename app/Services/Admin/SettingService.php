@@ -28,9 +28,21 @@ class SettingService
      */
     public function getAllSettings(): Collection
     {
-        return Cache::remember(self::CACHE_KEY_SETTINGS, self::CACHE_TTL, function () {
-            return SiteSetting::where('is_active', true)->orderBy('group')->orderBy('key')->get();
-        });
+        $cached = Cache::get(self::CACHE_KEY_SETTINGS);
+        if ($cached instanceof Collection) {
+            return $cached;
+        }
+
+        Cache::forget(self::CACHE_KEY_SETTINGS);
+
+        $settings = SiteSetting::where('is_active', true)->orderBy('group')->orderBy('key')->get();
+        try {
+            Cache::put(self::CACHE_KEY_SETTINGS, $settings, self::CACHE_TTL);
+        } catch (\Throwable) {
+            // ignore cache write error
+        }
+
+        return $settings;
     }
 
     /**
@@ -85,9 +97,23 @@ class SettingService
      */
     public function getAboutInfo(): ?AboutInfo
     {
-        return Cache::remember(self::CACHE_KEY_ABOUT, self::CACHE_TTL, function () {
-            return AboutInfo::where('is_active', true)->first();
-        });
+        $cached = Cache::get(self::CACHE_KEY_ABOUT);
+        if ($cached instanceof AboutInfo) {
+            return $cached;
+        }
+
+        Cache::forget(self::CACHE_KEY_ABOUT);
+
+        $about = AboutInfo::where('is_active', true)->first();
+        if ($about) {
+            try {
+                Cache::put(self::CACHE_KEY_ABOUT, $about, self::CACHE_TTL);
+            } catch (\Throwable) {
+                // ignore cache write error
+            }
+        }
+
+        return $about;
     }
 
     /**
