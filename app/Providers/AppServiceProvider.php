@@ -15,7 +15,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->extend(\Illuminate\Database\Migrations\MigrationCreator::class, function ($creator, $app) {
+            return new \App\Support\CustomMigrationCreator($app['files'], $app->basePath('stubs'));
+        });
+
+        $this->app->extend('migration.creator', function ($creator, $app) {
+            return new \App\Support\CustomMigrationCreator($app['files'], $app->basePath('stubs'));
+        });
     }
 
     /**
