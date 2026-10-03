@@ -1,4 +1,3 @@
-import { PaginatedResource } from '@/types';
 import { Link, router } from '@inertiajs/react';
 import { FC } from 'react';
 
@@ -13,7 +12,7 @@ interface AdminPaginationProps {
 	perPage?: number | string;
 	onPerPageChange?: (perPage: number) => void;
 	baseUrl?: string;
-	filters?: Record<string, any>;
+	filters?: Record<string, string | number | boolean | undefined | null>;
 	itemName?: string;
 }
 

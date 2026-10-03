@@ -8,7 +8,7 @@ interface PaginationProps {
 	className?: string;
 	perPage?: number | string;
 	baseUrl?: string;
-	filters?: Record<string, any>;
+	filters?: Record<string, string | number | boolean | undefined | null>;
 	showPageLimit?: boolean;
 }
 
