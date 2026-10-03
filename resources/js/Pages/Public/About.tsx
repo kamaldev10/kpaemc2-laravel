@@ -6,12 +6,9 @@ import ProfilSection from '@/Components/Public/Sections/ProfilSection';
 import VisiMisiSection from '@/Components/Public/Sections/VisiMisiSection';
 import CTABanner from '@/Components/Public/UI/CTABanner';
 import PageHero from '@/Components/Public/UI/PageHero';
-import { mockAboutFull } from '@/mocks/aboutMock';
-import { mockHomeDivisions } from '@/mocks/homeMock';
 import { AboutInfo } from '@/types/about';
 import { Division } from '@/types/division';
 import { Member } from '@/types/member';
-import { resolveData, useIsMockDataEnabled } from '@/utils/mockData';
 import { Head } from '@inertiajs/react';
 import { BookOpen, Compass, ShieldCheck, Sparkles, Target } from 'lucide-react';
 import { FC } from 'react';
@@ -32,10 +29,8 @@ const sectionNav = [
 ];
 
 export const About: FC<AboutProps> = ({ aboutInfo, divisions, featuredMembers = [] }) => {
-	const isMockEnabled = useIsMockDataEnabled();
-
-	const currentInfo = resolveData(aboutInfo, mockAboutFull, isMockEnabled);
-	const currentDivisions = resolveData(divisions, mockHomeDivisions, isMockEnabled) ?? [];
+	const currentInfo = aboutInfo ?? null;
+	const currentDivisions = divisions ?? [];
 
 	const orgName = currentInfo?.org_name || 'KPA EMC²';
 	const pageTitle = `Tentang Kami — ${orgName}`;

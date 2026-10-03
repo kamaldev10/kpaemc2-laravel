@@ -1,4 +1,3 @@
-import { mockAboutFull } from '@/mocks/aboutMock';
 import { AboutInfo } from '@/types/about';
 import { CheckCircle2, Compass, Scroll, Target } from 'lucide-react';
 import { FC } from 'react';
@@ -7,14 +6,26 @@ interface VisiMisiSectionProps {
 	aboutInfo?: AboutInfo | null;
 }
 
-export const VisiMisiSection: FC<VisiMisiSectionProps> = ({ aboutInfo = mockAboutFull }) => {
-	const currentInfo = aboutInfo ?? mockAboutFull;
-	const missions = currentInfo.mission && currentInfo.mission.length > 0
-		? currentInfo.mission
-		: (mockAboutFull.mission ?? []);
-	const ethics = currentInfo.code_of_ethics && currentInfo.code_of_ethics.length > 0
-		? currentInfo.code_of_ethics
-		: (mockAboutFull.code_of_ethics ?? []);
+const defaultEthics = [
+	'Pecinta Alam Indonesia sadar bahwa alam beserta isinya adalah ciptaan Tuhan Yang Maha Esa.',
+	'Pecinta Alam Indonesia adalah bagian dari masyarakat Indonesia yang sadar akan tanggung jawab kepada Tuhan, Bangsa, dan Tanah Air.',
+	'Pecinta Alam Indonesia sadar bahwa alam adalah sarana pendidikan untuk membentuk kepribadian dan mempertebal rasa cinta kepada Tuhan dan Tanah Air.',
+	'Pecinta Alam Indonesia berikrar untuk senantiasa memelihara alam beserta isinya serta menggunakan sumber alam sesuai dengan batas kemampuannya.',
+];
+
+export const VisiMisiSection: FC<VisiMisiSectionProps> = ({ aboutInfo }) => {
+	const vision =
+		aboutInfo?.vision ||
+		'Menjadi organisasi mahasiswa pecinta alam yang unggul, berintegritas, mandiri, dan berdaya saing dalam eksplorasi alam serta konservasi lingkungan hidup.';
+	const missions =
+		aboutInfo?.mission && aboutInfo.mission.length > 0
+			? aboutInfo.mission
+			: [
+					'Mengembangkan eksistensi organisasi di dalam maupun di luar universitas.',
+					'Membentuk generasi yang bermoral, berkarakter dan intelektual.',
+					'Berkontribusi dalam kegiatan sosial dan menjaga pelestarian lingkungan hidup.',
+					'Menjalin silaturahmi baik kepada sesama pecinta alam maupun lembaga lain.',
+				];
 
 	return (
 		<section className="py-20 bg-slate-50">
@@ -45,7 +56,7 @@ export const VisiMisiSection: FC<VisiMisiSectionProps> = ({ aboutInfo = mockAbou
 								Visi KPA EMC²
 							</h3>
 							<p className="mt-2 text-xl font-bold leading-relaxed text-white sm:text-2xl">
-								"{currentInfo.vision || 'Menjadi organisasi mahasiswa pecinta alam yang unggul, berintegritas, mandiri, dan berdaya saing dalam eksplorasi alam serta konservasi lingkungan hidup.'}"
+								"{vision}"
 							</p>
 						</div>
 					</div>
@@ -88,7 +99,7 @@ export const VisiMisiSection: FC<VisiMisiSectionProps> = ({ aboutInfo = mockAbou
 					</div>
 
 					<div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-						{ethics.map((item, idx) => (
+						{defaultEthics.map((item, idx) => (
 							<div key={idx} className="flex items-start gap-3 bg-white/80 rounded-xl p-4 border border-amber-100">
 								<CheckCircle2 className="h-5 w-5 shrink-0 text-amber-600 mt-0.5" />
 								<p className="text-sm leading-relaxed text-slate-700">{item}</p>

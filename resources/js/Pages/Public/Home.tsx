@@ -5,18 +5,10 @@ import EventHighlight from '@/Components/Public/Sections/EventHighlight';
 import HeroSection from '@/Components/Public/Sections/HeroSection';
 import StatsBar from '@/Components/Public/Sections/StatsBar';
 import CTABanner from '@/Components/Public/UI/CTABanner';
-import {
-	mockHomeAboutInfo,
-	mockHomeDivisions,
-	mockHomeEvents,
-	mockHomePosts,
-	mockHomeSiteSettings,
-} from '@/mocks/homeMock';
 import { AboutInfo } from '@/types/about';
 import { Division } from '@/types/division';
 import { Event } from '@/types/event';
 import { Post } from '@/types/post';
-import { resolveData, useIsMockDataEnabled } from '@/utils/mockData';
 import { Head } from '@inertiajs/react';
 import { FC } from 'react';
 
@@ -25,7 +17,7 @@ interface HomeProps {
 	divisions?: Division[] | null;
 	latestPosts?: Post[] | null;
 	upcomingEvents?: Event[] | null;
-	siteSettings?: Record<string, string> | null;
+	siteSettings?: Record<string, string | null> | null;
 }
 
 export const Home: FC<HomeProps> = ({
@@ -35,19 +27,11 @@ export const Home: FC<HomeProps> = ({
 	upcomingEvents,
 	siteSettings,
 }) => {
-	const isMockEnabled = useIsMockDataEnabled();
-
-	const currentInfo = resolveData(aboutInfo, mockHomeAboutInfo, isMockEnabled);
-	const currentSettings = resolveData(siteSettings, mockHomeSiteSettings, isMockEnabled);
-	const currentDivisions = resolveData(divisions, mockHomeDivisions, isMockEnabled) ?? [];
-	const currentPosts = resolveData(latestPosts, mockHomePosts, isMockEnabled) ?? [];
-	const currentEvents = resolveData(upcomingEvents, mockHomeEvents, isMockEnabled) ?? [];
-
-	const orgName = currentInfo?.org_name || 'KPA EMC²';
-	const tagline = currentInfo?.motto;
+	const orgName = aboutInfo?.org_name || 'KPA EMC²';
+	const tagline = aboutInfo?.motto || 'Bergerak Satu Asa, Berbekal Alam Lestari!';
 	const pageTitle = `${orgName} — ${tagline}`;
 	const pageDescription =
-		currentInfo?.description ||
+		aboutInfo?.description ||
 		'Portal resmi KPA EMC² (Kelompok Pecinta Alam FMIPA Universitas Riau). Informasi organisasi, 4 divisi operasional, artikel & postingan kegiatan alam, dan pendaftaran agenda.';
 
 	return (
@@ -57,13 +41,13 @@ export const Home: FC<HomeProps> = ({
 				<meta name="description" content={pageDescription} />
 				<meta property="og:title" content={pageTitle} />
 				<meta property="og:description" content={pageDescription} />
-				{currentInfo?.hero_banner_url || currentInfo?.cover_url || currentInfo?.logo_url ? (
+				{aboutInfo?.hero_banner_url || aboutInfo?.cover_url || aboutInfo?.logo_url ? (
 					<meta
 						property="og:image"
 						content={
-							currentInfo?.hero_banner_url ||
-							currentInfo?.cover_url ||
-							currentInfo?.logo_url ||
+							aboutInfo?.hero_banner_url ||
+							aboutInfo?.cover_url ||
+							aboutInfo?.logo_url ||
 							''
 						}
 					/>
@@ -72,19 +56,19 @@ export const Home: FC<HomeProps> = ({
 			</Head>
 
 			{/* 1. Hero Section */}
-			<HeroSection aboutInfo={currentInfo} />
+			<HeroSection aboutInfo={aboutInfo} />
 
 			{/* 2. Stats Bar */}
-			<StatsBar siteSettings={currentSettings} />
+			<StatsBar siteSettings={siteSettings} />
 
-			{/* 4. Recent Articles & Expedition Journals */}
-			<ArticleHighlight posts={currentPosts} />
+			{/* 3. Recent Articles & Expedition Journals */}
+			<ArticleHighlight posts={latestPosts} />
 
-			{/* 3. 4 Divisions Highlight */}
-			<DivisionHighlight divisions={currentDivisions} />
+			{/* 4. 4 Divisions Highlight */}
+			<DivisionHighlight divisions={divisions} />
 
 			{/* 5. Upcoming Open Events */}
-			<EventHighlight events={currentEvents} />
+			<EventHighlight events={upcomingEvents} />
 
 			{/* 6. Call to Action Banner */}
 			<CTABanner

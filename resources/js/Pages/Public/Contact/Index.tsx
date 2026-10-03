@@ -1,6 +1,5 @@
 import { PublicLayout } from '@/Components/Public/Layout/PublicLayout';
 import { PageHero } from '@/Components/Public/UI/PageHero';
-import { mockContactInfo } from '@/mocks/contactMock';
 import { PageProps } from '@/types';
 import { AboutInfo } from '@/types/about';
 import { Head, useForm, usePage } from '@inertiajs/react';
@@ -46,13 +45,13 @@ export const ContactIndex: FC<ContactIndexProps> = ({ aboutInfo = null, siteSett
 		});
 	};
 
-	const email = siteSettings?.contact_email || aboutInfo?.email || mockContactInfo.email;
-	const phone = siteSettings?.contact_phone || aboutInfo?.phone || mockContactInfo.phone;
-	const address = siteSettings?.contact_address || aboutInfo?.address || mockContactInfo.address;
-	const mapEmbedUrl = mockContactInfo.map_embed_url;
-	const googleMapsUrl = mockContactInfo.google_maps_url;
-	const instagramUrl = mockContactInfo.instagram;
-	const youtubeUrl = mockContactInfo.youtube;
+	const email = siteSettings?.contact_email || aboutInfo?.email || '';
+	const phone = siteSettings?.contact_phone || aboutInfo?.phone || '';
+	const address = siteSettings?.contact_address || aboutInfo?.address || '';
+	const mapEmbedUrl = siteSettings?.map_embed_url || '';
+	const googleMapsUrl = siteSettings?.google_maps_url || '';
+	const instagramUrl = siteSettings?.instagram_url || '';
+	const youtubeUrl = siteSettings?.youtube_url || '';
 
 	return (
 		<PublicLayout>
@@ -134,7 +133,7 @@ export const ContactIndex: FC<ContactIndexProps> = ({ aboutInfo = null, siteSett
 							</div>
 							<h3 className="text-sm font-bold text-slate-900">Jam Operasional</h3>
 							<p className="mt-2 text-xs leading-relaxed text-slate-600">
-								{mockContactInfo.operational_hours}
+								{siteSettings?.operational_hours || 'Senin — Jumat, 09.00 — 17.00 WIB'}
 							</p>
 						</div>
 					</div>

@@ -1,5 +1,4 @@
 import { ImagePlaceholder } from '@/Components/Public/UI/ImagePlaceholder';
-import { mockHomeDivisions } from '@/mocks/homeMock';
 import { Division } from '@/types/division';
 import { Link } from '@inertiajs/react';
 import { ArrowRight, Compass, Home, TreePine, Users } from 'lucide-react';
@@ -17,9 +16,13 @@ const iconMap: Record<string, FC<{ className?: string }>> = {
 };
 
 export const DivisionHighlight: FC<DivisionHighlightProps> = ({
-	divisions = mockHomeDivisions,
+	divisions = [],
 }) => {
-	const currentDivisions = divisions && divisions.length > 0 ? divisions : mockHomeDivisions;
+	const currentDivisions = divisions || [];
+
+	if (currentDivisions.length === 0) {
+		return null;
+	}
 
 	return (
 		<section className="bg-slate-50 py-20">
@@ -50,7 +53,7 @@ export const DivisionHighlight: FC<DivisionHighlightProps> = ({
 					</div>
 				</div>
 
-				{/* 4 Cards Grid */}
+				{/* Cards Grid */}
 				<div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
 					{currentDivisions.map((div) => {
 						const IconComponent =

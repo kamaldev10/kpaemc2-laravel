@@ -2,9 +2,7 @@ import PublicLayout from '@/Components/Public/Layout/PublicLayout';
 import RelatedArticles from '@/Components/Public/Sections/RelatedArticles';
 import ShareButtons from '@/Components/Public/UI/ShareButtons';
 import TagList from '@/Components/Public/UI/TagList';
-import { mockPosts } from '@/mocks/postMock';
 import { Post } from '@/types/post';
-import { resolveData, useIsMockDataEnabled } from '@/utils/mockData';
 import { Head, Link } from '@inertiajs/react';
 import { Calendar, ChevronLeft, Clock, Tag, User } from 'lucide-react';
 import { FC, useMemo } from 'react';
@@ -15,12 +13,8 @@ interface PostShowProps {
 }
 
 export const PostShow: FC<PostShowProps> = ({ post, relatedPosts }) => {
-	const isMockEnabled = useIsMockDataEnabled();
-
-	const currentPost = resolveData(post, mockPosts[0], isMockEnabled) ?? post;
-
-	const fallbackRelated = mockPosts.filter((p) => p.id !== currentPost?.id).slice(0, 3);
-	const currentRelated = resolveData(relatedPosts, fallbackRelated, isMockEnabled) ?? [];
+	const currentPost = post;
+	const currentRelated = relatedPosts ?? [];
 
 	const formattedDate = currentPost.published_at
 		? new Date(currentPost.published_at).toLocaleDateString('id-ID', {

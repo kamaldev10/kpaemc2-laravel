@@ -5,10 +5,8 @@ import { PageHero } from '@/Components/Public/UI/PageHero';
 import { Pagination } from '@/Components/Public/UI/Pagination';
 import { SearchBar } from '@/Components/Public/UI/SearchBar';
 import { useSearch } from '@/hooks/useSearch';
-import { mockEvents } from '@/mocks/eventMock';
 import { Event } from '@/types/event';
 import { PaginatedData } from '@/types/pagination';
-import { useIsMockDataEnabled } from '@/utils/mockData';
 import { Head, router } from '@inertiajs/react';
 import { Calendar, Compass, Sparkles } from 'lucide-react';
 import { FC, useMemo } from 'react';
@@ -21,8 +19,6 @@ interface EventsIndexProps {
 }
 
 export const EventsIndex: FC<EventsIndexProps> = ({ events = null, filters = {} }) => {
-	const isMockEnabled = useIsMockDataEnabled();
-
 	const isPaginated = events !== null && typeof events === 'object' && 'data' in events;
 
 	const resolvedEvents = useMemo(() => {
@@ -32,11 +28,8 @@ export const EventsIndex: FC<EventsIndexProps> = ({ events = null, filters = {} 
 		if (Array.isArray(events)) {
 			return events;
 		}
-		if (isMockEnabled) {
-			return mockEvents;
-		}
 		return [];
-	}, [events, isPaginated, isMockEnabled]);
+	}, [events, isPaginated]);
 
 	const paginationLinks = isPaginated ? (events as PaginatedData<Event>).links : [];
 

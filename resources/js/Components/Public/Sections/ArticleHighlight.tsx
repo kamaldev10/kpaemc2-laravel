@@ -1,5 +1,4 @@
 import { ImagePlaceholder } from '@/Components/Public/UI/ImagePlaceholder';
-import { mockHomePosts } from '@/mocks/homeMock';
 import { Post } from '@/types/post';
 import { Link } from '@inertiajs/react';
 import { ArrowRight, BookOpen, Calendar, Tag } from 'lucide-react';
@@ -10,7 +9,11 @@ interface ArticleHighlightProps {
 }
 
 export const ArticleHighlight: FC<ArticleHighlightProps> = ({ posts }) => {
-	const currentPosts = posts && posts.length > 0 ? posts : mockHomePosts;
+	const currentPosts = posts || [];
+
+	if (currentPosts.length === 0) {
+		return null;
+	}
 
 	return (
 		<section id="posts" className="scroll-mt-20 bg-white py-20">
@@ -23,11 +26,10 @@ export const ArticleHighlight: FC<ArticleHighlightProps> = ({ posts }) => {
 							<span>Artikel & Postingan</span>
 						</div>
 						<h2 className="mt-3 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
-							Berita, Kegiatan, Artikel & Lainnya
+							Berita, Kegiatan, Artikel & Catatan Ekspedisi
 						</h2>
 						<p className="mt-3 text-base text-slate-600">
-							Setiap postingan memiliki makna yang mendalam demi terjaganya
-							kelestarian alam
+							Dokumentasi pengetahuan, ulasan teknis kepecintaalaman, dan rekam jejak aksi konservasi.
 						</p>
 					</div>
 

@@ -3,13 +3,9 @@ import DivisionMemberGroup from '@/Components/Public/Sections/DivisionMemberGrou
 import OrgChart from '@/Components/Public/Sections/OrgChart';
 import CTABanner from '@/Components/Public/UI/CTABanner';
 import PageHero from '@/Components/Public/UI/PageHero';
-import { mockAboutFull } from '@/mocks/aboutMock';
-import { mockDivisions } from '@/mocks/divisionMock';
-import { mockMembers } from '@/mocks/memberMock';
 import { AboutInfo } from '@/types/about';
 import { Division } from '@/types/division';
 import { Member } from '@/types/member';
-import { resolveData, useIsMockDataEnabled } from '@/utils/mockData';
 import { Head } from '@inertiajs/react';
 import { Filter, Users } from 'lucide-react';
 import { FC, useMemo, useState } from 'react';
@@ -21,11 +17,9 @@ interface StructureIndexProps {
 }
 
 export const StructureIndex: FC<StructureIndexProps> = ({ aboutInfo, divisions, members }) => {
-	const isMockEnabled = useIsMockDataEnabled();
-
-	const currentAbout = resolveData(aboutInfo, mockAboutFull, isMockEnabled);
-	const currentDivisions = resolveData(divisions, mockDivisions, isMockEnabled) ?? [];
-	const currentMembers = resolveData(members, mockMembers, isMockEnabled) ?? [];
+	const currentAbout = aboutInfo ?? null;
+	const currentDivisions = divisions ?? [];
+	const currentMembers = members ?? [];
 
 	const [selectedDivision, setSelectedDivision] = useState<string>('all');
 

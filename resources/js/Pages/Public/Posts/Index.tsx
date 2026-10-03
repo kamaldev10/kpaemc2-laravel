@@ -6,10 +6,8 @@ import PageHero from '@/Components/Public/UI/PageHero';
 import Pagination from '@/Components/Public/UI/Pagination';
 import SearchBar from '@/Components/Public/UI/SearchBar';
 import useSearch from '@/hooks/useSearch';
-import { mockCategories, mockPosts } from '@/mocks/postMock';
 import { PaginatedData } from '@/types/pagination';
 import { Category, Post } from '@/types/post';
-import { resolveData, useIsMockDataEnabled } from '@/utils/mockData';
 import { Head, router } from '@inertiajs/react';
 import { BookOpen, SearchX } from 'lucide-react';
 import { FC, useMemo } from 'react';
@@ -24,11 +22,9 @@ interface PostsIndexProps {
 }
 
 export const PostsIndex: FC<PostsIndexProps> = ({ posts, categories, filters = {} }) => {
-	const isMockEnabled = useIsMockDataEnabled();
+	const currentCategories = categories ?? [];
 
-	const currentCategories = resolveData(categories, mockCategories, isMockEnabled) ?? [];
-
-	// Extract pagination metadata or wrap mock array
+	// Extract pagination metadata
 	const isPaginated = posts && typeof posts === 'object' && 'data' in posts;
 	const currentPostsList: Post[] = useMemo(() => {
 		if (isPaginated) {
@@ -37,11 +33,8 @@ export const PostsIndex: FC<PostsIndexProps> = ({ posts, categories, filters = {
 		if (Array.isArray(posts)) {
 			return posts;
 		}
-		if (isMockEnabled) {
-			return mockPosts;
-		}
 		return [];
-	}, [posts, isPaginated, isMockEnabled]);
+	}, [posts, isPaginated]);
 
 	const paginationLinks = isPaginated ? (posts as PaginatedData<Post>).links : [];
 

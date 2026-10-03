@@ -1,5 +1,4 @@
 import { ImagePlaceholder } from '@/Components/Public/UI/ImagePlaceholder';
-import { mockHomeDivisions } from '@/mocks/homeMock';
 import { Division } from '@/types/division';
 import {
 	ArrowUpRight,
@@ -82,10 +81,14 @@ const divisionMeta: Record<
 };
 
 export const AboutDivisionSection: FC<AboutDivisionSectionProps> = ({
-	divisions = mockHomeDivisions,
+	divisions = [],
 }) => {
-	const currentDivisions = divisions && divisions.length > 0 ? divisions : mockHomeDivisions;
+	const currentDivisions = divisions || [];
 	const [activeTab, setActiveTab] = useState<string>(currentDivisions[0]?.slug ?? 'kaderisasi');
+
+	if (currentDivisions.length === 0) {
+		return null;
+	}
 
 	const activeDivision =
 		currentDivisions.find((d) => d.slug === activeTab) ?? currentDivisions[0];
@@ -166,7 +169,7 @@ export const AboutDivisionSection: FC<AboutDivisionSectionProps> = ({
 								</div>
 
 								<p className="text-base leading-relaxed text-slate-200 sm:text-lg">
-									{activeDivision.short_description || activeDivision.full_description}
+									{activeDivision.short_description || activeDivision.description}
 								</p>
 
 								<div className="pt-2">
@@ -213,7 +216,7 @@ export const AboutDivisionSection: FC<AboutDivisionSectionProps> = ({
 					</div>
 				)}
 
-				{/* 4 Cards Overview Grid */}
+				{/* Cards Overview Grid */}
 				<div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
 					{currentDivisions.map((div) => {
 						const meta = divisionMeta[div.slug] ?? {
@@ -257,7 +260,7 @@ export const AboutDivisionSection: FC<AboutDivisionSectionProps> = ({
 									</h4>
 
 									<p className="mt-2 line-clamp-3 text-xs leading-relaxed text-slate-600">
-										{div.short_description || div.full_description}
+										{div.short_description || div.description}
 									</p>
 								</div>
 

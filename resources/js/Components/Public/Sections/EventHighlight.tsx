@@ -1,5 +1,4 @@
 import { ImagePlaceholder } from '@/Components/Public/UI/ImagePlaceholder';
-import { mockHomeEvents } from '@/mocks/homeMock';
 import { Event } from '@/types/event';
 import { Link } from '@inertiajs/react';
 import { ArrowRight, Calendar, MapPin, Sparkles } from 'lucide-react';
@@ -9,10 +8,10 @@ interface EventHighlightProps {
 	events?: Event[] | null;
 }
 
-export const EventHighlight: FC<EventHighlightProps> = ({ events = mockHomeEvents }) => {
-	const currentEvents = events && events.length > 0 ? events : mockHomeEvents;
+export const EventHighlight: FC<EventHighlightProps> = ({ events = [] }) => {
+	const currentEvents = events || [];
 
-	if (!currentEvents || currentEvents.length === 0) {
+	if (currentEvents.length === 0) {
 		return null;
 	}
 

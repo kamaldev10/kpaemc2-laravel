@@ -1,4 +1,3 @@
-import { mockAboutFull } from '@/mocks/aboutMock';
 import { AboutInfo } from '@/types/about';
 import { Calendar, Compass, ShieldCheck, TreePine } from 'lucide-react';
 import { FC } from 'react';
@@ -7,8 +6,13 @@ interface ProfilSectionProps {
 	aboutInfo?: AboutInfo | null;
 }
 
-export const ProfilSection: FC<ProfilSectionProps> = ({ aboutInfo = mockAboutFull }) => {
-	const currentInfo = aboutInfo ?? mockAboutFull;
+export const ProfilSection: FC<ProfilSectionProps> = ({ aboutInfo }) => {
+	const orgName = aboutInfo?.org_name || 'KPA EMC²';
+	const description =
+		aboutInfo?.description ||
+		'Kelompok Pecinta Alam EMC² adalah organisasi mahasiswa FMIPA UNRI yang berdedikasi pada eksplorasi rimba raya, pendidikan karakter, dan perlindungan lingkungan.';
+	const motto = aboutInfo?.motto || 'Bergerak Satu Asa, Berbekal Alam Lestari!';
+	const foundedDate = aboutInfo?.founded_date || '10 Oktober 1984';
 
 	return (
 		<section className="bg-white py-20">
@@ -22,17 +26,13 @@ export const ProfilSection: FC<ProfilSectionProps> = ({ aboutInfo = mockAboutFul
 						</div>
 
 						<h2 className="text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
-							Mengenal Lebih Dekat {currentInfo.org_name}
+							Mengenal Lebih Dekat {orgName}
 						</h2>
 
 						<div className="space-y-4 text-base leading-relaxed text-slate-600">
+							<p>{description}</p>
 							<p>
-								{currentInfo.description ||
-									'Kelompok Pecinta Alam EMC² adalah organisasi mahasiswa yang berdedikasi pada eksplorasi rimba raya, pendidikan karakter, dan perlindungan lingkungan.'}
-							</p>
-							<p>
-								{currentInfo.history ||
-									'Didirikan oleh mahasiswa lintas disiplin ilmu dengan semangat persaudaraan dan cinta tanah air, KPA EMC² terus aktif menyelenggarakan ekspedisi gunung hutan, pemetaan gua karst, arung jeram, serta riset keanekaragaman hayati.'}
+								Didirikan oleh mahasiswa FMIPA Universitas Riau dengan semangat persaudaraan dan cinta tanah air, KPA EMC² terus aktif menyelenggarakan pendidikan kader, ekspedisi gunung hutan, pemetaan gua karst, arung jeram, serta riset dan advokasi konservasi lingkungan.
 							</p>
 						</div>
 
@@ -42,21 +42,8 @@ export const ProfilSection: FC<ProfilSectionProps> = ({ aboutInfo = mockAboutFul
 									<Calendar className="h-5 w-5" />
 								</div>
 								<div>
-									<p className="text-xs font-medium text-slate-500">
-										Berdiri Sejak
-									</p>
-									<p className="text-sm font-bold text-slate-900">
-										{currentInfo.founded_date ||
-											(currentInfo.established_at
-												? new Date(
-														currentInfo.established_at
-													).toLocaleDateString('id-ID', {
-														year: 'numeric',
-														month: 'long',
-														day: 'numeric',
-													})
-												: '10 Oktober 1984')}
-									</p>
+									<p className="text-xs font-medium text-slate-500">Berdiri Sejak</p>
+									<p className="text-sm font-bold text-slate-900">{foundedDate}</p>
 								</div>
 							</div>
 
@@ -65,12 +52,8 @@ export const ProfilSection: FC<ProfilSectionProps> = ({ aboutInfo = mockAboutFul
 									<ShieldCheck className="h-5 w-5" />
 								</div>
 								<div>
-									<p className="text-xs font-medium text-slate-500">
-										Status Organisasi
-									</p>
-									<p className="text-sm font-bold text-slate-900">
-										lembaga Semi Otonom (LSO)
-									</p>
+									<p className="text-xs font-medium text-slate-500">Status Organisasi</p>
+									<p className="text-sm font-bold text-slate-900">Lembaga Semi Otonom (LSO)</p>
 								</div>
 							</div>
 						</div>
@@ -86,7 +69,7 @@ export const ProfilSection: FC<ProfilSectionProps> = ({ aboutInfo = mockAboutFul
 								</div>
 
 								<h3 className="text-2xl font-bold text-white">
-									{currentInfo?.motto}
+									{motto}
 								</h3>
 
 								<p className="text-sm leading-relaxed text-purple-200/90">

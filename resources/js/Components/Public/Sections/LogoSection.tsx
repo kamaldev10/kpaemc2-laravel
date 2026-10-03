@@ -1,4 +1,3 @@
-import { mockAboutFull } from '@/mocks/aboutMock';
 import { AboutInfo } from '@/types/about';
 import {
 	Compass,
@@ -18,9 +17,8 @@ interface LogoSectionProps {
 
 type TabCategory = 'all' | 'colors' | 'geometry';
 
-export const LogoSection: FC<LogoSectionProps> = ({ aboutInfo = mockAboutFull }) => {
-	const currentInfo = aboutInfo ?? mockAboutFull;
-	const logoUrl = currentInfo.logo_url;
+export const LogoSection: FC<LogoSectionProps> = ({ aboutInfo }) => {
+	const logoUrl = aboutInfo?.logo_url;
 	const [activeTab, setActiveTab] = useState<TabCategory>('all');
 
 	const colorElements = useMemo(
@@ -216,17 +214,17 @@ export const LogoSection: FC<LogoSectionProps> = ({ aboutInfo = mockAboutFull })
 								</div>
 
 								<h3 className="text-2xl font-black tracking-wide text-white sm:text-3xl">
-									{currentInfo.org_name || 'KPA EMC²'}
+									{aboutInfo?.org_name || 'KPA EMC²'}
 								</h3>
 								<p className="mt-1 text-xs font-medium text-purple-200">
-									Kelompok Pecinta Alam Einstein Mapalindup Ceria Club
+									Kelompok Pecinta Alam FMIPA Universitas Riau
 								</p>
 
 								<div className="mt-6 flex w-full flex-col gap-2 rounded-2xl border border-white/10 bg-white/5 p-4 text-left text-xs">
 									<div className="flex items-center justify-between">
 										<span className="text-slate-400">Didirikan Pada:</span>
 										<span className="font-semibold text-white">
-											{currentInfo.founded_date || '10 Oktober 1984'}
+											{aboutInfo?.founded_date || '10 Oktober 1984'}
 										</span>
 									</div>
 									<div className="flex items-center justify-between">
@@ -257,7 +255,7 @@ export const LogoSection: FC<LogoSectionProps> = ({ aboutInfo = mockAboutFull })
 										className={`shadow-xs group relative overflow-hidden rounded-2xl border bg-white p-5 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg sm:p-6 ${elem.cardBorder}`}
 									>
 										<div className="flex items-start gap-4">
-											{/* Color / Geometric Indicator Swatch */}
+											{/* Indicator */}
 											<div className="shrink-0 pt-0.5">
 												<div
 													className={`shadow-xs flex h-11 w-11 items-center justify-center rounded-xl transition-transform duration-300 group-hover:scale-110 ${elem.iconColor}`}
@@ -298,24 +296,6 @@ export const LogoSection: FC<LogoSectionProps> = ({ aboutInfo = mockAboutFull })
 								);
 							})}
 						</div>
-
-						{/* Philosophical Summary Quote Card */}
-						{currentInfo.logo_philosophy && (
-							<div className="relative mt-6 overflow-hidden rounded-3xl border border-purple-200 bg-gradient-to-r from-purple-900 via-indigo-900 to-purple-950 p-6 text-white shadow-xl sm:p-8">
-								<div className="absolute right-4 top-4 text-purple-700/30">
-									<Quote className="h-24 w-24 -rotate-12" />
-								</div>
-								<div className="relative z-10 space-y-2">
-									<div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-amber-400">
-										<Sparkles className="h-4 w-4" />
-										<span>Ikrar Nilai Filosofis</span>
-									</div>
-									<p className="text-sm italic leading-relaxed text-purple-100 sm:text-base">
-										"{currentInfo.logo_philosophy}"
-									</p>
-								</div>
-							</div>
-						)}
 					</div>
 				</div>
 			</div>

@@ -1,4 +1,3 @@
-import { mockHomeAboutInfo } from '@/mocks/homeMock';
 import { AboutInfo } from '@/types/about';
 import { Link } from '@inertiajs/react';
 import { ArrowRight, Compass, Mountain } from 'lucide-react';
@@ -8,13 +7,16 @@ interface HeroSectionProps {
 	aboutInfo?: AboutInfo | null;
 }
 
-export const HeroSection: FC<HeroSectionProps> = ({ aboutInfo = mockHomeAboutInfo }) => {
-	const currentInfo = aboutInfo ?? mockHomeAboutInfo;
-	const bannerImage = currentInfo.hero_banner_url || currentInfo.cover_url;
+export const HeroSection: FC<HeroSectionProps> = ({ aboutInfo }) => {
+	const bannerImage = aboutInfo?.hero_banner_url || aboutInfo?.cover_url;
+	const motto = aboutInfo?.motto || 'Bergerak Satu Asa, Berbekal Alam Lestari!';
+	const description =
+		aboutInfo?.description ||
+		'Menumbuhkan ketangguhan fisik, kemandirian mental, dan integritas ilmiah dalam menjelajahi alam terbuka serta menjaga kelestarian ekosistem Indonesia.';
 
 	return (
 		<section className="relative flex min-h-[85vh] items-center overflow-hidden bg-slate-950 text-white">
-			{/* High-Resolution Background Image or Ambient Gradient Placeholder */}
+			{/* Background Image or Ambient Gradient */}
 			<div className="absolute inset-0 z-0">
 				{bannerImage ? (
 					<img
@@ -37,13 +39,12 @@ export const HeroSection: FC<HeroSectionProps> = ({ aboutInfo = mockHomeAboutInf
 				<div className="max-w-3xl">
 					{/* Title / Tagline */}
 					<h1 className="text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl">
-						{currentInfo.motto || 'Lestari Alamku, Jaya Negeriku'}
+						{motto}
 					</h1>
 
 					{/* Description */}
 					<p className="mt-6 text-base leading-relaxed text-slate-300 sm:text-lg lg:text-xl">
-						{currentInfo.description ||
-							'Menumbuhkan ketangguhan fisik, kemandirian mental, dan integritas ilmiah dalam menjelajahi alam terbuka serta menjaga kelestarian ekosistem Indonesia.'}
+						{description}
 					</p>
 
 					{/* CTA Buttons */}

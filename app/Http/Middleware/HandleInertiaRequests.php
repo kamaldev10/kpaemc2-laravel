@@ -40,7 +40,6 @@ class HandleInertiaRequests extends Middleware
                 ...(new Ziggy)->toArray(),
                 'location' => $request->url(),
             ],
-            'use_mock_data' => filter_var(env('USE_MOCK_DATA', false), FILTER_VALIDATE_BOOLEAN),
             'app_logo_url' => fn () => AboutInfo::where('is_active', true)->first()?->logo_url,
             'flash' => [
                 'success' => fn () => $request->session()->get('success'),

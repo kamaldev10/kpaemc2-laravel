@@ -1,19 +1,18 @@
-import { mockHomeSiteSettings } from '@/mocks/homeMock';
 import { Calendar, Compass, Mountain, Users } from 'lucide-react';
 import { FC } from 'react';
 
 interface StatsBarProps {
-	siteSettings?: Record<string, string> | null;
+	siteSettings?: Record<string, string | null> | null;
 }
 
-export const StatsBar: FC<StatsBarProps> = ({ siteSettings = mockHomeSiteSettings }) => {
-	const settings = siteSettings ?? mockHomeSiteSettings;
+export const StatsBar: FC<StatsBarProps> = ({ siteSettings }) => {
+	const settings = siteSettings || {};
 
 	const stats = [
 		{
 			id: 1,
 			label: 'Tahun Berdiri & Pengabdian',
-			value: settings.stats_years_active ?? '15',
+			value: settings.stats_years_active ?? '15+',
 			unit: 'Tahun',
 			icon: Calendar,
 			color: 'text-purple-700 bg-purple-100',
@@ -29,15 +28,15 @@ export const StatsBar: FC<StatsBarProps> = ({ siteSettings = mockHomeSiteSetting
 		{
 			id: 3,
 			label: 'Ekspedisi & Riset Lapangan',
-			value: settings.stats_expeditions_count ?? '52',
+			value: settings.stats_expeditions_count ?? '50+',
 			unit: 'Ekspedisi',
 			icon: Compass,
 			color: 'text-amber-700 bg-amber-100',
 		},
 		{
 			id: 4,
-			label: 'Puncak & Gua Terjelajahi',
-			value: settings.stats_summits_count ?? '86',
+			label: 'Puncak & Kawasan Terjelajahi',
+			value: settings.stats_summits_count ?? '80+',
 			unit: 'Kawasan',
 			icon: Mountain,
 			color: 'text-emerald-700 bg-emerald-100',

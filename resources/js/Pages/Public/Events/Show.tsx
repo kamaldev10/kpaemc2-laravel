@@ -2,10 +2,8 @@ import { EventCard } from '@/Components/Public/Cards/EventCard';
 import { PublicLayout } from '@/Components/Public/Layout/PublicLayout';
 import { ImagePlaceholder } from '@/Components/Public/UI/ImagePlaceholder';
 import { TagList } from '@/Components/Public/UI/TagList';
-import { mockEvents } from '@/mocks/eventMock';
 import { Event } from '@/types/event';
 import { PageProps } from '@/types';
-import { useIsMockDataEnabled } from '@/utils/mockData';
 import { Head, Link, useForm, usePage } from '@inertiajs/react';
 import {
 	Calendar,
@@ -20,7 +18,7 @@ import {
 	Sparkles,
 	Wallet,
 } from 'lucide-react';
-import { FC, FormEventHandler, useMemo } from 'react';
+import { FC, FormEventHandler } from 'react';
 
 interface CustomPageProps extends PageProps {
 	flash?: { success?: string; error?: string };
@@ -32,22 +30,10 @@ interface EventsShowProps {
 }
 
 export const EventsShow: FC<EventsShowProps> = ({ event = null, relatedEvents = [] }) => {
-	const isMockEnabled = useIsMockDataEnabled();
 	const { flash } = usePage<CustomPageProps>().props;
 
-	const currentEvent: Event = useMemo(() => {
-		if (event) return event;
-		if (isMockEnabled) return mockEvents[0];
-		return mockEvents[0];
-	}, [event, isMockEnabled]);
-
-	const currentRelated: Event[] = useMemo(() => {
-		if (relatedEvents && relatedEvents.length > 0) return relatedEvents;
-		if (isMockEnabled) {
-			return mockEvents.filter((e) => e.id !== currentEvent.id).slice(0, 3);
-		}
-		return [];
-	}, [relatedEvents, isMockEnabled, currentEvent.id]);
+	const currentEvent = event ?? ({} as Event);
+	const currentRelated: Event[] = relatedEvents ?? [];
 
 	// Registration form setup
 	const { data, setData, post, processing, reset } = useForm({
