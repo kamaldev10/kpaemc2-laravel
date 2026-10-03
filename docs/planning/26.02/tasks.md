@@ -62,13 +62,13 @@
 
 | #   | Task                                                                  | Layer | Status |
 | --- | --------------------------------------------------------------------- | ----- | ------ |
-| 5.1 | `EventController` (Admin resource endpoints)                          | BE    | ⏳     |
-| 5.2 | `StoreEventRequest` & `UpdateEventRequest`                            | BE    | ⏳     |
-| 5.3 | `EventService` (caching, date validation, participant list)           | BE    | ⏳     |
-| 5.4 | `EventResource`                                                       | BE    | ⏳     |
-| 5.5 | Policy rules in `DashboardPolicy`                                     | BE    | ⏳     |
-| 5.6 | Frontend Event Management & Registration export                       | FE    | ⏳     |
-| 5.7 | Feature tests `EventCrudTest.php` & unit tests `EventServiceTest.php` | TEST  | ⏳     |
+| 5.1 | `EventController` (Admin resource endpoints)                          | BE    | ✅     |
+| 5.2 | `StoreEventRequest` & `UpdateEventRequest`                            | BE    | ✅     |
+| 5.3 | `EventService` (caching, date validation, participant list)           | BE    | ✅     |
+| 5.4 | `EventResource` & `RegistrationResource`                              | BE    | ✅     |
+| 5.5 | Policy rules in `EventPolicy`                                         | BE    | ✅     |
+| 5.6 | Frontend Event Management & Registration export                       | FE    | ✅     |
+| 5.7 | Feature tests `EventCrudTest.php` & unit tests `EventServiceTest.php` | TEST  | ✅     |
 
 ---
 
@@ -76,9 +76,9 @@
 
 | #   | Task                                                                   | Layer | Status |
 | --- | ---------------------------------------------------------------------- | ----- | ------ |
-| 6.1 | Queue job `ProcessMediaUpload` for background image optimization       | BE    | ⏳     |
-| 6.2 | Redis Cache tags implementation for fast list queries & cache flushing | BE    | ⏳     |
-| 6.3 | CI/CD pipeline (GitHub Actions) – lint, test, build verification       | DEV   | ⏳     |
+| 6.1 | Queue job `ProcessMediaUpload` for background image optimization       | BE    | ✅     |
+| 6.2 | Redis Cache tags implementation for fast list queries & cache flushing | BE    | ✅     |
+| 6.3 | CI/CD pipeline (GitHub Actions) – lint, test, build verification       | DEV   | ✅     |
 
 ---
 

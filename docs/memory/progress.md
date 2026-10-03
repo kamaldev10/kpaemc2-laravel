@@ -34,15 +34,15 @@ Dokumen acuan: `docs/planning/26.02/tasks.md`
 | **2**   | **Admin Layout UI**               | FE       | ✅ Selesai    | `AdminLayout`, `AdminSidebar` (role-filtered), `AdminNavbar`, dynamic breadcrumbs, user dropdown, flash alerts.                                                                                                 |
 | **3**   | **Admin CRUD – Articles & Posts** | FULL     | ✅ Selesai    | `PostController`, `ArticleController`, `StorePostRequest`, `UpdatePostRequest`, `PostService`, `PostResource`, `PostPolicy`, `RichTextEditor`, `ImageUploader`, Index/Create/Edit pages, 20 unit/feature tests. |
 | **4**   | **Admin CRUD – Members**          | FULL     | ✅ Selesai    | Pengurus & Anggota: `MemberController`, `MemberService`, `StoreMemberRequest`, `UpdateMemberRequest`, `MemberResource`, `MemberPolicy`, `AvatarUploader`, Index/Create/Edit, 21 unit/feature tests. |
-| **5**   | **Admin CRUD – Events**           | FULL     | ⏳ Berikutnya | Agenda Kegiatan & Pendaftaran: `EventController`, `EventService`, list peserta registrasi.                                                                                                                      |
-| **6**   | **Site Settings, Polish & QA**    | FULL     | ⏳ Menunggu   | Pengaturan situs dinamis (`SiteSetting`), audit trail, full regression testing.                                                                                                                                 |
+| **5**   | **Admin CRUD – Events**           | FULL     | ✅ Selesai    | Agenda Kegiatan & Pendaftaran: `EventController`, `EventService`, `StoreEventRequest`, `UpdateEventRequest`, `EventResource`, `RegistrationResource`, `EventPolicy`, Index/Create/Edit/Registrations, 23 unit/feature tests. |
+| **6**   | **Supporting Infrastructure**     | FULL     | ✅ Selesai    | Background job `ProcessMediaUpload`, cache invalidation tags, GitHub Actions CI workflow.                                                                                                                        |
 
 ---
 
 ## 2. Test Suite Health
 
-- Total Tests Passing: **106 tests** (100% pass)
-- Assertions: **449 assertions**
+- Total Tests Passing: **129 tests** (100% pass)
+- Assertions: **563 assertions**
 - Frontend Build: `npm run build` (0 TypeScript errors, SSR & Client bundles clean)
 - Lint & Code Style: ESLint & Prettier passing
 
