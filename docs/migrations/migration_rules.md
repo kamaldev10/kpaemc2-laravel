@@ -203,7 +203,8 @@ Untuk menjaga integritas data dan kestabilan sistem production:
      ```
 
 2. **Format Penamaan File Migrasi Baru:**
-   - Gunakan format timestamp standar: `YYYYMMDD_XXXX_action_table_name.php` (misal: `20260901_0001_add_status_notes_to_registrations_table.php`).
+   - Gunakan format timestamp standar: `YYYYMMDD_XXXX_action_table_name.php` (misal: `20261003_0017_optimize_database_indexes_and_trigram.php`).
+   - Sequence `XXXX` menggunakan 4 digit zero-padded global counter.
 
 3. **Standar Kolom Baru:**
    - Gunakan tipe `TIMESTAMPTZ` untuk waktu.
@@ -211,8 +212,10 @@ Untuk menjaga integritas data dan kestabilan sistem production:
    - Kolom ForeignKey **wajib** menyertakan index: `$table->foreignId('...')->nullable()->index()->constrained('...')->nullOnDelete();`.
    - Asset media **wajib** mematuhi _Zero-BLOB policy_ (hanya simpan `*_url` dan `*_public_id` Cloudinary).
 
-4. **Zero-Downtime Rule untuk Tabel Besar:**
-   - Saat menambahkan indeks pada tabel production yang aktif, gunakan non-blocking index:
-     ```sql
-     CREATE INDEX CONCURRENTLY ...
-     ```
+4. **Aturan Wajib Optimasi Basis Data & Indeks (Database Optimization Rules):**
+   - **Indeks Kolom Filter & Sort Rutin:** Semua kolom yang sering dipakai di clause `WHERE`, `ORDER BY`, atau filter gabungan wajib dibuatkan indeks komposit (misal: `(batch_year DESC, is_pengurus, is_active)`).
+   - **Trigram GIN Index untuk Pencarian Teks:** Gunakan ekstensi `pg_trgm` dengan GIN index (`gin_trgm_ops`) untuk kolom teks/string yang sering dicari dengan `ILIKE` / `LIKE` (misal: `title`, `name`, `location`).
+   - **Partial Indexing:** Gunakan `WHERE deleted_at IS NULL` atau `WHERE is_active = true` pada index jika tabel menggunakan SoftDeletes / flag aktif untuk menghemat memory index.
+   - **Foreign Key Indexing:** Jangan pernah biarkan relasi FK tanpa indeks.
+   - **Zero-Downtime Rule untuk Tabel Besar:** Saat menambahkan indeks pada tabel production aktif, utamakan index non-blocking (`CREATE INDEX CONCURRENTLY IF NOT EXISTS ...`).
+   - **Method down() Lengkap:** Setiap migrasi indeks wajib menyertakan `DROP INDEX IF EXISTS` di method `down()`.

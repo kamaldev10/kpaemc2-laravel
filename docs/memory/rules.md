@@ -13,9 +13,14 @@
 - ❌ **DILARANG** menyimpan file gambar, dokumen, atau payload base64 langsung ke tabel database PostgreSQL.
 - ✅ **WAJIB** menggunakan `App\Services\CloudinaryService` untuk mengunggah aset ke Cloudinary CDN dan hanya menyimpan URL & `public_id` ke database.
 
-## 3. Database Migration Integrity
+## 3. Database Migration Integrity & Optimization
 - ❌ **DILARANG** mengubah file migrasi yang statusnya sudah `Ran` (sudah dieksekusi di database).
 - ✅ **WAJIB** membuat migration baru jika ingin menambah kolom, mengubah indeks, atau memodifikasi tabel.
+- ✅ **WAJIB** memperhatikan optimasi database di setiap migrasi baru:
+  - Foreign key wajib terindeks (`->index()`).
+  - Kolom pencarian teks (`ILIKE`) wajib menggunakan trigram GIN index (`gin_trgm_ops`).
+  - Kolom sorting + filter gabungan wajib menggunakan composite/partial index.
+  - Setiap penambahan indeks wajib menyertakan rollback di method `down()`.
 
 ## 4. Verification Cycle Sebelum Commit
 Sebelum melakukan commit dan push ke git, AI **WAJIB** memverifikasi dua hal berikut berhasil tanpa error:
