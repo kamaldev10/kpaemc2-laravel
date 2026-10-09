@@ -11,19 +11,41 @@ export interface User {
 	is_active?: boolean;
 }
 
+export interface PaginationLink {
+	url: string | null;
+	label: string;
+	active: boolean;
+	page?: number | null;
+}
+
+export interface PaginationMeta {
+	current_page: number;
+	from: number | null;
+	last_page: number;
+	links: PaginationLink[];
+	path: string;
+	per_page: number;
+	to: number | null;
+	total: number;
+}
+
 export interface PaginatedResource<T> {
 	data: T[];
-	current_page: number;
-	last_page: number;
-	per_page: number;
-	total: number;
-	from: number | null;
-	to: number | null;
-	links: {
-		url: string | null;
-		label: string;
-		active: boolean;
-	}[];
+	current_page?: number;
+	last_page?: number;
+	per_page?: number;
+	total?: number;
+	from?: number | null;
+	to?: number | null;
+	links?:
+		| PaginationLink[]
+		| {
+				first?: string | null;
+				last?: string | null;
+				prev?: string | null;
+				next?: string | null;
+		  };
+	meta?: PaginationMeta;
 }
 
 export type PageProps<T extends Record<string, unknown> = Record<string, unknown>> = T & {
