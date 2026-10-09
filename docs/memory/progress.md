@@ -53,16 +53,18 @@ Dokumen acuan: `docs/planning/26.04/tasks.md`
 
 ---
 
-### Sprint 26.05 — Phase 4 Completion (SELESAI ✅)
+### Sprint 26.05 — Account Settings, Profile Security & Phase 4 Completion (SELESAI ✅)
+Dokumen acuan: `docs/planning/26.05/tasks.md`
 
 | Section | Modul                                              | Layer   | Status     | Keterangan |
 | ------- | -------------------------------------------------- | ------- | ---------- | ---------- |
-| **1**   | **Cek Status Pendaftaran (`/events/check-status`)** | FULL   | ✅ Selesai | GET (form) + POST (lookup by code+email). Halaman baru `CheckStatus.tsx`. |
-| **2**   | **Gender Select di Form Registrasi**               | FE      | ✅ Selesai | Tambahkan `<select>` gender Laki-laki/Perempuan di `Events/Show.tsx`. |
-| **3**   | **Admin Dashboard Real Stats**                     | BE/FE   | ✅ Selesai | `DashboardController` query DB nyata; Dashboard.tsx tampilkan stat + alert badge. |
-| **4**   | **Custom Migration Creator Cleanup**               | BE      | ✅ Selesai | Hapus duplikat `extend()` di `AppServiceProvider`, commit format `YYYYMMDD_XXXX`. |
-| **5**   | **Feature Tests — Registration & Check Status**    | TEST    | ✅ Selesai | 4 test baru: closed-event rejection, check-status page, valid lookup, wrong-email lookup. |
-| **6**   | **RegistrationFactory Gender Fix**                 | TEST    | ✅ Selesai | Factory gender dari `'M'/'F'` → `'male'/'female'` sesuai validasi. |
+| **1**   | **Pengaturan Akun & Profil Admin**                 | FULL    | ✅ Selesai | `AccountController`, routing `/admin/account`, sidebar menu, `Admin/Account/Index.tsx`. |
+| **2**   | **Lupa Password & Reset Password Restyle**         | FE      | ✅ Selesai | Restyle `ForgotPassword.tsx` dan `ResetPassword.tsx` dengan theme portal ungu EMC². |
+| **3**   | **Cek Status Pendaftaran (`/events/check-status`)** | FULL    | ✅ Selesai | GET (form) + POST (lookup by code+email). Halaman baru `CheckStatus.tsx`. |
+| **4**   | **Gender Select di Form Registrasi**               | FE      | ✅ Selesai | Tambahkan `<select>` gender Laki-laki/Perempuan di `Events/Show.tsx`. |
+| **5**   | **Admin Dashboard Real Stats**                     | BE/FE   | ✅ Selesai | `DashboardController` query DB nyata; `Dashboard.tsx` tampilkan stat + alert badge. |
+| **6**   | **Custom Migration Creator & Index Rules**         | BE/DOCS | ✅ Selesai | Format `YYYYMMDD_XXXX` & penambahan rules optimasi database di migration docs. |
+| **7**   | **Feature Tests — Registration & Check Status**    | TEST    | ✅ Selesai | 4 test baru untuk event registration lifecycle & check status. |
 
 ---
 
