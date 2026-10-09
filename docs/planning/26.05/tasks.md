@@ -35,14 +35,14 @@
 
 | #   | Task                                                                                  | Layer | Status |
 | --- | ------------------------------------------------------------------------------------- | ----- | ------ |
-| 3.1 | `UserPolicy` (hanya `super_admin` yang dapat `viewAny`, `create`, `update`, `delete`) | BE    | ⏳     |
-| 3.2 | `StoreUserRequest` & `UpdateUserRequest` (validasi name, email unique, password, role)| BE    | ⏳     |
-| 3.3 | `UserService` (daftar user, filter role/search, pagination, prevent self-lockout)     | BE    | ⏳     |
-| 3.4 | `UserController` (Admin resource endpoints `/admin/users`)                            | BE    | ⏳     |
-| 3.5 | Routing `/admin/users` (resource controller di dalam admin middleware)                | BE    | ⏳     |
-| 3.6 | Tampilkan menu "Kelola Pengguna" di Sidebar Admin (khusus untuk `super_admin`)        | FE    | ⏳     |
-| 3.7 | Frontend User Management UI (`Admin/Users/Index.tsx`) + Create/Edit Modal             | FE    | ⏳     |
-| 3.8 | Feature Test `UserManagementTest.php` (akses role, create user, validation)           | TEST  | ⏳     |
+| 3.1 | `UserPolicy` (hanya `super_admin` yang dapat `viewAny`, `create`, `update`, `delete`) | BE    | ✅     |
+| 3.2 | `StoreUserRequest` & `UpdateUserRequest` (validasi name, email unique, password, role)| BE    | ✅     |
+| 3.3 | `UserService` (daftar user, filter role/search, pagination, prevent self-lockout)     | BE    | ✅     |
+| 3.4 | `UserController` (Admin resource endpoints `/admin/users`)                            | BE    | ✅     |
+| 3.5 | Routing `/admin/users` (resource controller di dalam admin middleware)                | BE    | ✅     |
+| 3.6 | Tampilkan menu "Kelola Pengguna" di Sidebar Admin (khusus untuk `super_admin`)        | FE    | ✅     |
+| 3.7 | Frontend User Management UI (`Admin/Users/Index.tsx`) + Create/Edit Modal             | FE    | ✅     |
+| 3.8 | Feature Test `UserManagementTest.php` (akses role, create user, validation)           | TEST  | ✅     |
 
 ---
 

@@ -41,6 +41,7 @@ class AppServiceProvider extends ServiceProvider
         \Illuminate\Support\Facades\Gate::policy(\App\Models\SiteSetting::class, \App\Policies\SettingPolicy::class);
         \Illuminate\Support\Facades\Gate::policy(\App\Models\AboutInfo::class, \App\Policies\SettingPolicy::class);
         \Illuminate\Support\Facades\Gate::policy(\App\Models\Contact::class, \App\Policies\ContactPolicy::class);
+        \Illuminate\Support\Facades\Gate::policy(\App\Models\User::class, \App\Policies\UserPolicy::class);
 
         // Robust Eloquent User Provider that handles legacy / invalid UUID session IDs safely
         Auth::provider('eloquent', function ($app, array $config) {

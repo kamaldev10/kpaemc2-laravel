@@ -85,6 +85,9 @@ Route::middleware(['auth', 'verified', App\Http\Middleware\EnsureAdmin::class])
         Route::patch('contacts/{contact}/read', [App\Http\Controllers\Admin\ContactController::class, 'markAsRead'])->name('contacts.read');
         Route::post('contacts/read-all', [App\Http\Controllers\Admin\ContactController::class, 'markAllAsRead'])->name('contacts.read-all');
         Route::delete('contacts/{contact}', [App\Http\Controllers\Admin\ContactController::class, 'destroy'])->name('contacts.destroy');
+
+        // User Management (Super Admin only)
+        Route::resource('users', App\Http\Controllers\Admin\UserController::class)->except(['create', 'show', 'edit']);
     });
 
 require __DIR__ . '/auth.php';

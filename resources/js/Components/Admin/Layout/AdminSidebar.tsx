@@ -10,6 +10,7 @@ import {
 	FolderKanban,
 	LayoutDashboard,
 	Settings,
+	Shield,
 	ShieldAlert,
 	UserCheck,
 	Users,
@@ -89,6 +90,16 @@ export const AdminSidebar: FC<AdminSidebarProps> = ({ isOpen, onClose, user }) =
 		{
 			groupName: 'Sistem & Konfigurasi',
 			items: [
+				...(isSuperAdmin
+					? [
+							{
+								name: 'Kelola Pengguna',
+								href: '/admin/users',
+								icon: <Shield className="h-4 w-4" />,
+								activeMatcher: '^/admin/users',
+							},
+						]
+					: []),
 				{
 					name: 'Pengaturan Situs',
 					href: '/admin/settings',
