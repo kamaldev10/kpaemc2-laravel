@@ -65,7 +65,7 @@ export const MembersIndex: FC<MemberIndexProps> = ({
 	const [selectedDivision, setSelectedDivision] = useState(filters.division_id || '');
 	const [selectedStatus, setSelectedStatus] = useState(filters.status || '');
 	const [selectedPengurus, setSelectedPengurus] = useState(
-		filters.is_pengurus !== undefined ? filters.is_pengurus : '1'
+		filters.is_pengurus !== undefined ? filters.is_pengurus : ''
 	);
 	const [deleteModalMember, setDeleteModalMember] = useState<Member | null>(null);
 
@@ -82,7 +82,7 @@ export const MembersIndex: FC<MemberIndexProps> = ({
 				search: searchTerm || undefined,
 				division_id: selectedDivision || undefined,
 				status: selectedStatus || undefined,
-				is_pengurus: selectedPengurus !== undefined ? selectedPengurus : '',
+				is_pengurus: selectedPengurus !== '' ? selectedPengurus : undefined,
 				per_page: filters.per_page || undefined,
 			},
 			{ preserveState: true, replace: true }
@@ -93,7 +93,7 @@ export const MembersIndex: FC<MemberIndexProps> = ({
 		setSearchTerm('');
 		setSelectedDivision('');
 		setSelectedStatus('');
-		setSelectedPengurus('1');
+		setSelectedPengurus('');
 		router.get('/admin/members', {}, { preserveState: true, replace: true });
 	};
 

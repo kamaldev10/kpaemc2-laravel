@@ -30,15 +30,7 @@ class MemberController extends Controller
             $perPage = 10;
         }
 
-        $filters = $request->only(['search', 'division_id', 'status']);
-        
-        // Default filter is_pengurus=1 unless explicitly set (including empty string to view all)
-        if ($request->has('is_pengurus')) {
-            $filters['is_pengurus'] = $request->input('is_pengurus');
-        } else {
-            $filters['is_pengurus'] = '1';
-        }
-
+        $filters = $request->only(['search', 'division_id', 'status', 'is_pengurus']);
         $filters['per_page'] = (string) $perPage;
 
         $members = $this->memberService->paginate($filters, $perPage);
