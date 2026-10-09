@@ -11,6 +11,7 @@ import {
 	LayoutDashboard,
 	Settings,
 	ShieldAlert,
+	UserCheck,
 	Users,
 	X,
 } from 'lucide-react';
@@ -93,6 +94,12 @@ export const AdminSidebar: FC<AdminSidebarProps> = ({ isOpen, onClose, user }) =
 					href: '/admin/settings',
 					icon: <Settings className="h-4 w-4" />,
 					activeMatcher: '^/admin/settings',
+				},
+				{
+					name: 'Pengaturan Akun',
+					href: '/admin/account',
+					icon: <UserCheck className="h-4 w-4" />,
+					activeMatcher: '^/admin/account',
 				},
 			],
 		},

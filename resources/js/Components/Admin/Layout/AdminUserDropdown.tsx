@@ -93,7 +93,7 @@ export const AdminUserDropdown: FC<AdminUserDropdownProps> = ({ user }) => {
                     {/* Action Links */}
                     <div className="py-1">
                         <Link
-                            href="/profile"
+                            href="/admin/account"
                             onClick={() => setIsOpen(false)}
                             className="flex w-full items-center gap-2.5 rounded-lg px-3 py-2 text-xs font-medium text-slate-700 transition-colors hover:bg-purple-50 hover:text-purple-900"
                         >
@@ -101,7 +101,7 @@ export const AdminUserDropdown: FC<AdminUserDropdownProps> = ({ user }) => {
                             <span>Pengaturan Akun & Profil</span>
                         </Link>
                         <Link
-                            href="/profile"
+                            href="/admin/account#password"
                             onClick={() => setIsOpen(false)}
                             className="flex w-full items-center gap-2.5 rounded-lg px-3 py-2 text-xs font-medium text-slate-700 transition-colors hover:bg-purple-50 hover:text-purple-900"
                         >

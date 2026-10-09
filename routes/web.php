@@ -75,6 +75,11 @@ Route::middleware(['auth', 'verified', App\Http\Middleware\EnsureAdmin::class])
         Route::put('settings', [App\Http\Controllers\Admin\SettingController::class, 'updateSettings'])->name('settings.update');
         Route::post('settings/about', [App\Http\Controllers\Admin\SettingController::class, 'updateAboutInfo'])->name('settings.about.update');
 
+        // Account Settings (Profile & Password)
+        Route::get('account', [App\Http\Controllers\Admin\AccountController::class, 'index'])->name('account.index');
+        Route::patch('account/profile', [App\Http\Controllers\Admin\AccountController::class, 'updateProfile'])->name('account.profile.update');
+        Route::put('account/password', [App\Http\Controllers\Admin\AccountController::class, 'updatePassword'])->name('account.password.update');
+
         // Contact Inquiries Inbox
         Route::get('contacts', [App\Http\Controllers\Admin\ContactController::class, 'index'])->name('contacts.index');
         Route::patch('contacts/{contact}/read', [App\Http\Controllers\Admin\ContactController::class, 'markAsRead'])->name('contacts.read');
