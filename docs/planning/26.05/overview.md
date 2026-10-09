@@ -61,10 +61,22 @@ Sesuai aturan keamanan dan arsitektur otentikasi KPA EMC²:
   - `matematika` ("Matematika")
   - `statistika` ("Statistika")
 - Perbaikan form `Create.tsx` dan `Edit.tsx` agar field Jurusan dan Status menggunakan dropdown select terstandarisasi.
-- Perbaikan filter & badge di `Admin/Members/Index.tsx`.
 - Update validasi request & Eloquent model cast.
 
-### E. Event Registration & Status Lookup — *Selesai*
+### E. Admin Members Index — Metrics Cards, Search, Filter & Pagination Polish
+- **4 Metrics Cards**:
+  - Total Anggota (`total`)
+  - Pengurus Aktif (`pengurus`)
+  - Anggota Luar Biasa (`honorary`)
+  - Anggota Biasa (`regular`)
+- **Search & Multi-Filter**:
+  - Pencarian fleksibel (`name`, `member_number`, `position`, `major`).
+  - Filter Divisi, Filter Status (`regular`, `honorary`, `inactive`), Filter Peran Pengurus (`1` / `0`).
+  - Tombol Terapkan & Reset Filter yang reaktif.
+- **Pagination & Page Limit**:
+  - Limit selector (10, 20, 50, 100) terintegrasi dengan filter query strings.
+
+### F. Event Registration & Status Lookup — *Selesai*
 - Halaman publik Cek Status Registrasi (`/events/check-status`).
 - Form registrasi gender select & dashboard real DB stats.
 
@@ -79,11 +91,13 @@ Sesuai aturan keamanan dan arsitektur otentikasi KPA EMC²:
 | **Policy** | `app/Policies/UserPolicy.php` | Gate authorization super admin only |
 | **Request** | `app/Http/Requests/Admin/StoreUserRequest.php` & `UpdateUserRequest.php` | Validasi input pembuatan & update akun |
 | **Request** | `app/Http/Requests/Admin/StoreMemberRequest.php` & `UpdateMemberRequest.php` | Validasi enum status keanggotaan & jurusan |
+| **Service** | `app/Services/Admin/MemberService.php` | Query filter, search, metrics 4 card, pagination |
 | **Service** | `app/Services/Admin/UserService.php` | Business logic & pagination user |
 | **Controller** | `app/Http/Controllers/Admin/UserController.php` | Resource controller `/admin/users` |
 | **Routing** | `routes/web.php` | Endpoint `/admin/users` dengan policy check |
 | **Sidebar** | `resources/js/Components/Admin/Layout/AdminSidebar.tsx` | Menu "Kelola Pengguna" (tampil hanya untuk Super Admin) |
 | **Frontend** | `resources/js/Pages/Admin/Users/Index.tsx` | UI tabel manajemen user + modal create/edit |
+| **Frontend** | `resources/js/Pages/Admin/Members/Index.tsx` | 4 metric cards, search, filter dropdown, pagination |
 | **Frontend** | `resources/js/Pages/Admin/Members/Create.tsx` & `Edit.tsx` | Form member dengan status & jurusan dropdown |
 | **Test** | `tests/Feature/Admin/UserManagementTest.php` | Integration test hak akses & CRUD user |
-| **Test** | `tests/Feature/Admin/MemberCrudTest.php` | Integration test CRUD member, status & major enum |
+| **Test** | `tests/Feature/Admin/MemberCrudTest.php` | Integration test CRUD member, search, filter & metrics |
