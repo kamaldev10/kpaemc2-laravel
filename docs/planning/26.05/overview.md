@@ -47,7 +47,16 @@ Sesuai aturan keamanan dan arsitektur otentikasi KPA EMC²:
 ### C. Autentikasi & Reset Password Restyle — *Selesai*
 - Restyle `ForgotPassword.tsx` & `ResetPassword.tsx` dengan tema gelap ungu EMC².
 
-### D. Event Registration & Status Lookup — *Selesai*
+### D. Member Status Enum Standardization (`MemberStatusEnum`)
+- Standarisasi status keanggotaan menggunakan PHP Enum `MemberStatusEnum` & TypeScript type `MemberStatus`:
+  - `regular` (Anggota Biasa)
+  - `honorary` (Anggota Luar Biasa)
+  - `inactive` (Non Aktif)
+- Perbaikan form `Create.tsx` dan `Edit.tsx` agar opsi value & label konsisten.
+- Perbaikan filter & badge di `Admin/Members/Index.tsx`.
+- Update validasi request & Eloquent model cast.
+
+### E. Event Registration & Status Lookup — *Selesai*
 - Halaman publik Cek Status Registrasi (`/events/check-status`).
 - Form registrasi gender select & dashboard real DB stats.
 
@@ -57,11 +66,15 @@ Sesuai aturan keamanan dan arsitektur otentikasi KPA EMC²:
 
 | Layer | Berkas / Komponen | Peran |
 | ----- | ----------------- | ----- |
+| **Enum** | `app/Enums/MemberStatusEnum.php` | Enum status keanggotaan (Biasa, Luar Biasa, Non Aktif) |
 | **Policy** | `app/Policies/UserPolicy.php` | Gate authorization super admin only |
 | **Request** | `app/Http/Requests/Admin/StoreUserRequest.php` & `UpdateUserRequest.php` | Validasi input pembuatan & update akun |
-| **Service** | `app/Services/Admin/UserService.php` | Business logic & pagination |
+| **Request** | `app/Http/Requests/Admin/StoreMemberRequest.php` & `UpdateMemberRequest.php` | Validasi enum status keanggotaan |
+| **Service** | `app/Services/Admin/UserService.php` | Business logic & pagination user |
 | **Controller** | `app/Http/Controllers/Admin/UserController.php` | Resource controller `/admin/users` |
 | **Routing** | `routes/web.php` | Endpoint `/admin/users` dengan policy check |
 | **Sidebar** | `resources/js/Components/Admin/Layout/AdminSidebar.tsx` | Menu "Kelola Pengguna" (tampil hanya untuk Super Admin) |
 | **Frontend** | `resources/js/Pages/Admin/Users/Index.tsx` | UI tabel manajemen user + modal create/edit |
+| **Frontend** | `resources/js/Pages/Admin/Members/Create.tsx` & `Edit.tsx` | Form member dengan status dropdown konsisten |
 | **Test** | `tests/Feature/Admin/UserManagementTest.php` | Integration test hak akses & CRUD user |
+| **Test** | `tests/Feature/Admin/MemberCrudTest.php` | Integration test CRUD member & status enum |
