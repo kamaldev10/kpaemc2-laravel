@@ -1,20 +1,21 @@
-# Tasks — Sprint 26.05 (User Management, Member Status Enum, Account Settings & Phase 4 Completion)
+# Tasks — Sprint 26.05 (User Management, Enums Standardization, Account Settings & Phase 4 Completion)
 
 > Layer: BE = Laravel Backend · FE = React/Inertia Frontend · TEST = Pest/PHPUnit · DB = Database/Migrations
 
 ---
 
-## 1. Member Status Enum Refactoring & Standardization (`MemberStatusEnum`)
+## 1. Member Status & Major Enums (`MemberStatusEnum` & `DepartmentMajorEnum`)
 
 | #   | Task                                                                                  | Layer | Status |
 | --- | ------------------------------------------------------------------------------------- | ----- | ------ |
 | 1.1 | Buat Enum PHP `app/Enums/MemberStatusEnum.php` (`regular`, `honorary`, `inactive`)     | BE    | ⏳     |
-| 1.2 | Update `app/Models/Member.php` casts `status => MemberStatusEnum::class`              | BE    | ⏳     |
-| 1.3 | Update `StoreMemberRequest.php` & `UpdateMemberRequest.php` validasi enum             | BE    | ⏳     |
-| 1.4 | Update TypeScript type `resources/js/types/member.ts` (`MemberStatus`)                 | FE    | ⏳     |
-| 1.5 | Update Form `Create.tsx` & `Edit.tsx` (sesuaikan label & value enum)                   | FE    | ⏳     |
-| 1.6 | Update Filter & Badge di `Admin/Members/Index.tsx` & komponen publik                  | FE    | ⏳     |
-| 1.7 | Unit/Feature test validasi status member (`MemberCrudTest.php`)                       | TEST  | ⏳     |
+| 1.2 | Buat Enum PHP `app/Enums/DepartmentMajorEnum.php` (7 Jurusan FMIPA UNRI)              | BE    | ⏳     |
+| 1.3 | Update `app/Models/Member.php` casts `status` & `major`                               | BE    | ⏳     |
+| 1.4 | Update `StoreMemberRequest.php` & `UpdateMemberRequest.php` validasi enum             | BE    | ⏳     |
+| 1.5 | Update TypeScript types `resources/js/types/member.ts` (`MemberStatus`, `DepartmentMajor`)| FE | ⏳     |
+| 1.6 | Update Form `Create.tsx` & `Edit.tsx` (dropdown pilihan Jurusan & Status)             | FE    | ⏳     |
+| 1.7 | Update Filter & Badge di `Admin/Members/Index.tsx` & komponen publik                  | FE    | ⏳     |
+| 1.8 | Unit/Feature test validasi status & major member (`MemberCrudTest.php`)               | TEST  | ⏳     |
 
 ---
 

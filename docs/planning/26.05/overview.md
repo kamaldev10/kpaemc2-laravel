@@ -47,12 +47,20 @@ Sesuai aturan keamanan dan arsitektur otentikasi KPA EMC²:
 ### C. Autentikasi & Reset Password Restyle — *Selesai*
 - Restyle `ForgotPassword.tsx` & `ResetPassword.tsx` dengan tema gelap ungu EMC².
 
-### D. Member Status Enum Standardization (`MemberStatusEnum`)
+### D. Member Status & Major Enums Standardization
 - Standarisasi status keanggotaan menggunakan PHP Enum `MemberStatusEnum` & TypeScript type `MemberStatus`:
   - `regular` (Anggota Biasa)
   - `honorary` (Anggota Luar Biasa)
   - `inactive` (Non Aktif)
-- Perbaikan form `Create.tsx` dan `Edit.tsx` agar opsi value & label konsisten.
+- Standarisasi jurusan mahasiswa menggunakan PHP Enum `DepartmentMajorEnum` & TypeScript type `DepartmentMajor`:
+  - `sistem_informasi` ("Sistem Informasi")
+  - `manajemen_informatika` ("Manajemen Informatika")
+  - `biologi` ("Biologi")
+  - `fisika` ("Fisika")
+  - `kimia` ("Kimia")
+  - `matematika` ("Matematika")
+  - `statistika` ("Statistika")
+- Perbaikan form `Create.tsx` dan `Edit.tsx` agar field Jurusan dan Status menggunakan dropdown select terstandarisasi.
 - Perbaikan filter & badge di `Admin/Members/Index.tsx`.
 - Update validasi request & Eloquent model cast.
 
@@ -67,14 +75,15 @@ Sesuai aturan keamanan dan arsitektur otentikasi KPA EMC²:
 | Layer | Berkas / Komponen | Peran |
 | ----- | ----------------- | ----- |
 | **Enum** | `app/Enums/MemberStatusEnum.php` | Enum status keanggotaan (Biasa, Luar Biasa, Non Aktif) |
+| **Enum** | `app/Enums/DepartmentMajorEnum.php` | Enum 7 jurusan FMIPA UNRI |
 | **Policy** | `app/Policies/UserPolicy.php` | Gate authorization super admin only |
 | **Request** | `app/Http/Requests/Admin/StoreUserRequest.php` & `UpdateUserRequest.php` | Validasi input pembuatan & update akun |
-| **Request** | `app/Http/Requests/Admin/StoreMemberRequest.php` & `UpdateMemberRequest.php` | Validasi enum status keanggotaan |
+| **Request** | `app/Http/Requests/Admin/StoreMemberRequest.php` & `UpdateMemberRequest.php` | Validasi enum status keanggotaan & jurusan |
 | **Service** | `app/Services/Admin/UserService.php` | Business logic & pagination user |
 | **Controller** | `app/Http/Controllers/Admin/UserController.php` | Resource controller `/admin/users` |
 | **Routing** | `routes/web.php` | Endpoint `/admin/users` dengan policy check |
 | **Sidebar** | `resources/js/Components/Admin/Layout/AdminSidebar.tsx` | Menu "Kelola Pengguna" (tampil hanya untuk Super Admin) |
 | **Frontend** | `resources/js/Pages/Admin/Users/Index.tsx` | UI tabel manajemen user + modal create/edit |
-| **Frontend** | `resources/js/Pages/Admin/Members/Create.tsx` & `Edit.tsx` | Form member dengan status dropdown konsisten |
+| **Frontend** | `resources/js/Pages/Admin/Members/Create.tsx` & `Edit.tsx` | Form member dengan status & jurusan dropdown |
 | **Test** | `tests/Feature/Admin/UserManagementTest.php` | Integration test hak akses & CRUD user |
-| **Test** | `tests/Feature/Admin/MemberCrudTest.php` | Integration test CRUD member & status enum |
+| **Test** | `tests/Feature/Admin/MemberCrudTest.php` | Integration test CRUD member, status & major enum |
