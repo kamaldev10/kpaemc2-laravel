@@ -74,10 +74,10 @@ class MemberCrudTest extends TestCase
             'division_id' => $division->id,
             'position' => 'Staff Logistik',
             'batch_year' => 2023,
-            'major' => 'Kehutanan',
+            'major' => 'biologi',
             'phone' => '081234567890',
             'email' => 'fajar@kpa-emc2.org',
-            'status' => 'active',
+            'status' => 'regular',
             'is_pengurus' => true,
             'sort_order' => 5,
         ];
@@ -153,7 +153,8 @@ class MemberCrudTest extends TestCase
             'name' => 'Nama Setelah Diperbarui',
             'member_number' => 'EMC.2022.010',
             'position' => 'Ketua Bidang Konservasi',
-            'status' => 'active',
+            'major' => 'sistem_informasi',
+            'status' => 'honorary',
             'is_pengurus' => true,
         ];
 

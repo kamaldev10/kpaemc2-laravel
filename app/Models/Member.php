@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Enums\DepartmentMajorEnum;
+use App\Enums\MemberStatusEnum;
 use App\Models\Traits\HasAuditColumns;
 use App\Models\Traits\HasUuidKey;
 use Database\Factories\MemberFactory;
@@ -42,6 +44,8 @@ class Member extends Model
             'is_pengurus' => 'boolean',
             'sort_order' => 'integer',
             'is_active' => 'boolean',
+            'status' => MemberStatusEnum::class,
+            'major' => DepartmentMajorEnum::class,
         ];
     }
 

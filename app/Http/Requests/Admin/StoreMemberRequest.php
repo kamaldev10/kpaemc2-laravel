@@ -2,9 +2,12 @@
 
 namespace App\Http\Requests\Admin;
 
+use App\Enums\DepartmentMajorEnum;
+use App\Enums\MemberStatusEnum;
 use App\Models\Member;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\Enum;
 
 class StoreMemberRequest extends FormRequest
 {
@@ -33,7 +36,7 @@ class StoreMemberRequest extends FormRequest
             ? (int) $this->input('sort_order')
             : 0;
 
-        $status = $this->input('status') ?: 'regular';
+        $status = $this->input('status') ?: MemberStatusEnum::REGULAR->value;
 
         $this->merge([
             'is_pengurus' => $isPengurus,
@@ -56,10 +59,10 @@ class StoreMemberRequest extends FormRequest
             'division_id' => ['nullable', 'uuid', 'exists:divisions,id'],
             'position' => ['nullable', 'string', 'max:150'],
             'batch_year' => ['nullable', 'integer', 'min:1980', 'max:' . (date('Y') + 1)],
-            'major' => ['nullable', 'string', 'max:255'],
+            'major' => ['nullable', new Enum(DepartmentMajorEnum::class)],
             'phone' => ['nullable', 'string', 'max:30'],
             'email' => ['nullable', 'email', 'max:255'],
-            'status' => ['required', 'string', Rule::in(['regular', 'active', 'alumni', 'honorary'])],
+            'status' => ['required', new Enum(MemberStatusEnum::class)],
             'bio' => ['nullable', 'string'],
             'avatar' => ['nullable', 'file', 'image', 'mimes:jpeg,png,jpg,webp', 'max:5120'],
             'avatar_url' => ['nullable', 'string', 'max:500'],

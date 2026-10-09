@@ -2,7 +2,13 @@ import AdminLayout from '@/Layouts/AdminLayout';
 import AdminPagination from '@/Components/Admin/UI/AdminPagination';
 import { BreadcrumbItem } from '@/types/admin';
 import { PaginatedResource } from '@/types';
-import { Member } from '@/types/member';
+import {
+	DEPARTMENT_MAJOR_LABELS,
+	DepartmentMajor,
+	MEMBER_STATUS_LABELS,
+	Member,
+	MemberStatus,
+} from '@/types/member';
 import { Head, Link, router } from '@inertiajs/react';
 import {
 	Briefcase,
@@ -100,32 +106,26 @@ export const MembersIndex: FC<MemberIndexProps> = ({
 
 	const getStatusBadge = (status: string | null | undefined) => {
 		switch (status) {
-			case 'active':
-				return (
-					<span className="inline-flex items-center gap-1 rounded-full bg-emerald-50 px-2.5 py-0.5 text-[11px] font-semibold text-emerald-700">
-						<span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
-						<span>Aktif</span>
-					</span>
-				);
-			case 'alumni':
-				return (
-					<span className="inline-flex items-center gap-1 rounded-full bg-blue-50 px-2.5 py-0.5 text-[11px] font-semibold text-blue-700">
-						<span className="h-1.5 w-1.5 rounded-full bg-blue-500" />
-						<span>Alumni</span>
-					</span>
-				);
 			case 'honorary':
 				return (
-					<span className="inline-flex items-center gap-1 rounded-full bg-purple-50 px-2.5 py-0.5 text-[11px] font-semibold text-purple-700">
+					<span className="inline-flex items-center gap-1 rounded-full bg-purple-50 px-2.5 py-0.5 text-[11px] font-semibold text-purple-700 border border-purple-200">
 						<span className="h-1.5 w-1.5 rounded-full bg-purple-500" />
-						<span>Kehormatan</span>
+						<span>Anggota Luar Biasa</span>
 					</span>
 				);
+			case 'inactive':
+				return (
+					<span className="inline-flex items-center gap-1 rounded-full bg-slate-100 px-2.5 py-0.5 text-[11px] font-semibold text-slate-600 border border-slate-200">
+						<span className="h-1.5 w-1.5 rounded-full bg-slate-400" />
+						<span>Non Aktif</span>
+					</span>
+				);
+			case 'regular':
 			default:
 				return (
-					<span className="inline-flex items-center gap-1 rounded-full bg-slate-100 px-2.5 py-0.5 text-[11px] font-semibold text-slate-700">
-						<span className="h-1.5 w-1.5 rounded-full bg-slate-400" />
-						<span>Biasa</span>
+					<span className="inline-flex items-center gap-1 rounded-full bg-emerald-50 px-2.5 py-0.5 text-[11px] font-semibold text-emerald-700 border border-emerald-200">
+						<span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+						<span>Anggota Biasa</span>
 					</span>
 				);
 		}
@@ -216,17 +216,18 @@ export const MembersIndex: FC<MemberIndexProps> = ({
 					</div>
 
 					{/* Status Select */}
-					<div className="w-full md:w-36">
+					<div className="w-full md:w-44">
 						<select
 							value={selectedStatus}
 							onChange={(e) => setSelectedStatus(e.target.value)}
 							className="w-full rounded-xl border border-slate-200 bg-slate-50/50 px-3 py-2 text-xs text-slate-800 focus:border-purple-600 focus:bg-white focus:outline-hidden focus:ring-1 focus:ring-purple-600"
 						>
 							<option value="">Semua Status</option>
-							<option value="active">Aktif</option>
-							<option value="regular">Biasa</option>
-							<option value="alumni">Alumni</option>
-							<option value="honorary">Kehormatan</option>
+							{Object.entries(MEMBER_STATUS_LABELS).map(([value, label]) => (
+								<option key={value} value={value}>
+									{label}
+								</option>
+							))}
 						</select>
 					</div>
 
@@ -367,7 +368,10 @@ export const MembersIndex: FC<MemberIndexProps> = ({
 													{member.batch_year ? `Angkatan ${member.batch_year}` : '-'}
 												</div>
 												<div className="text-[11px] text-slate-400">
-													{member.major || '-'}
+													{member.major_label ||
+														(member.major && DEPARTMENT_MAJOR_LABELS[member.major as DepartmentMajor]) ||
+														member.major ||
+														'-'}
 												</div>
 											</td>
 

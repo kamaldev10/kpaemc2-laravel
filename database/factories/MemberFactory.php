@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Enums\DepartmentMajorEnum;
+use App\Enums\MemberStatusEnum;
 use App\Models\Division;
 use App\Models\Member;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -19,10 +21,10 @@ class MemberFactory extends Factory
             'division_id' => Division::factory(),
             'position' => fake()->randomElement(['Anggota Aktif', 'Kepala Divisi', 'Staff Ahli', 'Humas', 'Logistik']),
             'batch_year' => fake()->numberBetween(2018, 2025),
-            'major' => fake()->randomElement(['Teknik Informatika', 'Sistem Informasi', 'Ilmu Lingkungan', 'Biologi', 'Kehutanan', 'Kimia', 'Fisika', 'Matematika']),
+            'major' => fake()->randomElement(DepartmentMajorEnum::values()),
             'phone' => fake()->phoneNumber(),
             'email' => fake()->unique()->safeEmail(),
-            'status' => 'regular',
+            'status' => fake()->randomElement(MemberStatusEnum::values()),
             'bio' => fake()->sentence(12),
             'avatar_url' => 'https://res.cloudinary.com/demo/image/upload/v1/samples/people/smiling-man.jpg',
             'avatar_public_id' => 'samples/people/smiling-man',

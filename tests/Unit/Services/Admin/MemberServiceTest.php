@@ -43,12 +43,12 @@ class MemberServiceTest extends TestCase
         Member::factory()->create([
             'name' => 'Aditya Pratama',
             'member_number' => 'EMC.2023.001',
-            'major' => 'Biologi',
+            'major' => 'biologi',
         ]);
         Member::factory()->create([
             'name' => 'Budi Santoso',
             'member_number' => 'EMC.2022.099',
-            'major' => 'Fisika',
+            'major' => 'fisika',
         ]);
 
         $resultByName = $this->service->paginate(['search' => 'Aditya']);
@@ -77,14 +77,14 @@ class MemberServiceTest extends TestCase
 
     public function test_paginate_filters_by_status(): void
     {
-        Member::factory()->create(['status' => 'active']);
-        Member::factory()->create(['status' => 'alumni']);
+        Member::factory()->create(['status' => 'regular']);
+        Member::factory()->create(['status' => 'honorary']);
 
-        $active = $this->service->paginate(['status' => 'active']);
-        $alumni = $this->service->paginate(['status' => 'alumni']);
+        $regular = $this->service->paginate(['status' => 'regular']);
+        $honorary = $this->service->paginate(['status' => 'honorary']);
 
-        $this->assertEquals(1, $active->total());
-        $this->assertEquals(1, $alumni->total());
+        $this->assertEquals(1, $regular->total());
+        $this->assertEquals(1, $honorary->total());
     }
 
     public function test_paginate_filters_by_is_pengurus(): void
@@ -110,8 +110,8 @@ class MemberServiceTest extends TestCase
             'division_id' => $division->id,
             'position' => 'Staff Humas',
             'batch_year' => 2024,
-            'major' => 'Sistem Informasi',
-            'status' => 'active',
+            'major' => 'sistem_informasi',
+            'status' => 'regular',
             'is_pengurus' => true,
         ], null, $actor);
 

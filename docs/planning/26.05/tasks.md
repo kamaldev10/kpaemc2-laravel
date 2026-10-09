@@ -8,13 +8,13 @@
 
 | #   | Task                                                                                  | Layer | Status |
 | --- | ------------------------------------------------------------------------------------- | ----- | ------ |
-| 1.1 | Buat Enum PHP `app/Enums/MemberStatusEnum.php` (`regular`, `honorary`, `inactive`)     | BE    | ⏳     |
-| 1.2 | Buat Enum PHP `app/Enums/DepartmentMajorEnum.php` (7 Jurusan FMIPA UNRI)              | BE    | ⏳     |
-| 1.3 | Update `app/Models/Member.php` casts `status` & `major`                               | BE    | ⏳     |
-| 1.4 | Update `StoreMemberRequest.php` & `UpdateMemberRequest.php` validasi enum             | BE    | ⏳     |
-| 1.5 | Update TypeScript types `resources/js/types/member.ts` (`MemberStatus`, `DepartmentMajor`)| FE | ⏳     |
-| 1.6 | Update Form `Create.tsx` & `Edit.tsx` (dropdown pilihan Jurusan & Status)             | FE    | ⏳     |
-| 1.7 | Unit/Feature test validasi status & major member (`MemberCrudTest.php`)               | TEST  | ⏳     |
+| 1.1 | Buat Enum PHP `app/Enums/MemberStatusEnum.php` (`regular`, `honorary`, `inactive`)     | BE    | ✅     |
+| 1.2 | Buat Enum PHP `app/Enums/DepartmentMajorEnum.php` (7 Jurusan FMIPA UNRI)              | BE    | ✅     |
+| 1.3 | Update `app/Models/Member.php` casts `status` & `major`                               | BE    | ✅     |
+| 1.4 | Update `StoreMemberRequest.php` & `UpdateMemberRequest.php` validasi enum             | BE    | ✅     |
+| 1.5 | Update TypeScript types `resources/js/types/member.ts` (`MemberStatus`, `DepartmentMajor`)| FE | ✅     |
+| 1.6 | Update Form `Create.tsx` & `Edit.tsx` (dropdown pilihan Jurusan & Status)             | FE    | ✅     |
+| 1.7 | Unit/Feature test validasi status & major member (`MemberCrudTest.php` & `MemberServiceTest.php`)| TEST | ✅ |
 
 ---
 
