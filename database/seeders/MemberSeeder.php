@@ -51,16 +51,33 @@ class MemberSeeder extends Seeder
 			$memberNumber = str_replace("''", "'", $row[3]);
 
 			$majorRaw = $row[4];
-			$major = ($majorRaw === 'null' || trim($majorRaw, "'") === '')
+			$majorStr = ($majorRaw === 'null' || trim($majorRaw, "'") === '')
 				? null
 				: str_replace("''", "'", trim($majorRaw, "'"));
+
+			$major = match ($majorStr) {
+				'Sistem Informasi' => 'sistem_informasi',
+				'Manajemen Informatika', 'Manajeman Informatika' => 'manajemen_informatika',
+				'Biologi' => 'biologi',
+				'Fisika' => 'fisika',
+				'Kimia' => 'kimia',
+				'Matematika' => 'matematika',
+				'Statistika' => 'statistika',
+				default => null,
+			};
 
 			$phoneRaw = $row[5];
 			$phone = ($phoneRaw === 'null' || trim($phoneRaw, "'") === '')
 				? null
 				: str_replace("''", "'", trim($phoneRaw, "'"));
 
-			$status = str_replace("''", "'", $row[6]);
+			$statusRaw = str_replace("''", "'", $row[6]);
+			$status = match ($statusRaw) {
+				'Anggota Biasa', 'Biasa', 'regular' => 'regular',
+				'Anggota Luar Biasa', 'Kehormatan', 'honorary' => 'honorary',
+				'Non Aktif', 'inactive' => 'inactive',
+				default => 'regular',
+			};
 
 			$avatarRaw = $row[7];
 			$avatarUrl = ($avatarRaw === 'null' || trim($avatarRaw, "'") === '')

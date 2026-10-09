@@ -15,6 +15,7 @@
 | 1.5 | Update TypeScript types `resources/js/types/member.ts` (`MemberStatus`, `DepartmentMajor`)| FE | ✅     |
 | 1.6 | Update Form `Create.tsx` & `Edit.tsx` (dropdown pilihan Jurusan & Status)             | FE    | ✅     |
 | 1.7 | Unit/Feature test validasi status & major member (`MemberCrudTest.php` & `MemberServiceTest.php`)| TEST | ✅ |
+| 1.8 | Migrasi data normalisasi legacy strings ke Enums (`20261009_0018_...`)                | DB    | ✅     |
 
 ---
 
@@ -22,11 +23,11 @@
 
 | #   | Task                                                                                  | Layer | Status |
 | --- | ------------------------------------------------------------------------------------- | ----- | ------ |
-| 2.1 | Sesuaikan metrics di `MemberService::getMetrics()` (Total, Pengurus Aktif, Anggota Luar Biasa, Anggota Biasa)| BE | ⏳ |
-| 2.2 | Update 4 Card Ringkasan di `Admin/Members/Index.tsx` sesuai metrics baru              | FE    | ⏳     |
-| 2.3 | Audit & perbaiki fitur Search (name, NIA, jabatan, jurusan) & Filter (divisi, status, pengurus)| BE/FE | ⏳ |
-| 2.4 | Verifikasi filter `status` dropdown di Index agar selaras dengan `MemberStatusEnum`   | FE    | ⏳     |
-| 2.5 | Verifikasi AdminPagination (10, 20, 50, 100) & query string retention di `/admin/members`| FULL | ⏳ |
+| 2.1 | Sesuaikan metrics di `MemberService::getMetrics()` (Total, Pengurus Aktif, Anggota Luar Biasa, Anggota Biasa)| BE | ✅ |
+| 2.2 | Update 4 Card Ringkasan di `Admin/Members/Index.tsx` sesuai metrics baru              | FE    | ✅     |
+| 2.3 | Audit & perbaiki fitur Search (name, NIA, jabatan, jurusan) & Filter (divisi, status, pengurus)| BE/FE | ✅ |
+| 2.4 | Verifikasi filter `status` dropdown di Index agar selaras dengan `MemberStatusEnum`   | FE    | ✅     |
+| 2.5 | Verifikasi AdminPagination (10, 20, 50, 100) & query string retention di `/admin/members`| FULL | ✅ |
 
 ---
 

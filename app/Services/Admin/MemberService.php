@@ -61,15 +61,15 @@ class MemberService
     /**
      * Get summary metrics for members dashboard.
      *
-     * @return array{total: int, pengurus: int, active: int, alumni: int}
+     * @return array{total: int, pengurus: int, honorary: int, regular: int}
      */
     public function getMetrics(): array
     {
         return [
             'total' => Member::count(),
             'pengurus' => Member::where('is_pengurus', true)->count(),
-            'active' => Member::whereIn('status', ['active', 'regular'])->count(),
-            'alumni' => Member::where('status', 'alumni')->count(),
+            'honorary' => Member::where('status', 'honorary')->count(),
+            'regular' => Member::where('status', 'regular')->count(),
         ];
     }
 

@@ -47,6 +47,8 @@ class MemberCrudTest extends TestCase
             ->has('members.data', 3)
             ->has('divisions')
             ->has('metrics')
+            ->where('metrics.total', 3)
+            ->where('metrics.pengurus', 3)
         );
     }
 

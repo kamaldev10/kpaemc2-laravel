@@ -50,8 +50,8 @@ interface MemberIndexProps {
 	metrics: {
 		total: number;
 		pengurus: number;
-		active: number;
-		alumni: number;
+		honorary: number;
+		regular: number;
 	};
 }
 
@@ -59,7 +59,7 @@ export const MembersIndex: FC<MemberIndexProps> = ({
 	members,
 	divisions = [],
 	filters = {},
-	metrics = { total: 0, pengurus: 0, active: 0, alumni: 0 },
+	metrics = { total: 0, pengurus: 0, honorary: 0, regular: 0 },
 }) => {
 	const [searchTerm, setSearchTerm] = useState(filters.search || '');
 	const [selectedDivision, setSelectedDivision] = useState(filters.division_id || '');
@@ -82,7 +82,7 @@ export const MembersIndex: FC<MemberIndexProps> = ({
 				search: searchTerm || undefined,
 				division_id: selectedDivision || undefined,
 				status: selectedStatus || undefined,
-				is_pengurus: selectedPengurus !== '' ? selectedPengurus : undefined,
+				is_pengurus: selectedPengurus !== undefined ? selectedPengurus : '',
 				per_page: filters.per_page || undefined,
 			},
 			{ preserveState: true, replace: true }
@@ -162,25 +162,25 @@ export const MembersIndex: FC<MemberIndexProps> = ({
 				<div className="rounded-xl border border-slate-200 bg-white p-4 shadow-xs">
 					<div className="flex items-center justify-between">
 						<span className="text-xs font-medium text-slate-500">Pengurus Aktif</span>
-						<Shield className="h-4 w-4 text-emerald-600" />
+						<Shield className="h-4 w-4 text-purple-600" />
 					</div>
-					<p className="mt-2 text-2xl font-bold text-emerald-700">{metrics.pengurus}</p>
+					<p className="mt-2 text-2xl font-bold text-purple-700">{metrics.pengurus}</p>
 				</div>
 
 				<div className="rounded-xl border border-slate-200 bg-white p-4 shadow-xs">
 					<div className="flex items-center justify-between">
-						<span className="text-xs font-medium text-slate-500">Anggota Aktif</span>
-						<UserCheck className="h-4 w-4 text-blue-600" />
+						<span className="text-xs font-medium text-slate-500">Anggota Luar Biasa</span>
+						<GraduationCap className="h-4 w-4 text-indigo-600" />
 					</div>
-					<p className="mt-2 text-2xl font-bold text-blue-700">{metrics.active}</p>
+					<p className="mt-2 text-2xl font-bold text-indigo-700">{metrics.honorary}</p>
 				</div>
 
 				<div className="rounded-xl border border-slate-200 bg-white p-4 shadow-xs">
 					<div className="flex items-center justify-between">
-						<span className="text-xs font-medium text-slate-500">Alumni</span>
-						<GraduationCap className="h-4 w-4 text-amber-600" />
+						<span className="text-xs font-medium text-slate-500">Anggota Biasa</span>
+						<UserCheck className="h-4 w-4 text-emerald-600" />
 					</div>
-					<p className="mt-2 text-2xl font-bold text-amber-700">{metrics.alumni}</p>
+					<p className="mt-2 text-2xl font-bold text-emerald-700">{metrics.regular}</p>
 				</div>
 			</div>
 
@@ -436,7 +436,7 @@ export const MembersIndex: FC<MemberIndexProps> = ({
 						search: searchTerm || undefined,
 						division_id: selectedDivision || undefined,
 						status: selectedStatus || undefined,
-						is_pengurus: selectedPengurus !== '' ? selectedPengurus : undefined,
+						is_pengurus: selectedPengurus !== undefined ? selectedPengurus : undefined,
 					}}
 					itemName="anggota"
 				/>
